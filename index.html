@@ -54,32 +54,35 @@
       display: inline-block;
       margin-top: 12px;
     }
-    .features {
-      max-width: 900px;
+    .how-it-works {
+      max-width: 1000px;
       margin: 0 auto;
       padding: 60px 20px;
-    }
-    .features h2 {
       text-align: center;
+    }
+    .how-it-works h2 {
       font-size: 28px;
       font-weight: 700;
       margin-bottom: 40px;
     }
-    .feature-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    .steps {
+      display: flex;
+      flex-wrap: wrap;
       gap: 24px;
+      justify-content: center;
     }
-    .feature {
-      background: rgba(255, 255, 255, 0.05);
-      padding: 24px;
+    .step {
+      flex: 1 1 200px;
+      background: rgba(255,255,255,0.05);
       border-radius: 16px;
+      padding: 24px;
+      max-width: 220px;
     }
-    .feature h3 {
+    .step h3 {
       font-size: 18px;
       margin-bottom: 8px;
     }
-    .feature p {
+    .step p {
       font-size: 14px;
       color: #ccc;
     }
@@ -115,8 +118,8 @@
 <body>
   <header>
     <div style="display: flex; align-items: center; gap: 12px;">
-      <img src="img/logo.png" alt="StudyLock Logo" width="32" height="32">
-      <span style="font-size: 20px; font-weight: bold; color: #fff">StudyLock</span>
+      <img src="https://studylock.github.io/img/logo.png" alt="StudyLock Logo" width="42" height="42">
+      <span style="font-size: 22px; font-weight: bold; color: #fff">StudyLock</span>
     </div>
     <nav class="nav-links">
       <a href="#contact">Contact Us</a>
@@ -127,38 +130,52 @@
 
   <section class="hero">
     <h1>Struggling to stay focused while studying?</h1>
-    <p>StudyLock blocks your distracting apps — and only unlocks them after you study and pass a quiz.</p>
+    <p>StudyLock helps you stay on track by blocking distracting apps — and only unlocking them once you’ve studied and passed a quiz.</p>
     <a href="https://apps.apple.com/app/studylock/id6744610901" class="download-btn">
       <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/white/en-us.svg" alt="Download on the App Store" width="160">
     </a>
   </section>
 
-  <section class="features">
+  <section class="how-it-works">
     <h2>How It Works</h2>
+    <div class="steps">
+      <div class="step">
+        <h3>📄 Upload Materials</h3>
+        <p>PDFs or images – StudyLock reads them using AI.</p>
+      </div>
+      <div class="step">
+        <h3>🔒 Block Apps</h3>
+        <p>Pick distractions to block — yes, even TikTok.</p>
+      </div>
+      <div class="step">
+        <h3>📚 Learn with AI</h3>
+        <p>Get summaries in your preferred language.</p>
+      </div>
+      <div class="step">
+        <h3>✅ Unlock by Passing</h3>
+        <p>Take a quiz. Reach your score. Apps unlock.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="features">
+    <h2>Why StudyLock?</h2>
     <div class="feature-grid">
       <div class="feature">
-        <h3>📄 Upload Study Materials</h3>
-        <p>Use PDFs or images. StudyLock reads your materials using AI.</p>
+        <h3>🎯 Custom Unlock Rules</h3>
+        <p>Set your own quiz score threshold to regain access.</p>
       </div>
       <div class="feature">
-        <h3>🔒 Block Apps</h3>
-        <p>Select distracting apps to block during your session — yes, even TikTok.</p>
+        <h3>🌐 Multi-language Learning</h3>
+        <p>Study in the language you're most comfortable with.</p>
       </div>
       <div class="feature">
-        <h3>📚 Learn with Summaries</h3>
-        <p>AI-generated notes help you understand faster, in the language you prefer.</p>
+        <h3>📊 Track & Reflect</h3>
+        <p>Monitor sessions, time spent, and insights.</p>
       </div>
       <div class="feature">
-        <h3>📝 Prove You Studied</h3>
-        <p>Take a quiz based on your materials. Score high enough to unlock your apps.</p>
-      </div>
-      <div class="feature">
-        <h3>📈 Track Progress</h3>
-        <p>See your completed sessions, study time, and personalized insights.</p>
-      </div>
-      <div class="feature">
-        <h3>👥 Join Group Communities</h3>
-        <p>Use your school or organization email to join groups, stay motivated, and share sessions.</p>
+        <h3>🏫 Group Study Support</h3>
+        <p>Use your school email to join and follow group progress.</p>
       </div>
     </div>
   </section>
@@ -166,16 +183,16 @@
   <section class="screenshot-gallery">
     <h2>See StudyLock in Action</h2>
     <div class="screenshot-row">
-      <img src="img/01.png" alt="Screenshot 1">
-      <img src="img/02.png" alt="Screenshot 2">
-      <img src="img/03.png" alt="Screenshot 3">
-      <img src="img/04.png" alt="Screenshot 4">
-      <img src="img/05.png" alt="Screenshot 5">
-      <img src="img/06.png" alt="Screenshot 6">
-      <img src="img/07.png" alt="Screenshot 7">
-      <img src="img/08.png" alt="Screenshot 8">
-      <img src="img/09.png" alt="Screenshot 9">
-      <img src="img/10.png" alt="Screenshot 10">
+      <img src="https://studylock.github.io/img/01.png" alt="Screenshot 1">
+      <img src="https://studylock.github.io/img/02.png" alt="Screenshot 2">
+      <img src="https://studylock.github.io/img/03.png" alt="Screenshot 3">
+      <img src="https://studylock.github.io/img/04.png" alt="Screenshot 4">
+      <img src="https://studylock.github.io/img/05.png" alt="Screenshot 5">
+      <img src="https://studylock.github.io/img/06.png" alt="Screenshot 6">
+      <img src="https://studylock.github.io/img/07.png" alt="Screenshot 7">
+      <img src="https://studylock.github.io/img/08.png" alt="Screenshot 8">
+      <img src="https://studylock.github.io/img/09.png" alt="Screenshot 9">
+      <img src="https://studylock.github.io/img/10.png" alt="Screenshot 10">
     </div>
   </section>
 
