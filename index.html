@@ -16,145 +16,158 @@
       font-family: 'Inter', sans-serif;
     }
     body {
-      background: linear-gradient(160deg, #463278, #233C73);
-      color: #fff;
+      background: #f8f9fc;
+      color: #222;
+      line-height: 1.6;
     }
     header {
-      padding: 24px 40px;
+      background: #fff;
+      padding: 20px 40px;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.05);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    header img {
+      height: 36px;
+      vertical-align: middle;
+      margin-right: 10px;
     }
     .nav-links a {
-      margin-left: 24px;
+      margin-left: 20px;
       text-decoration: none;
-      color: #ccc;
+      color: #444;
       font-size: 14px;
     }
     .hero {
       text-align: center;
-      padding: 80px 20px 60px;
-      max-width: 800px;
-      margin: 0 auto;
+      padding: 100px 20px 60px;
+      background: linear-gradient(145deg, #e9eaf0, #ffffff);
     }
     .hero h1 {
-      font-size: 44px;
+      font-size: 42px;
       font-weight: 800;
-      line-height: 1.2;
-      margin-bottom: 16px;
+      margin-bottom: 20px;
     }
     .hero p {
       font-size: 18px;
-      font-weight: 400;
-      color: #ddd;
-      margin-bottom: 32px;
+      color: #555;
+      max-width: 700px;
+      margin: 0 auto 30px;
     }
-    .download-btn {
-      display: inline-block;
-      margin-top: 12px;
+    .hero a img {
+      height: 48px;
     }
     .steps-section {
-      max-width: 1000px;
-      margin: 60px auto;
+      max-width: 1100px;
+      margin: 80px auto;
       padding: 0 20px;
-      text-align: center;
     }
     .steps-section h2 {
       font-size: 28px;
-      margin-bottom: 40px;
+      text-align: center;
+      margin-bottom: 50px;
     }
-    .steps {
+    .step-flow {
       display: flex;
-      flex-direction: row;
       flex-wrap: wrap;
-      justify-content: center;
-      gap: 32px;
+      justify-content: space-between;
+      gap: 30px;
     }
-    .step {
-      flex: 1 1 200px;
-      background: rgba(255,255,255,0.05);
+    .step-box {
+      flex: 1 1 180px;
+      background: #fff;
       border-radius: 12px;
       padding: 20px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
       text-align: center;
-      max-width: 220px;
       position: relative;
     }
+    .step-box::after {
+      content: '→';
+      position: absolute;
+      right: -20px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 20px;
+      color: #aaa;
+    }
+    .step-box:last-child::after {
+      display: none;
+    }
     .step-number {
-      font-size: 28px;
-      font-weight: 800;
-      color: #fff;
-      background: #5a47a5;
-      border-radius: 50%;
-      width: 48px;
-      height: 48px;
-      line-height: 48px;
-      margin: 0 auto 10px;
+      font-size: 22px;
+      font-weight: 700;
+      color: #5a47a5;
+      margin-bottom: 10px;
     }
     .screenshots {
-      text-align: center;
-      margin: 80px auto;
-      max-width: 1200px;
-      padding: 0 20px;
+      padding: 80px 20px;
+      background: #fff;
     }
     .screenshots h2 {
+      text-align: center;
       font-size: 28px;
-      margin-bottom: 40px;
+      margin-bottom: 30px;
     }
     .screenshot-gallery {
       display: flex;
       overflow-x: auto;
-      gap: 12px;
+      gap: 16px;
+      padding: 0 10px;
     }
     .screenshot-gallery img {
       border-radius: 12px;
-      max-height: 420px;
+      max-height: 440px;
     }
     .features-section {
-      max-width: 1000px;
-      margin: 0 auto;
-      padding: 60px 20px;
+      max-width: 1100px;
+      margin: 60px auto;
+      padding: 0 20px;
     }
     .features-section h2 {
       text-align: center;
       font-size: 28px;
-      font-weight: 700;
       margin-bottom: 40px;
     }
-    .features-alt {
+    .features-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 32px;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
     }
-    .feature-box {
-      padding: 32px;
-      background: linear-gradient(145deg, #ffffff, #f3f3f3);
-      border-radius: 16px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-      color: #000;
+    .feature-card {
+      background: #f0f1f6;
+      padding: 24px;
+      border-radius: 12px;
+      transition: all 0.3s;
     }
-    .feature-box:nth-child(even) {
-      background: linear-gradient(145deg, #fafafa, #eaeaea);
+    .feature-card:hover {
+      background: #e3e5ee;
+      transform: translateY(-4px);
     }
-    .feature-box h3 {
+    .feature-card h3 {
       font-size: 18px;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
-    .feature-box p {
+    .feature-card p {
       font-size: 14px;
-      color: #555;
+      color: #444;
     }
     footer {
       text-align: center;
       font-size: 13px;
       padding: 40px 20px;
-      color: #888;
+      color: #777;
     }
   </style>
 </head>
 <body>
   <header>
-    <div style="font-size: 20px; font-weight: bold; color: #fff">
-      <img src="https://studylock.github.io/img/logo.png" alt="StudyLock Logo" style="height: 36px; vertical-align: middle; margin-right: 10px;">
+    <div style="display:flex; align-items:center; font-weight:bold; font-size:18px;">
+      <img src="https://studylock.github.io/img/logo.png" alt="StudyLock Logo">
       StudyLock
     </div>
     <nav class="nav-links">
@@ -167,31 +180,31 @@
   <section class="hero">
     <h1>Struggling to stay focused while studying?</h1>
     <p>StudyLock helps you stay on track by blocking distracting apps — and only unlocking them once you’ve studied and passed a quiz.</p>
-    <a href="https://apps.apple.com/app/studylock/id6744610901" class="download-btn">
-      <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/white/en-us.svg" alt="Download on the App Store" width="160">
+    <a href="https://apps.apple.com/app/studylock/id6744610901">
+      <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/white/en-us.svg" alt="Download on the App Store">
     </a>
   </section>
 
   <section class="steps-section">
     <h2>How It Works</h2>
-    <div class="steps">
-      <div class="step">
+    <div class="step-flow">
+      <div class="step-box">
         <div class="step-number">1</div>
         <p>Upload study materials (PDFs or images)</p>
       </div>
-      <div class="step">
+      <div class="step-box">
         <div class="step-number">2</div>
         <p>Block distracting apps (yes, even TikTok)</p>
       </div>
-      <div class="step">
+      <div class="step-box">
         <div class="step-number">3</div>
         <p>Learn through AI-generated summaries</p>
       </div>
-      <div class="step">
+      <div class="step-box">
         <div class="step-number">4</div>
         <p>Take a quiz to prove you've studied</p>
       </div>
-      <div class="step">
+      <div class="step-box">
         <div class="step-number">5</div>
         <p>Unlock your apps once you meet the score threshold</p>
       </div>
@@ -216,24 +229,24 @@
 
   <section class="features-section">
     <h2>Features</h2>
-    <div class="features-alt">
-      <div class="feature-box">
+    <div class="features-grid">
+      <div class="feature-card">
         <h3>Custom Unlock Rules</h3>
         <p>Set your own quiz score requirement to unlock apps.</p>
       </div>
-      <div class="feature-box">
+      <div class="feature-card">
         <h3>Multi-language Learning</h3>
         <p>Learn in the language you're most comfortable with.</p>
       </div>
-      <div class="feature-box">
+      <div class="feature-card">
         <h3>Track Completed Sessions</h3>
         <p>Monitor your study time and completed sessions in one place.</p>
       </div>
-      <div class="feature-box">
+      <div class="feature-card">
         <h3>Personalized Insights</h3>
         <p>Get learning stats and feedback tailored to your study habits.</p>
       </div>
-      <div class="feature-box">
+      <div class="feature-card">
         <h3>Join Study Groups</h3>
         <p>Use your school or organization email to join, stay motivated, and track your group's progress.</p>
       </div>
