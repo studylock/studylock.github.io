@@ -16,126 +16,176 @@
       font-family: 'Inter', sans-serif;
     }
     body {
-      background: linear-gradient(to bottom right, #472D79, #1E2B60);
-      color: #fff;
+      background-color: #fefefe;
+      color: #222;
+      line-height: 1.6;
     }
     header {
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 24px 40px;
+      background-color: #fff;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      position: sticky;
+      top: 0;
+      z-index: 10;
     }
     .logo-container {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 14px;
+    }
+    .logo-container img {
+      width: 64px;
+      height: 64px;
+    }
+    .logo-container span {
+      font-size: 26px;
+      font-weight: 800;
     }
     .nav-links a {
       margin-left: 24px;
       text-decoration: none;
-      color: #ccc;
+      color: #555;
       font-size: 14px;
     }
     .hero {
-      text-align: center;
-      padding: 100px 20px 60px;
-      max-width: 800px;
-      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      padding: 80px 40px;
+      background: linear-gradient(135deg, #8054c7, #4b6cb7);
+      color: white;
+    }
+    .hero-content {
+      max-width: 550px;
     }
     .hero h1 {
-      font-size: 46px;
+      font-size: 40px;
       font-weight: 800;
       margin-bottom: 20px;
     }
     .hero p {
-      font-size: 20px;
-      font-weight: 400;
-      color: #ddd;
-      margin-bottom: 32px;
+      font-size: 18px;
+      margin-bottom: 24px;
     }
-    .download-btn {
-      display: inline-block;
-      margin-top: 20px;
+    .hero .download-btn img {
+      height: 48px;
+    }
+    .hero-logo {
+      flex: 1;
+      text-align: center;
+    }
+    .hero-logo img {
+      width: 240px;
+      max-width: 100%;
     }
     .section {
       max-width: 1100px;
       margin: 0 auto;
-      padding: 60px 20px;
+      padding: 80px 20px;
     }
     .section h2 {
-      font-size: 30px;
-      font-weight: 700;
+      font-size: 32px;
       text-align: center;
-      margin-bottom: 40px;
+      margin-bottom: 60px;
     }
-    .workflow {
+    .steps-horizontal {
       display: flex;
       justify-content: space-between;
-      flex-wrap: wrap;
+      flex-wrap: nowrap;
+      overflow-x: auto;
       gap: 20px;
     }
-    .workflow-step {
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 16px;
-      flex: 1 1 220px;
-      padding: 24px;
+    .step-box {
+      background: #fff;
+      border-radius: 14px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.05);
+      padding: 30px;
       text-align: center;
+      flex: 0 0 220px;
+      position: relative;
     }
-    .workflow-step h3 {
-      font-size: 18px;
+    .step-box::before {
+      content: attr(data-step);
+      position: absolute;
+      top: -16px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #8054c7;
+      color: #fff;
+      font-weight: bold;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      line-height: 36px;
+    }
+    .step-box h3 {
+      font-size: 16px;
+      margin-top: 28px;
       margin-bottom: 10px;
     }
-    .workflow-step p {
+    .step-box p {
       font-size: 14px;
-      color: #ccc;
+      color: #555;
     }
     .features-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 24px;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 32px;
     }
     .feature {
-      background: rgba(255, 255, 255, 0.05);
+      background: #fff;
       padding: 24px;
-      border-radius: 16px;
+      border-radius: 14px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.05);
     }
     .feature h3 {
       font-size: 18px;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
     .feature p {
       font-size: 14px;
-      color: #ccc;
+      color: #555;
     }
     .screenshot-gallery {
-      padding: 40px 20px;
+      background: #f2f2f8;
+      padding: 80px 20px;
+    }
+    .screenshot-gallery h2 {
       text-align: center;
+      font-size: 32px;
+      margin-bottom: 40px;
     }
     .screenshot-row {
       display: flex;
       overflow-x: auto;
       gap: 12px;
-      padding-bottom: 10px;
-      margin-top: 20px;
+      padding-top: 20px;
     }
     .screenshot-row img {
-      height: 480px;
-      border-radius: 12px;
+      height: 500px;
+      border-radius: 14px;
       flex-shrink: 0;
     }
     footer {
       text-align: center;
       font-size: 13px;
       padding: 40px 20px;
+      background-color: #fff;
       color: #888;
+      margin-top: 60px;
+      border-top: 1px solid #eee;
     }
   </style>
 </head>
 <body>
   <header>
     <div class="logo-container">
-      <img src="https://studylock.github.io/img/logo.png" alt="StudyLock Logo" width="50" height="50">
-      <span style="font-size: 24px; font-weight: bold; color: #fff">StudyLock</span>
+      <img src="https://studylock.github.io/img/logo.png" alt="StudyLock Logo">
+      <span>StudyLock</span>
     </div>
     <nav class="nav-links">
       <a href="#contact">Contact Us</a>
@@ -145,53 +195,66 @@
   </header>
 
   <section class="hero">
-    <h1>Struggling to stay focused while studying?</h1>
-    <p>StudyLock helps you stay on track by blocking distracting apps — and only unlocking them once you’ve studied and passed a quiz.</p>
-    <a href="https://apps.apple.com/app/studylock/id6744610901" class="download-btn">
-      <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/white/en-us.svg" alt="Download on the App Store" width="160">
-    </a>
+    <div class="hero-content">
+      <h1>Struggling to stay focused while studying?</h1>
+      <p>StudyLock helps you stay on track by blocking distracting apps — and only unlocking them once you’ve studied and passed a quiz.</p>
+      <a href="https://apps.apple.com/app/studylock/id6744610901" class="download-btn">
+        <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/white/en-us.svg" alt="Download on the App Store">
+      </a>
+    </div>
+    <div class="hero-logo">
+      <img src="https://studylock.github.io/img/logo.png" alt="App Logo">
+    </div>
   </section>
 
   <section class="section">
     <h2>How It Works</h2>
-    <div class="workflow">
-      <div class="workflow-step">
-        <h3>📄 Upload Materials</h3>
-        <p>PDFs or images — StudyLock reads them using AI.</p>
+    <div class="steps-horizontal">
+      <div class="step-box" data-step="1">
+        <h3>Upload Study Materials</h3>
+        <p>PDFs or images — StudyLock reads your content using AI.</p>
       </div>
-      <div class="workflow-step">
-        <h3>🔒 Block Apps</h3>
-        <p>Pick distractions to block — yes, even TikTok.</p>
+      <div class="step-box" data-step="2">
+        <h3>Block Distracting Apps</h3>
+        <p>Select which apps to block during your study session.</p>
       </div>
-      <div class="workflow-step">
-        <h3>📚 Learn with AI</h3>
-        <p>Get summaries in your preferred language.</p>
+      <div class="step-box" data-step="3">
+        <h3>Learn with Summaries</h3>
+        <p>AI-generated notes help you understand faster in your preferred language.</p>
       </div>
-      <div class="workflow-step">
-        <h3>✅ Unlock by Passing</h3>
-        <p>Take a quiz. Reach your score. Apps unlock.</p>
+      <div class="step-box" data-step="4">
+        <h3>Take a Quiz</h3>
+        <p>Answer a personalized quiz to prove you've studied the material.</p>
+      </div>
+      <div class="step-box" data-step="5">
+        <h3>Unlock Your Apps</h3>
+        <p>Once you meet the quiz score threshold, your apps are automatically unlocked.</p>
       </div>
     </div>
   </section>
 
   <section class="section">
-    <h2>Why StudyLock?</h2>
+    <h2>Features</h2>
     <div class="features-grid">
       <div class="feature">
-        <h3>🎯 Custom Unlock Rules</h3>
-        <p>Set your own quiz score threshold to regain access.</p>
+        <h3>Custom Unlock Rules</h3>
+        <p>Set your own quiz score requirement to unlock apps.</p>
       </div>
       <div class="feature">
-        <h3>🌐 Multi-language Learning</h3>
-        <p>Study in the language you're most comfortable with.</p>
+        <h3>Multi-language Learning</h3>
+        <p>Learn in the language you're most comfortable with.</p>
       </div>
       <div class="feature">
-        <h3>📊 Track & Reflect</h3>
-        <p>Monitor sessions, time spent, and insights.</p>
+        <h3>Track Completed Sessions</h3>
+        <p>Monitor your study time and completed sessions in one place.</p>
       </div>
       <div class="feature">
-        <h3>🏫 Group Study Support</h3>
-        <p>Use your school email to join and follow group progress.</p>
+        <h3>Personalized Insights</h3>
+        <p>Get learning stats and feedback tailored to your study habits.</p>
+      </div>
+      <div class="feature">
+        <h3>Join Study Groups</h3>
+        <p>Use your school or organization email to join, stay motivated, and track your group's progress.</p>
       </div>
     </div>
   </section>
