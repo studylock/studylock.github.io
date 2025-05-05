@@ -16,15 +16,19 @@
       font-family: 'Inter', sans-serif;
     }
     body {
-      background: linear-gradient(160deg, #463278, #233C73);
+      background: linear-gradient(to bottom right, #472D79, #1E2B60);
       color: #fff;
-      padding: 0;
     }
     header {
-      padding: 24px 40px;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      padding: 24px 40px;
+    }
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 12px;
     }
     .nav-links a {
       margin-left: 24px;
@@ -34,73 +38,85 @@
     }
     .hero {
       text-align: center;
-      padding: 80px 20px 60px;
+      padding: 100px 20px 60px;
       max-width: 800px;
       margin: 0 auto;
     }
     .hero h1 {
-      font-size: 44px;
+      font-size: 46px;
       font-weight: 800;
-      line-height: 1.2;
-      margin-bottom: 16px;
+      margin-bottom: 20px;
     }
     .hero p {
-      font-size: 18px;
+      font-size: 20px;
       font-weight: 400;
       color: #ddd;
       margin-bottom: 32px;
     }
     .download-btn {
       display: inline-block;
-      margin-top: 12px;
+      margin-top: 20px;
     }
-    .how-it-works {
-      max-width: 1000px;
+    .section {
+      max-width: 1100px;
       margin: 0 auto;
       padding: 60px 20px;
-      text-align: center;
     }
-    .how-it-works h2 {
-      font-size: 28px;
+    .section h2 {
+      font-size: 30px;
       font-weight: 700;
+      text-align: center;
       margin-bottom: 40px;
     }
-    .steps {
+    .workflow {
       display: flex;
+      justify-content: space-between;
       flex-wrap: wrap;
-      gap: 24px;
-      justify-content: center;
+      gap: 20px;
     }
-    .step {
-      flex: 1 1 200px;
-      background: rgba(255,255,255,0.05);
+    .workflow-step {
+      background: rgba(255, 255, 255, 0.05);
       border-radius: 16px;
+      flex: 1 1 220px;
       padding: 24px;
-      max-width: 220px;
+      text-align: center;
     }
-    .step h3 {
+    .workflow-step h3 {
       font-size: 18px;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
     }
-    .step p {
+    .workflow-step p {
+      font-size: 14px;
+      color: #ccc;
+    }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 24px;
+    }
+    .feature {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 24px;
+      border-radius: 16px;
+    }
+    .feature h3 {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+    .feature p {
       font-size: 14px;
       color: #ccc;
     }
     .screenshot-gallery {
-      max-width: 1100px;
-      margin: 0 auto;
       padding: 40px 20px;
-    }
-    .screenshot-gallery h2 {
       text-align: center;
-      font-size: 26px;
-      margin-bottom: 24px;
     }
     .screenshot-row {
       display: flex;
       overflow-x: auto;
       gap: 12px;
       padding-bottom: 10px;
+      margin-top: 20px;
     }
     .screenshot-row img {
       height: 480px;
@@ -117,9 +133,9 @@
 </head>
 <body>
   <header>
-    <div style="display: flex; align-items: center; gap: 12px;">
-      <img src="https://studylock.github.io/img/logo.png" alt="StudyLock Logo" width="42" height="42">
-      <span style="font-size: 22px; font-weight: bold; color: #fff">StudyLock</span>
+    <div class="logo-container">
+      <img src="https://studylock.github.io/img/logo.png" alt="StudyLock Logo" width="50" height="50">
+      <span style="font-size: 24px; font-weight: bold; color: #fff">StudyLock</span>
     </div>
     <nav class="nav-links">
       <a href="#contact">Contact Us</a>
@@ -136,31 +152,31 @@
     </a>
   </section>
 
-  <section class="how-it-works">
+  <section class="section">
     <h2>How It Works</h2>
-    <div class="steps">
-      <div class="step">
+    <div class="workflow">
+      <div class="workflow-step">
         <h3>📄 Upload Materials</h3>
-        <p>PDFs or images – StudyLock reads them using AI.</p>
+        <p>PDFs or images — StudyLock reads them using AI.</p>
       </div>
-      <div class="step">
+      <div class="workflow-step">
         <h3>🔒 Block Apps</h3>
         <p>Pick distractions to block — yes, even TikTok.</p>
       </div>
-      <div class="step">
+      <div class="workflow-step">
         <h3>📚 Learn with AI</h3>
         <p>Get summaries in your preferred language.</p>
       </div>
-      <div class="step">
+      <div class="workflow-step">
         <h3>✅ Unlock by Passing</h3>
         <p>Take a quiz. Reach your score. Apps unlock.</p>
       </div>
     </div>
   </section>
 
-  <section class="features">
+  <section class="section">
     <h2>Why StudyLock?</h2>
-    <div class="feature-grid">
+    <div class="features-grid">
       <div class="feature">
         <h3>🎯 Custom Unlock Rules</h3>
         <p>Set your own quiz score threshold to regain access.</p>
