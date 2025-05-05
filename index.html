@@ -83,6 +83,27 @@
       font-size: 14px;
       color: #ccc;
     }
+    .screenshot-gallery {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+    .screenshot-gallery h2 {
+      text-align: center;
+      font-size: 26px;
+      margin-bottom: 24px;
+    }
+    .screenshot-row {
+      display: flex;
+      overflow-x: auto;
+      gap: 12px;
+      padding-bottom: 10px;
+    }
+    .screenshot-row img {
+      height: 480px;
+      border-radius: 12px;
+      flex-shrink: 0;
+    }
     footer {
       text-align: center;
       font-size: 13px;
@@ -93,7 +114,10 @@
 </head>
 <body>
   <header>
-    <div style="font-size: 20px; font-weight: bold; color: #fff">StudyLock</div>
+    <div style="display: flex; align-items: center; gap: 12px;">
+      <img src="img/logo.png" alt="StudyLock Logo" width="32" height="32">
+      <span style="font-size: 20px; font-weight: bold; color: #fff">StudyLock</span>
+    </div>
     <nav class="nav-links">
       <a href="#contact">Contact Us</a>
       <a href="#terms">Terms of Use</a>
@@ -136,6 +160,22 @@
         <h3>👥 Join Group Communities</h3>
         <p>Use your school or organization email to join groups, stay motivated, and share sessions.</p>
       </div>
+    </div>
+  </section>
+
+  <section class="screenshot-gallery">
+    <h2>See StudyLock in Action</h2>
+    <div class="screenshot-row">
+      <img src="img/01.png" alt="Screenshot 1">
+      <img src="img/02.png" alt="Screenshot 2">
+      <img src="img/03.png" alt="Screenshot 3">
+      <img src="img/04.png" alt="Screenshot 4">
+      <img src="img/05.png" alt="Screenshot 5">
+      <img src="img/06.png" alt="Screenshot 6">
+      <img src="img/07.png" alt="Screenshot 7">
+      <img src="img/08.png" alt="Screenshot 8">
+      <img src="img/09.png" alt="Screenshot 9">
+      <img src="img/10.png" alt="Screenshot 10">
     </div>
   </section>
 
