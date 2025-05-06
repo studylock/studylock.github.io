@@ -99,6 +99,27 @@
       h1 { font-size: 2rem; }
       h2 { font-size: 1.25rem; }
     }
+
+
+        @media (max-width: 768px) {
+  .navbar-inner {
+    flex-direction: column;
+    align-items: center;
+  }
+  /* Put the links on their own line, centered */
+  .navbar-links {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 12px;
+    width: 100%;
+  }
+  /* Remove left-margin push on each link */
+  .navbar-links a {
+    margin: 0;
+  }
+    }
+    
   </style>
 </head>
 <body>
