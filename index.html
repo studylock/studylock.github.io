@@ -26,14 +26,22 @@
 }
 
 .navbar-inner {
-  max-width: 1200px;
+  /* match your .section max-width */
+  max-width: 1000px;
+  /* center it in the viewport */
   margin: 0 auto;
+  /* give it the same 20px gutter you have on your sections */
+  padding: 0 20px;
+  /* include that padding in the width calculation */
+  box-sizing: border-box;
   width: 100%;
+
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
 }
+
 
 
 
