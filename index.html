@@ -21,13 +21,20 @@
   width: 100%;
   background: #fff;
   z-index: 1000;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+  padding: 14px 16px;
+}
+
+.navbar-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
   display: flex;
-  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
-  padding: 14px 16px;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+  flex-wrap: wrap;
 }
+
 
 
     .navbar-left {
@@ -289,7 +296,8 @@
 </head>
 <body>
 
-  <div class="navbar">
+<div class="navbar">
+  <div class="navbar-inner">
     <a class="navbar-left" href="#">
       <img src="https://studylock.github.io/img/logo.png" alt="StudyLock logo">
       StudyLock
@@ -300,6 +308,8 @@
       <a href="#privacy">Privacy Policy</a>
     </div>
   </div>
+</div>
+
 
   <section class="section">
     <h1 class="headline">Struggling to stay focused while studying?</h1>
