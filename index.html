@@ -2,372 +2,140 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Stay focused while studying with StudyLock. Block distracting apps and earn your screen time by actually learning." />
-  <title>StudyLock – Block distractions. Unlock learning.</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>StudyLock</title>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&display=swap" rel="stylesheet">
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Inter', sans-serif;
-    }
     body {
-      background: #f8f9fc;
-      color: #222;
+      margin: 0;
+      font-family: 'Manrope', sans-serif;
+      background: #fdfdfc;
+      color: #111;
       line-height: 1.6;
+      overflow-x: hidden;
     }
 
-    header {
-      background: #fff;
-      padding: 16px 20px;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      align-items: center;
-      box-shadow: 0 1px 6px rgba(0,0,0,0.05);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      font-weight: bold;
-      font-size: 18px;
-    }
-
-    .brand img {
-      height: 36px;
-      margin-right: 10px;
-    }
-
-    .nav-links {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-
-    .nav-links a {
-      margin-left: 16px;
-      margin-top: 8px;
-      text-decoration: none;
-      color: #444;
-      font-size: 14px;
-      transition: color 0.3s;
-    }
-
-    .nav-links a:hover {
-      color: #5a47a5;
-    }
-
-    .hero {
-      position: relative;
+    .section {
+      padding: 100px 20px;
+      max-width: 800px;
+      margin: auto;
       text-align: center;
-      padding: 140px 20px 100px;
-      background: linear-gradient(135deg, #d6d9f8, #e7d4f8);
-      overflow: hidden;
     }
 
-    .hero::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: url('https://www.transparenttextures.com/patterns/cubes.png');
-      opacity: 0.06;
-    }
-
-    .hero h1 {
-      font-size: 48px;
+    .headline {
+      font-size: 3.5rem;
       font-weight: 800;
-      margin-bottom: 20px;
-      position: relative;
+      margin-bottom: 1rem;
+      letter-spacing: -0.5px;
     }
 
-    .hero p {
-      font-size: 20px;
-      color: #444;
-      max-width: 700px;
-      margin: 0 auto 30px;
-      position: relative;
+    .subhead {
+      font-size: 1.4rem;
+      color: #555;
+      margin-bottom: 2rem;
     }
 
-    .hero a img {
-      height: 52px;
-      position: relative;
+    .appstore-button img {
+      height: 50px;
     }
 
-    .steps-section {
-      max-width: 1100px;
-      margin: 100px auto;
-      padding: 0 20px;
-    }
-
-    .steps-section h2 {
-      font-size: 32px;
-      text-align: center;
-      margin-bottom: 60px;
-    }
-
-    .step-flow {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      gap: 30px;
-    }
-
-    .step-box {
-      flex: 1 1 180px;
+    .step {
+      font-size: 1.7rem;
+      font-weight: 600;
+      padding: 60px 20px;
       background: #fff;
-      border-radius: 12px;
-      padding: 24px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
-      text-align: center;
-      position: relative;
-      transition: transform 0.3s, background 0.3s;
-    }
-
-    .step-box:hover {
-      transform: translateY(-6px);
-      background: #f4f4fd;
-    }
-
-    .step-box::after {
-      content: '➡';
-      position: absolute;
-      right: -20px;
-      top: 50%;
-      transform: translateY(-50%);
-      font-size: 20px;
-      color: #aaa;
-    }
-
-    .step-box:last-child::after {
-      display: none;
-    }
-
-    .step-number {
-      font-size: 24px;
-      font-weight: 700;
-      color: #5a47a5;
-      margin-bottom: 12px;
+      margin: 20px auto;
+      border-left: 5px solid #111;
+      text-align: left;
+      max-width: 700px;
     }
 
     .screenshots {
-      padding: 100px 20px;
-      background: #fafbff;
-    }
-
-    .screenshots h2 {
-      text-align: center;
-      font-size: 32px;
-      margin-bottom: 40px;
-    }
-
-    .screenshot-gallery {
       display: flex;
       overflow-x: auto;
       gap: 16px;
-      padding: 0 10px;
-      scroll-snap-type: x mandatory;
+      padding: 60px 20px;
+      justify-content: center;
     }
 
-    .screenshot-gallery img {
+    .screenshots img {
+      height: 400px;
       border-radius: 12px;
-      max-height: 440px;
-      scroll-snap-align: center;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+      flex-shrink: 0;
+      transition: transform 0.3s ease;
     }
 
-    .features-section {
-      max-width: 900px;
-      margin: 100px auto;
-      padding: 0 20px;
-    }
-
-    .features-section h2 {
-      text-align: center;
-      font-size: 32px;
-      margin-bottom: 40px;
-    }
-
-    .features-grid {
-      display: flex;
-      flex-direction: column;
-      gap: 24px;
-    }
-
-    .feature-card {
-      background: #f1f3fa;
-      padding: 28px;
-      border-radius: 14px;
-      transition: all 0.3s ease;
-    }
-
-    .feature-card:hover {
-      background: #e5e8f5;
-      transform: translateY(-4px);
-    }
-
-    .feature-card h3 {
-      font-size: 20px;
-      margin-bottom: 10px;
-      color: #333;
-    }
-
-    .feature-card p {
-      font-size: 15px;
-      color: #555;
+    .screenshots img:hover {
+      transform: scale(1.03);
     }
 
     footer {
       text-align: center;
-      font-size: 13px;
-      padding: 50px 20px;
-      color: #777;
-      background: #f1f2f6;
+      padding: 80px 20px;
+      color: #888;
+      font-size: 0.9rem;
     }
 
-    @media (max-width: 600px) {
-      header {
-        flex-direction: column;
-        align-items: flex-start;
+    @media (max-width: 768px) {
+      .headline {
+        font-size: 2.2rem;
       }
-
-      .nav-links {
-        margin-top: 10px;
-        width: 100%;
-        justify-content: flex-start;
+      .subhead {
+        font-size: 1.1rem;
       }
-
-      .nav-links a {
-        margin-left: 0;
-        margin-right: 16px;
+      .step {
+        font-size: 1.2rem;
+        padding: 40px 20px;
       }
-
-      .hero h1 {
-        font-size: 34px;
-      }
-
-      .steps-section h2,
-      .screenshots h2,
-      .features-section h2 {
-        font-size: 26px;
-      }
-
-      .feature-card h3 {
-        font-size: 18px;
+      .screenshots img {
+        height: 280px;
       }
     }
   </style>
 </head>
 <body>
-  <header>
-    <div class="brand">
-      <img src="https://studylock.github.io/img/logo.png" alt="StudyLock Logo">
-      StudyLock
-    </div>
-    <nav class="nav-links">
-      <a href="#contact">Contact Us</a>
-      <a href="#terms">Terms of Use</a>
-      <a href="#privacy">Privacy Policy</a>
-    </nav>
-  </header>
 
-  <section class="hero" data-aos="fade-up">
-    <h1>Struggling to stay focused while studying?</h1>
-    <p>StudyLock helps you stay on track by blocking distracting apps — and only unlocking them once you’ve studied and passed a quiz.</p>
-    <a href="https://apps.apple.com/app/studylock/id6744610901">
-      <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/white/en-us.svg" alt="Download on the App Store">
+  <section class="section">
+    <img src="https://studylock.github.io/img/logo.png" alt="StudyLock logo" width="70" style="margin-bottom: 20px;">
+    <h1 class="headline">Your phone won't unlock until you study.</h1>
+    <p class="subhead">StudyLock blocks distractions and only unlocks your apps after you've studied, learned, and passed a quiz.</p>
+    <div class="appstore-button">
+      <a href="https://apps.apple.com/app/studylock/id6744610901" target="_blank">
+        <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/white/en-us.svg" alt="Download on App Store">
+      </a>
+    </div>
+  </section>
+
+  <div class="step">📄 Upload your study material (PDF or image)</div>
+  <div class="step">📵 Choose which apps to block — even TikTok</div>
+  <div class="step">🧠 Get AI-powered summaries of your content</div>
+  <div class="step">📝 Take a quiz to test your understanding</div>
+  <div class="step">🔓 Unlock your apps only if you pass</div>
+
+  <section class="section">
+    <h2 class="headline" style="font-size: 2.5rem;">Real focus, real results.</h2>
+    <p class="subhead">StudyLock helps you build discipline and measure real progress — not screen time.</p>
+  </section>
+
+  <div class="screenshots">
+    <img src="https://studylock.github.io/img/01.png" alt="screenshot 1">
+    <img src="https://studylock.github.io/img/02.png" alt="screenshot 2">
+    <img src="https://studylock.github.io/img/03.png" alt="screenshot 3">
+    <img src="https://studylock.github.io/img/04.png" alt="screenshot 4">
+    <img src="https://studylock.github.io/img/05.png" alt="screenshot 5">
+  </div>
+
+  <section class="section">
+    <h2 class="headline" style="font-size: 2.2rem;">Join students unlocking their focus.</h2>
+    <a href="https://apps.apple.com/app/studylock/id6744610901" target="_blank" class="appstore-button">
+      <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/white/en-us.svg" alt="App Store button">
     </a>
   </section>
 
-  <section class="steps-section">
-    <h2 data-aos="fade-up">How It Works</h2>
-    <div class="step-flow">
-      <div class="step-box" data-aos="fade-up" data-aos-delay="100">
-        <div class="step-number">1</div>
-        <p>Upload study materials (PDFs or images)</p>
-      </div>
-      <div class="step-box" data-aos="fade-up" data-aos-delay="200">
-        <div class="step-number">2</div>
-        <p>Block distracting apps (yes, even TikTok)</p>
-      </div>
-      <div class="step-box" data-aos="fade-up" data-aos-delay="300">
-        <div class="step-number">3</div>
-        <p>Learn through AI-generated summaries</p>
-      </div>
-      <div class="step-box" data-aos="fade-up" data-aos-delay="400">
-        <div class="step-number">4</div>
-        <p>Take a quiz to prove you've studied</p>
-      </div>
-      <div class="step-box" data-aos="fade-up" data-aos-delay="500">
-        <div class="step-number">5</div>
-        <p>Unlock your apps once you meet the score threshold</p>
-      </div>
-    </div>
-  </section>
-
-  <section class="screenshots" data-aos="fade-up">
-    <h2>See StudyLock in Action</h2>
-    <div class="screenshot-gallery">
-      <img src="https://studylock.github.io/img/01.png" alt="screenshot 1">
-      <img src="https://studylock.github.io/img/02.png" alt="screenshot 2">
-      <img src="https://studylock.github.io/img/03.png" alt="screenshot 3">
-      <img src="https://studylock.github.io/img/04.png" alt="screenshot 4">
-      <img src="https://studylock.github.io/img/05.png" alt="screenshot 5">
-      <img src="https://studylock.github.io/img/06.png" alt="screenshot 6">
-      <img src="https://studylock.github.io/img/07.png" alt="screenshot 7">
-      <img src="https://studylock.github.io/img/08.png" alt="screenshot 8">
-      <img src="https://studylock.github.io/img/09.png" alt="screenshot 9">
-      <img src="https://studylock.github.io/img/10.png" alt="screenshot 10">
-    </div>
-  </section>
-
-  <section class="features-section">
-    <h2 data-aos="fade-up">Features</h2>
-    <div class="features-grid">
-      <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
-        <h3>Custom Unlock Rules</h3>
-        <p>Set your own quiz score requirement to unlock apps.</p>
-      </div>
-      <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
-        <h3>Multi-language Learning</h3>
-        <p>Learn in the language you're most comfortable with.</p>
-      </div>
-      <div class="feature-card" data-aos="fade-up" data-aos-delay="300">
-        <h3>Track Completed Sessions</h3>
-        <p>Monitor your study time and completed sessions in one place.</p>
-      </div>
-      <div class="feature-card" data-aos="fade-up" data-aos-delay="400">
-        <h3>Personalized Insights</h3>
-        <p>Get learning stats and feedback tailored to your study habits.</p>
-      </div>
-      <div class="feature-card" data-aos="fade-up" data-aos-delay="500">
-        <h3>Join Study Groups</h3>
-        <p>Use your school or organization email to join, stay motivated, and track your group's progress.</p>
-      </div>
-    </div>
-  </section>
-
   <footer>
-    &copy; 2025 StudyLock. All rights reserved.
+    &copy; 2025 StudyLock. Made with intention.
   </footer>
 
-  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
-  <script>
-    AOS.init({
-      once: true,
-      duration: 700,
-      easing: 'ease-out-cubic'
-    });
-  </script>
 </body>
 </html>
