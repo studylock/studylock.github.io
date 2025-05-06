@@ -16,8 +16,8 @@
     }
 
     .section {
-      padding: 100px 20px;
-      max-width: 800px;
+      padding: 80px 20px;
+      max-width: 1000px;
       margin: auto;
       text-align: center;
     }
@@ -39,15 +39,48 @@
       height: 50px;
     }
 
-    .step {
-      font-size: 1.7rem;
-      font-weight: 600;
-      padding: 60px 20px;
+    .step-box {
       background: #fff;
-      margin: 20px auto;
-      border-left: 5px solid #111;
-      text-align: left;
-      max-width: 700px;
+      padding: 20px 24px;
+      border-radius: 14px;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.04);
+      margin: 28px auto;
+      max-width: 520px;
+      text-align: center;
+      position: relative;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.6s ease, transform 0.6s ease;
+      opacity: 0;
+      transform: translateY(40px);
+    }
+
+    .step-box.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .step-box:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    }
+
+    .step-number {
+      background: #111;
+      color: #fff;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1rem;
+      margin-bottom: 10px;
+    }
+
+    .arrow {
+      font-size: 1.8rem;
+      color: #bbb;
+      margin: -5px 0 15px;
     }
 
     .screenshots {
@@ -70,11 +103,33 @@
       transform: scale(1.03);
     }
 
-    footer {
-      text-align: center;
-      padding: 80px 20px;
-      color: #888;
-      font-size: 0.9rem;
+    /* Feature Section */
+    .features-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 40px;
+      text-align: left;
+    }
+
+    .feature-card {
+      background: #ffffff;
+      padding: 24px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 22px rgba(0,0,0,0.08);
+    }
+
+    .feature-card h3 {
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin-bottom: 10px;
+      color: #111;
     }
 
     @media (max-width: 768px) {
@@ -84,12 +139,14 @@
       .subhead {
         font-size: 1.1rem;
       }
-      .step {
-        font-size: 1.2rem;
-        padding: 40px 20px;
+      .step-box {
+        padding: 18px;
       }
       .screenshots img {
         height: 280px;
+      }
+      .features-grid {
+        grid-template-columns: 1fr;
       }
     }
   </style>
@@ -107,11 +164,19 @@
     </div>
   </section>
 
-  <div class="step">📄 Upload your study material (PDF or image)</div>
-  <div class="step">📵 Choose which apps to block — even TikTok</div>
-  <div class="step">🧠 Get AI-powered summaries of your content</div>
-  <div class="step">📝 Take a quiz to test your understanding</div>
-  <div class="step">🔓 Unlock your apps only if you pass</div>
+  <section class="section">
+    <h2 class="headline" style="font-size: 2.5rem;">How It Works</h2>
+
+    <div class="step-box"><div class="step-number">1</div><p><strong>Upload your study material</strong><br>(PDFs or images)</p></div>
+    <div class="arrow">↓</div>
+    <div class="step-box"><div class="step-number">2</div><p><strong>Choose which apps to block</strong><br>(yes, even TikTok)</p></div>
+    <div class="arrow">↓</div>
+    <div class="step-box"><div class="step-number">3</div><p><strong>Get AI-powered summaries</strong><br>in your preferred language</p></div>
+    <div class="arrow">↓</div>
+    <div class="step-box"><div class="step-number">4</div><p><strong>Take a quiz to test your understanding</strong><br>and track your learning</p></div>
+    <div class="arrow">↓</div>
+    <div class="step-box"><div class="step-number">5</div><p><strong>Unlock your apps</strong><br>only if you pass</p></div>
+  </section>
 
   <section class="section">
     <h2 class="headline" style="font-size: 2.5rem;">Real focus, real results.</h2>
@@ -126,6 +191,45 @@
     <img src="https://studylock.github.io/img/05.png" alt="screenshot 5">
   </div>
 
+   <section class="section">
+    <h2 class="headline" style="font-size: 2.3rem;">Features</h2>
+    <div class="features-grid">
+      <div class="feature-card">
+        <h3>📄 Upload Study Materials</h3>
+        Add your PDFs or images to start focused learning.
+      </div>
+      <div class="feature-card">
+        <h3>📵 Block Distracting Apps</h3>
+        Fully block apps like TikTok, Instagram, and more.
+      </div>
+      <div class="feature-card">
+        <h3>🧠 AI-Powered Summaries</h3>
+        Learn faster with generated insights from your content.
+      </div>
+      <div class="feature-card">
+        <h3>📝 Custom Quizzes</h3>
+        Prove you studied with auto-generated quizzes.
+      </div>
+      <div class="feature-card">
+        <h3>🔓 Unlock with Results</h3>
+        Your apps stay locked until you meet your score threshold.
+      </div>
+      <div class="feature-card">
+        <h3>🌍 Study in Your Language</h3>
+        Get summaries and quizzes in your preferred language.
+      </div>
+      <div class="feature-card">
+        <h3>📈 Progress Tracking</h3>
+        Track session history, time spent, and completion stats.
+      </div>
+      <div class="feature-card">
+        <h3>👥 Study Groups</h3>
+        Join with your school email to stay motivated together.
+      </div>
+    </div>
+    <p class="subhead" style="margin-top: 50px; font-style: italic;">Earn your screen time with real study time.</p>
+  </section>
+
   <section class="section">
     <h2 class="headline" style="font-size: 2.2rem;">Join students unlocking their focus.</h2>
     <a href="https://apps.apple.com/app/studylock/id6744610901" target="_blank" class="appstore-button">
@@ -136,6 +240,23 @@
   <footer>
     &copy; 2025 StudyLock. Made with intention.
   </footer>
+
+  <script>
+    const stepBoxes = document.querySelectorAll('.step-box');
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.4
+    });
+
+    stepBoxes.forEach(box => observer.observe(box));
+  </script>
 
 </body>
 </html>
