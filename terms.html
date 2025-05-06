@@ -3,73 +3,169 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>StudyLock – Terms of Use</title>
+  <title>Terms of Use – StudyLock</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&display=swap" rel="stylesheet" />
   <style>
+    :root {
+      --color-bg: #fdfdfc;
+      --color-text: #111;
+      --color-subtext: #555;
+      --color-card-bg: #ffffff;
+      --color-accent: #007aff;
+      --radius: 0.875rem;
+      --gap: 1.5rem;
+      --transition-fast: 0.2s ease;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
     body {
-      font-family: 'Manrope', sans-serif;
-      background: #fdfdfc;
-      color: #111;
       margin: 0;
-      padding: 2rem;
-      max-width: 800px;
-      line-height: 1.7;
+      font-family: 'Manrope', sans-serif;
+      background: var(--color-bg);
+      color: var(--color-text);
+      line-height: 1.6;
+    }
+    nav {
+      position: sticky;
+      top: 0;
+      background: var(--color-card-bg);
+      z-index: 1000;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    }
+    .navbar-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 1rem 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: var(--color-text);
+      font-weight: 800;
+      font-size: 1.1rem;
+    }
+    .logo img { height: 40px; }
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--color-text);
+      font-weight: 500;
+    }
+    .nav-links a:hover,
+    .nav-links a:focus {
+      color: var(--color-accent);
+    }
+    main {
+      max-width: 1000px;
+      padding: 5rem 1.25rem;
+      margin: 0 auto;
     }
     h1 {
-      font-size: 2rem;
+      font-size: 2.5rem;
+      font-weight: 800;
       margin-bottom: 1rem;
     }
     h2 {
-      margin-top: 2rem;
-      font-size: 1.25rem;
+      font-size: 1.5rem;
+      margin-top: 2.5rem;
+      font-weight: 700;
     }
     p {
       margin: 1rem 0;
+      color: var(--color-text);
+    }
+    ul {
+      margin-left: 1.25rem;
+    }
+    footer {
+      background: var(--color-card-bg);
+      text-align: center;
+      padding: 3rem 1.25rem;
+      color: var(--color-subtext);
+      font-size: 0.875rem;
+    }
+    footer a:hover,
+    footer a:focus {
+      color: var(--color-accent);
+    }
+    @media (max-width: 768px) {
+      h1 { font-size: 2rem; }
+      h2 { font-size: 1.25rem; }
     }
   </style>
 </head>
 <body>
-  <h1>StudyLock – Terms of Use</h1>
-  <p><strong>Effective Date:</strong> May 6, 2025</p>
+  <nav role="navigation" aria-label="Main navigation">
+    <div class="navbar-inner">
+      <a href="/" class="logo">
+        <img src="https://studylock.github.io/img/logo.png" alt="StudyLock logo" loading="lazy">
+        StudyLock
+      </a>
+      <div class="nav-links">
+        <a href="#contact">Contact Us</a>
+        <a href="terms.html">Terms of Use</a>
+        <a href="privacy.html">Privacy Policy</a>
+      </div>
+    </div>
+  </nav>
 
-  <h2>1. Introduction</h2>
-  <p>Welcome to StudyLock. By accessing or using our application, you agree to be bound by these Terms of Use. If you do not agree with any part of these terms, please do not use the app.</p>
+  <main role="main">
+    <h1>Terms of Use</h1>
+    <p><strong>Effective Date:</strong> May 6, 2025</p>
 
-  <h2>2. Definitions</h2>
-  <p><strong>App:</strong> The StudyLock mobile application.<br/>
-     <strong>User:</strong> Anyone who downloads, installs, or uses the App.<br/>
-     <strong>Content:</strong> Any data, text, images, study materials, or other information displayed or used within the App.</p>
+    <h2>1. Introduction</h2>
+    <p>Welcome to StudyLock. By accessing or using our application, you agree to be bound by these Terms of Use. If you do not agree with any part of these terms, please do not use the app.</p>
 
-  <h2>3. User Responsibilities</h2>
-  <ul>
-    <li>Use the App only for lawful purposes and in accordance with applicable laws and regulations.</li>
-    <li>Not interfere with or disrupt the App's functionality or servers.</li>
-    <li>Ensure any uploaded content does not violate third-party rights or contain harmful content.</li>
-  </ul>
+    <h2>2. Definitions</h2>
+    <p><strong>App:</strong> The StudyLock mobile application.<br>
+       <strong>User:</strong> Anyone who downloads, installs, or uses the App.<br>
+       <strong>Content:</strong> Any data, text, study material, images, or other information displayed or used within the App.</p>
 
-  <h2>4. Intellectual Property</h2>
-  <p>The App and its original content, features, and functionality are owned by the StudyLock team. Users are granted a limited, non-exclusive, non-transferable license to use the App for personal, non-commercial use only.</p>
+    <h2>3. User Responsibilities</h2>
+    <ul>
+      <li>Use the App only for lawful purposes and in accordance with all applicable laws.</li>
+      <li>Do not upload content that is harmful, illegal, or infringes on third-party rights.</li>
+      <li>Do not attempt to disrupt or exploit the App or its users.</li>
+    </ul>
 
-  <h2>5. Use of the App</h2>
-  <p>You agree not to:</p>
-  <ul>
-    <li>Reverse engineer, decompile, or disassemble any part of the App.</li>
-    <li>Use the App for any commercial or unauthorized purposes.</li>
-    <li>Use the App in a way that could damage or impair its functionality.</li>
-  </ul>
+    <h2>4. Intellectual Property</h2>
+    <p>All content, branding, and functionality of the App are the property of the StudyLock team. You may use the App only for personal, non-commercial purposes unless given express written permission.</p>
 
-  <h2>6. Data Collection and Privacy</h2>
-  <p>We respect your privacy. StudyLock may collect limited data necessary for app functionality — specifically your email address if you contact us. This data is not linked to your identity and is not used for tracking or advertising purposes. Please review our <a href="#privacy">Privacy Policy</a> for full details.</p>
+    <h2>5. Use of the App</h2>
+    <ul>
+      <li>Do not reverse engineer or modify any part of the App.</li>
+      <li>Do not resell, sublicense, or distribute the App without permission.</li>
+    </ul>
 
-  <h2>7. Disclaimers and Limitation of Liability</h2>
-  <p><strong>No Warranties:</strong> The App is provided "as is" without warranties of any kind. We do not guarantee the App will be uninterrupted or error-free.</p>
-  <p><strong>Limitation of Liability:</strong> StudyLock and its team shall not be liable for any damages or losses resulting from your use or inability to use the App.</p>
+    <h2>6. Data Collection and Privacy</h2>
+    <p>StudyLock does not collect personal data by default. The only instance where personal data (such as an email address) may be collected is when a user voluntarily signs in to join a Study Group using their Google or Microsoft account.</p>
+    <p>For more information, please review our <a href="privacy.html">Privacy Policy</a>.</p>
 
-  <h2>8. Changes to the Terms</h2>
-  <p>We may update these Terms from time to time. We will notify users of significant changes through the App or our website. Your continued use of the App after any updates indicates your acceptance of the new Terms.</p>
+    <h2>7. Disclaimers and Limitation of Liability</h2>
+    <p>The App is provided "as is" without any warranties, express or implied. We do not guarantee uninterrupted or error-free service. StudyLock is not responsible for any losses or damages arising from your use of the App.</p>
 
-  <h2>9. Contact Information</h2>
-  <p>If you have any questions about these Terms, please contact us at: <strong>studylock@icloud.com</strong></p>
+    <h2>8. Modifications to Terms</h2>
+    <p>We may update these Terms at any time. Changes will be communicated through the app or website. Continued use of the App implies acceptance of the updated Terms.</p>
 
-  <p style="margin-top: 2rem;">&copy; 2025 StudyLock</p>
+    <h2>9. Contact</h2>
+    <p>If you have any questions, please contact us at: <strong>studylock@icloud.com</strong></p>
+  </main>
+
+  <footer role="contentinfo">
+    <p id="contact">Contact us at: studylock@icloud.com</p>
+    <p>By using StudyLock, you agree to our <a href="terms.html">Terms of Use</a>.</p>
+    <p>Your data is protected. Read our <a href="privacy.html">Privacy Policy</a>.</p>
+    <p style="margin-top:2rem;">&copy; 2025 StudyLock</p>
+  </footer>
 </body>
 </html>
