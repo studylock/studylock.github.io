@@ -147,31 +147,25 @@
 
     
 /* 1) Override the main‐section padding just for the gallery */
+/* 1) Reset the gallery section’s default padding/width */
 [role="main"] .gallery-section {
-  max-width: none;      /* don’t cap at 1000px */
-  margin: 0;            /* remove auto centering */
-  padding-left: 0;      /* keep your 4rem vertical only */
+  max-width: none;
+  margin: 0;
+  padding-left: 0;
   padding-right: 0;
+    padding: 4rem 0;
+
 }
 
-/* 2) Break it out to full viewport width */
-.gallery-section {
-  position: relative;
-  left: 50%;            /* shift 50% into the page */
-  width: 100vw;         /* span the full viewport */
-  margin-left: -50vw;   /* pull it back to align edges */
-}
-
-/* 2) Make the gallery “break out” of its parent and go full‐bleed */
+/* 2) Full-bleed background & inner container */
+.gallery-section,
 .gallery-container {
   position: relative;
-  /* move the container to the middle of the viewport */
   left: 50%;
-  /* then pull it back by half the viewport width */
-  margin-left: -50vw;
-  /* force it to span the full viewport width */
   width: 100vw;
+  margin-left: -50vw;
 }
+
 
 /* 3) Clean up the .screenshots wrapper */
 .screenshots {
