@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
   <style>
     * {
       margin: 0;
@@ -20,10 +21,12 @@
       color: #222;
       line-height: 1.6;
     }
+
     header {
       background: #fff;
-      padding: 20px 40px;
+      padding: 16px 20px;
       display: flex;
+      flex-wrap: wrap;
       justify-content: space-between;
       align-items: center;
       box-shadow: 0 1px 6px rgba(0,0,0,0.05);
@@ -31,63 +34,114 @@
       top: 0;
       z-index: 100;
     }
-    header img {
+
+    .brand {
+      display: flex;
+      align-items: center;
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    .brand img {
       height: 36px;
-      vertical-align: middle;
       margin-right: 10px;
     }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
     .nav-links a {
-      margin-left: 20px;
+      margin-left: 16px;
+      margin-top: 8px;
       text-decoration: none;
       color: #444;
       font-size: 14px;
+      transition: color 0.3s;
     }
+
+    .nav-links a:hover {
+      color: #5a47a5;
+    }
+
     .hero {
+      position: relative;
       text-align: center;
-      padding: 100px 20px 60px;
-      background: linear-gradient(145deg, #e9eaf0, #ffffff);
+      padding: 140px 20px 100px;
+      background: linear-gradient(135deg, #d6d9f8, #e7d4f8);
+      overflow: hidden;
     }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('https://www.transparenttextures.com/patterns/cubes.png');
+      opacity: 0.06;
+    }
+
     .hero h1 {
-      font-size: 42px;
+      font-size: 48px;
       font-weight: 800;
       margin-bottom: 20px;
+      position: relative;
     }
+
     .hero p {
-      font-size: 18px;
-      color: #555;
+      font-size: 20px;
+      color: #444;
       max-width: 700px;
       margin: 0 auto 30px;
+      position: relative;
     }
+
     .hero a img {
-      height: 48px;
+      height: 52px;
+      position: relative;
     }
+
     .steps-section {
       max-width: 1100px;
-      margin: 80px auto;
+      margin: 100px auto;
       padding: 0 20px;
     }
+
     .steps-section h2 {
-      font-size: 28px;
+      font-size: 32px;
       text-align: center;
-      margin-bottom: 50px;
+      margin-bottom: 60px;
     }
+
     .step-flow {
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
       gap: 30px;
     }
+
     .step-box {
       flex: 1 1 180px;
       background: #fff;
       border-radius: 12px;
-      padding: 20px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      padding: 24px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
       text-align: center;
       position: relative;
+      transition: transform 0.3s, background 0.3s;
     }
+
+    .step-box:hover {
+      transform: translateY(-6px);
+      background: #f4f4fd;
+    }
+
     .step-box::after {
-      content: '→';
+      content: '➡';
       position: absolute;
       right: -20px;
       top: 50%;
@@ -95,78 +149,128 @@
       font-size: 20px;
       color: #aaa;
     }
+
     .step-box:last-child::after {
       display: none;
     }
+
     .step-number {
-      font-size: 22px;
+      font-size: 24px;
       font-weight: 700;
       color: #5a47a5;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
     }
+
     .screenshots {
-      padding: 80px 20px;
-      background: #fff;
+      padding: 100px 20px;
+      background: #fafbff;
     }
+
     .screenshots h2 {
       text-align: center;
-      font-size: 28px;
-      margin-bottom: 30px;
+      font-size: 32px;
+      margin-bottom: 40px;
     }
+
     .screenshot-gallery {
       display: flex;
       overflow-x: auto;
       gap: 16px;
       padding: 0 10px;
+      scroll-snap-type: x mandatory;
     }
+
     .screenshot-gallery img {
       border-radius: 12px;
       max-height: 440px;
+      scroll-snap-align: center;
     }
+
     .features-section {
-      max-width: 1100px;
-      margin: 60px auto;
+      max-width: 900px;
+      margin: 100px auto;
       padding: 0 20px;
     }
+
     .features-section h2 {
       text-align: center;
-      font-size: 28px;
+      font-size: 32px;
       margin-bottom: 40px;
     }
+
     .features-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      display: flex;
+      flex-direction: column;
       gap: 24px;
     }
+
     .feature-card {
-      background: #f0f1f6;
-      padding: 24px;
-      border-radius: 12px;
-      transition: all 0.3s;
+      background: #f1f3fa;
+      padding: 28px;
+      border-radius: 14px;
+      transition: all 0.3s ease;
     }
+
     .feature-card:hover {
-      background: #e3e5ee;
+      background: #e5e8f5;
       transform: translateY(-4px);
     }
+
     .feature-card h3 {
-      font-size: 18px;
+      font-size: 20px;
       margin-bottom: 10px;
+      color: #333;
     }
+
     .feature-card p {
-      font-size: 14px;
-      color: #444;
+      font-size: 15px;
+      color: #555;
     }
+
     footer {
       text-align: center;
       font-size: 13px;
-      padding: 40px 20px;
+      padding: 50px 20px;
       color: #777;
+      background: #f1f2f6;
+    }
+
+    @media (max-width: 600px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .nav-links {
+        margin-top: 10px;
+        width: 100%;
+        justify-content: flex-start;
+      }
+
+      .nav-links a {
+        margin-left: 0;
+        margin-right: 16px;
+      }
+
+      .hero h1 {
+        font-size: 34px;
+      }
+
+      .steps-section h2,
+      .screenshots h2,
+      .features-section h2 {
+        font-size: 26px;
+      }
+
+      .feature-card h3 {
+        font-size: 18px;
+      }
     }
   </style>
 </head>
 <body>
   <header>
-    <div style="display:flex; align-items:center; font-weight:bold; font-size:18px;">
+    <div class="brand">
       <img src="https://studylock.github.io/img/logo.png" alt="StudyLock Logo">
       StudyLock
     </div>
@@ -177,7 +281,7 @@
     </nav>
   </header>
 
-  <section class="hero">
+  <section class="hero" data-aos="fade-up">
     <h1>Struggling to stay focused while studying?</h1>
     <p>StudyLock helps you stay on track by blocking distracting apps — and only unlocking them once you’ve studied and passed a quiz.</p>
     <a href="https://apps.apple.com/app/studylock/id6744610901">
@@ -186,32 +290,32 @@
   </section>
 
   <section class="steps-section">
-    <h2>How It Works</h2>
+    <h2 data-aos="fade-up">How It Works</h2>
     <div class="step-flow">
-      <div class="step-box">
+      <div class="step-box" data-aos="fade-up" data-aos-delay="100">
         <div class="step-number">1</div>
         <p>Upload study materials (PDFs or images)</p>
       </div>
-      <div class="step-box">
+      <div class="step-box" data-aos="fade-up" data-aos-delay="200">
         <div class="step-number">2</div>
         <p>Block distracting apps (yes, even TikTok)</p>
       </div>
-      <div class="step-box">
+      <div class="step-box" data-aos="fade-up" data-aos-delay="300">
         <div class="step-number">3</div>
         <p>Learn through AI-generated summaries</p>
       </div>
-      <div class="step-box">
+      <div class="step-box" data-aos="fade-up" data-aos-delay="400">
         <div class="step-number">4</div>
         <p>Take a quiz to prove you've studied</p>
       </div>
-      <div class="step-box">
+      <div class="step-box" data-aos="fade-up" data-aos-delay="500">
         <div class="step-number">5</div>
         <p>Unlock your apps once you meet the score threshold</p>
       </div>
     </div>
   </section>
 
-  <section class="screenshots">
+  <section class="screenshots" data-aos="fade-up">
     <h2>See StudyLock in Action</h2>
     <div class="screenshot-gallery">
       <img src="https://studylock.github.io/img/01.png" alt="screenshot 1">
@@ -228,25 +332,25 @@
   </section>
 
   <section class="features-section">
-    <h2>Features</h2>
+    <h2 data-aos="fade-up">Features</h2>
     <div class="features-grid">
-      <div class="feature-card">
+      <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
         <h3>Custom Unlock Rules</h3>
         <p>Set your own quiz score requirement to unlock apps.</p>
       </div>
-      <div class="feature-card">
+      <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
         <h3>Multi-language Learning</h3>
         <p>Learn in the language you're most comfortable with.</p>
       </div>
-      <div class="feature-card">
+      <div class="feature-card" data-aos="fade-up" data-aos-delay="300">
         <h3>Track Completed Sessions</h3>
         <p>Monitor your study time and completed sessions in one place.</p>
       </div>
-      <div class="feature-card">
+      <div class="feature-card" data-aos="fade-up" data-aos-delay="400">
         <h3>Personalized Insights</h3>
         <p>Get learning stats and feedback tailored to your study habits.</p>
       </div>
-      <div class="feature-card">
+      <div class="feature-card" data-aos="fade-up" data-aos-delay="500">
         <h3>Join Study Groups</h3>
         <p>Use your school or organization email to join, stay motivated, and track your group's progress.</p>
       </div>
@@ -256,5 +360,14 @@
   <footer>
     &copy; 2025 StudyLock. All rights reserved.
   </footer>
+
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      once: true,
+      duration: 700,
+      easing: 'ease-out-cubic'
+    });
+  </script>
 </body>
 </html>
