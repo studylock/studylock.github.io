@@ -143,15 +143,23 @@
     .step-box:hover { transform:translateY(-3px); box-shadow:0 10px 25px rgba(0,0,0,0.08);}    
     .step-number { background:var(--color-text); color:#fff; width:36px; height:36px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; font-weight:700; margin-bottom:0.5rem;}    
     .arrow { font-size:2rem; color:var(--color-subtext); margin:-0.5rem 0 1rem;}    
-    .gallery-section { background:var(--color-section-bg); padding:4rem 0; }
     .gallery-title { font-size:2.5rem; font-weight:800; margin-bottom:2rem; }
 
     
 /* 1) Override the main‐section padding just for the gallery */
 [role="main"] .gallery-section {
-  /* remove the default 1.25rem left/right padding */
-  padding-left: 0 !important;
-  padding-right: 0 !important;
+  max-width: none;      /* don’t cap at 1000px */
+  margin: 0;            /* remove auto centering */
+  padding-left: 0;      /* keep your 4rem vertical only */
+  padding-right: 0;
+}
+
+/* 2) Break it out to full viewport width */
+.gallery-section {
+  position: relative;
+  left: 50%;            /* shift 50% into the page */
+  width: 100vw;         /* span the full viewport */
+  margin-left: -50vw;   /* pull it back to align edges */
 }
 
 /* 2) Make the gallery “break out” of its parent and go full‐bleed */
