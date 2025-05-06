@@ -130,21 +130,25 @@
       margin: -5px 0 15px;
     }
 
-    .screenshots {
-      display: flex;
-      overflow-x: auto;
-      gap: 16px;
-      padding: 60px 20px;
-      justify-content: center;
-    }
+.screenshots {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+}
 
-    .screenshots img {
-      height: 400px;
-      border-radius: 12px;
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
-      flex-shrink: 0;
-      transition: transform 0.3s ease;
-    }
+.screenshots img {
+  height: 400px;
+  flex-shrink: 0;
+  border-radius: 0;
+  box-shadow: none;
+  scroll-snap-align: start;
+  margin: 0;
+}
+
 
     .screenshots img:hover {
       transform: scale(1.03);
@@ -270,6 +274,7 @@
     <p class="subhead">Whether you're preparing for exams, tackling daily assignments, or working on long-term projects, StudyLock creates a structured, distraction-free environment powered by AI to support your learning.</p>
   </section>
 
+<div style="overflow-x: auto; width: 100vw;">
   <div class="screenshots">
     <img src="https://studylock.github.io/img/01.png" alt="screenshot 1">
     <img src="https://studylock.github.io/img/02.png" alt="screenshot 2">
@@ -282,6 +287,8 @@
     <img src="https://studylock.github.io/img/09.png" alt="screenshot 9">
     <img src="https://studylock.github.io/img/10.png" alt="screenshot 10">
   </div>
+</div>
+
 
   <section class="section">
     <h2 class="headline" style="font-size: 2.3rem;">Features</h2>
