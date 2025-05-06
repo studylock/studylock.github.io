@@ -279,18 +279,22 @@
         grid-template-columns: 1fr;
       }
 
-      .navbar {
-        flex-direction: column;
-        gap: 10px;
-        padding: 14px 20px;
-        text-align: center;
-      }
-
-
-
-      .navbar-left {
-        justify-content: center;
-      }
+  .navbar-inner {
+    flex-direction: column;
+    align-items: center;
+  }
+  /* Put the links on their own line, centered */
+  .navbar-links {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 12px;
+    width: 100%;
+  }
+  /* Remove left-margin push on each link */
+  .navbar-links a {
+    margin: 0;
+  }
     }
   </style>
 </head>
