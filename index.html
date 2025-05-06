@@ -145,16 +145,39 @@
     .arrow { font-size:2rem; color:var(--color-subtext); margin:-0.5rem 0 1rem;}    
     .gallery-section { background:var(--color-section-bg); padding:4rem 0; }
     .gallery-title { font-size:2.5rem; font-weight:800; margin-bottom:2rem; }
+
+    
+/* 1) Override the main‐section padding just for the gallery */
+[role="main"] .gallery-section {
+  /* remove the default 1.25rem left/right padding */
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+/* 2) Make the gallery “break out” of its parent and go full‐bleed */
+.gallery-container {
+  position: relative;
+  /* move the container to the middle of the viewport */
+  left: 50%;
+  /* then pull it back by half the viewport width */
+  margin-left: -50vw;
+  /* force it to span the full viewport width */
+  width: 100vw;
+}
+
+/* 3) Clean up the .screenshots wrapper */
 .screenshots {
   display: flex;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   gap: 0;
   padding: 0;
-  margin: 0 auto;
-  width: 100vw;
-  -webkit-overflow-scrolling: touch;
+  margin: 0;
+  width: 100%;
 }
+
+/* (Your existing rules for .screenshots img and media queries can stay as-is) */
+
 
 .screenshots::-webkit-scrollbar {
   height: 6px;
