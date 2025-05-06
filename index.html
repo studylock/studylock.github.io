@@ -148,35 +148,39 @@
     
 /* 1) Override the main‐section padding just for the gallery */
 /* 1) Reset the gallery section’s default padding/width */
+/* 1) Reset the gallery-section’s default centering/padding */
 [role="main"] .gallery-section {
-  max-width: none;
-  margin: 0;
-  padding-left: 0;
-  padding-right: 0;
-    padding: 4rem 0;
-
+  max-width: none;    /* don’t cap at 1000px */
+  margin: 0;          /* remove auto-center */
+  padding: 4rem 0;    /* your vertical spacing */
 }
 
-/* 2) Full-bleed background & inner container */
-.gallery-section,
-.gallery-container {
+/* 2) Break that section out to full-bleed */
+.gallery-section {
   position: relative;
   left: 50%;
+  transform: translateX(-50%);
   width: 100vw;
-  margin-left: -50vw;
 }
 
+/* 3) Keep the inner container normal (so it fills that full-bleed area) */
+.gallery-container {
+  margin: 0 auto;
+  padding: 0;
+  width: 100%;
+}
 
-/* 3) Clean up the .screenshots wrapper */
+/* 4) Screenshots strip stays gapless & scrollable */
 .screenshots {
   display: flex;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   gap: 0;
-  padding: 0;
   margin: 0;
+  padding: 0;
   width: 100%;
 }
+
 
 /* (Your existing rules for .screenshots img and media queries can stay as-is) */
 
