@@ -130,29 +130,90 @@
       margin: -5px 0 15px;
     }
 
+.gallery-section {
+  width: 100vw;
+  background: #f2f3f4;
+  padding: 60px 0;
+  overflow-x: hidden;
+  text-align: center;
+}
+
+.gallery-title {
+  font-size: 2.3rem;
+  font-weight: 800;
+  margin-bottom: 30px;
+  color: #111;
+}
+
+.gallery-container {
+  position: relative;
+}
+
+    .gallery-container::before,
+.gallery-container::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 50px;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.gallery-container::before {
+  left: 0;
+  background: linear-gradient(to right, #f2f3f4, transparent);
+}
+
+.gallery-container::after {
+  right: 0;
+  background: linear-gradient(to left, #f2f3f4, transparent);
+}
+
+
 .screenshots {
   display: flex;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   gap: 0;
-  margin: 0;
   padding: 0;
+  margin: 0 auto;
   width: 100vw;
+  -webkit-overflow-scrolling: touch;
+}
+
+.screenshots::-webkit-scrollbar {
+  height: 6px;
+}
+.screenshots::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 3px;
+}
+.screenshots::-webkit-scrollbar-track {
+  background: transparent;
 }
 
 .screenshots img {
   height: 400px;
   flex-shrink: 0;
-  border-radius: 0;
-  box-shadow: none;
   scroll-snap-align: start;
   margin: 0;
+  border-radius: 0;
+  transition: transform 0.3s ease;
 }
 
+.screenshots img:hover {
+  transform: scale(1.03);
+}
 
-    .screenshots img:hover {
-      transform: scale(1.03);
-    }
+.swipe-indicator {
+  margin-top: 12px;
+  font-size: 0.95rem;
+  color: #666;
+  opacity: 0.8;
+  user-select: none;
+}
+
 
     .features-grid {
       display: grid;
@@ -274,18 +335,24 @@
     <p class="subhead">Whether you're preparing for exams, tackling daily assignments, or working on long-term projects, StudyLock creates a structured, distraction-free environment powered by AI to support your learning.</p>
   </section>
 
-<div style="overflow-x: auto; width: 100vw;">
-  <div class="screenshots">
-    <img src="https://studylock.github.io/img/01.png" alt="screenshot 1">
-    <img src="https://studylock.github.io/img/02.png" alt="screenshot 2">
-    <img src="https://studylock.github.io/img/03.png" alt="screenshot 3">
-    <img src="https://studylock.github.io/img/04.png" alt="screenshot 4">
-    <img src="https://studylock.github.io/img/06.png" alt="screenshot 6">
-    <img src="https://studylock.github.io/img/07.png" alt="screenshot 7">
-    <img src="https://studylock.github.io/img/08.png" alt="screenshot 8">
-    <img src="https://studylock.github.io/img/09.png" alt="screenshot 9">
+<section class="gallery-section">
+  <h2 class="gallery-title">Explore the App</h2>
+  <div class="gallery-container">
+    <div class="screenshots">
+      <img src="https://studylock.github.io/img/01.png" alt="screenshot 1">
+      <img src="https://studylock.github.io/img/02.png" alt="screenshot 2">
+      <img src="https://studylock.github.io/img/03.png" alt="screenshot 3">
+      <img src="https://studylock.github.io/img/04.png" alt="screenshot 4">
+      <img src="https://studylock.github.io/img/05.png" alt="screenshot 5">
+      <img src="https://studylock.github.io/img/06.png" alt="screenshot 6">
+      <img src="https://studylock.github.io/img/07.png" alt="screenshot 7">
+      <img src="https://studylock.github.io/img/08.png" alt="screenshot 8">
+      <img src="https://studylock.github.io/img/09.png" alt="screenshot 9">
+    </div>
+    <div class="swipe-indicator">← Swipe to explore →</div>
   </div>
-</div>
+</section>
+
 
 
   <section class="section">
