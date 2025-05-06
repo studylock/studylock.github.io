@@ -3,21 +3,31 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Terms of Use – StudyLock</title>
+  <title>StudyLock</title>
 
+  <!-- SEO / Social Preview -->
+  <meta property="og:title" content="StudyLock: Earn Screen Time with Real Study Time" />
+  <meta property="og:description" content="StudyLock helps you stay on track by blocking distracting apps — and only unlocking them once you’ve studied and passed a quiz." />
+  <meta property="og:image" content="https://studylock.github.io/img/og-image.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- Preconnect & Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&display=swap" rel="stylesheet" />
+
   <style>
     :root {
       --color-bg: #fdfdfc;
       --color-text: #111;
       --color-subtext: #555;
       --color-card-bg: #ffffff;
+      --color-section-bg: #f2f3f4;
       --color-accent: #007aff;
       --radius: 0.875rem;
       --gap: 1.5rem;
       --transition-fast: 0.2s ease;
+      --transition-medium: 0.6s ease;
     }
     *, *::before, *::after { box-sizing: border-box; }
     body {
@@ -26,6 +36,8 @@
       background: var(--color-bg);
       color: var(--color-text);
       line-height: 1.6;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
     }
     nav {
       position: sticky;
@@ -60,112 +72,289 @@
       text-decoration: none;
       color: var(--color-text);
       font-weight: 500;
+      transition: color var(--transition-fast);
     }
     .nav-links a:hover,
     .nav-links a:focus {
       color: var(--color-accent);
+      outline: none;
     }
-    main {
-      max-width: 1000px;
-      padding: 5rem 1.25rem;
-      margin: 0 auto;
-    }
-    h1 {
-      font-size: 2.5rem;
-      font-weight: 800;
-      margin-bottom: 1rem;
-    }
-    h2 {
-      font-size: 1.5rem;
-      margin-top: 2.5rem;
+    .btn {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      border-radius: var(--radius);
       font-weight: 700;
+      text-decoration: none;
+      transition: background var(--transition-fast), color var(--transition-fast);
     }
-    p {
-      margin: 1rem 0;
-      color: var(--color-text);
+    .btn-primary {
+      background: var(--color-accent);
+      color: #fff;
+      border: none;
     }
-    ul {
-      margin-left: 1.25rem;
+    .btn-primary:hover,
+    .btn-primary:focus {
+      background: #005bb5;
     }
-    footer {
-      background: var(--color-card-bg);
-      text-align: center;
-      padding: 3rem 1.25rem;
-      color: var(--color-subtext);
-      font-size: 0.875rem;
-    }
-    footer a:hover,
-    footer a:focus {
+    .btn-outline {
+      border: 2px solid var(--color-accent);
       color: var(--color-accent);
     }
-    @media (max-width: 768px) {
-      h1 { font-size: 2rem; }
-      h2 { font-size: 1.25rem; }
+    .btn-outline:hover,
+    .btn-outline:focus {
+      background: var(--color-accent);
+      color: #fff;
+    }
+    [role="main"] section {
+      padding: 5rem 1.25rem;
+      max-width: 1000px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .headline {
+      font-size: 3rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+      letter-spacing: -0.5px;
+    }
+    .subhead {
+      font-size: 1.25rem;
+      color: var(--color-subtext);
+      margin-bottom: 2rem;
+    }
+    .hero-ctas {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+    .scroll-hint {
+      font-size: 0.9rem;
+      color: var(--color-subtext);
+      animation: bounce 2s infinite;
+      user-select: none;
+    }
+    @keyframes bounce { 0%,100%{transform:translateY(0);}50%{transform:translateY(6px);} }
+    .section { opacity:0; transform:translateY(40px); transition:opacity var(--transition-medium),transform var(--transition-medium);}    
+    .section.visible { opacity:1; transform:translateY(0); }
+    .step-box { background:var(--color-card-bg); padding:1.25rem; border-radius:var(--radius); box-shadow:0 6px 14px rgba(0,0,0,0.04); margin:2rem auto; max-width:520px; transition:transform var(--transition-fast),box-shadow var(--transition-fast),opacity var(--transition-medium),transform var(--transition-medium); opacity:0; transform:translateY(40px);}    
+    .step-box.visible { opacity:1; transform:translateY(0); }
+    .step-box:hover { transform:translateY(-3px); box-shadow:0 10px 25px rgba(0,0,0,0.08);}    
+    .step-number { background:var(--color-text); color:#fff; width:36px; height:36px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; font-weight:700; margin-bottom:0.5rem;}    
+    .arrow { font-size:2rem; color:var(--color-subtext); margin:-0.5rem 0 1rem;}    
+    .gallery-title { font-size:2.5rem; font-weight:800; margin-bottom:2rem; }
+
+    
+/* 1) Override the main‐section padding just for the gallery */
+/* 1) Reset the gallery section’s default padding/width */
+/* 1) Reset the gallery-section’s default centering/padding */
+[role="main"] .gallery-section {
+  max-width: none;    /* don’t cap at 1000px */
+  margin: 0;          /* remove auto-center */
+  padding: 4rem 0;    /* your vertical spacing */
+}
+
+/* 2) Break that section out to full-bleed */
+.gallery-section {
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw;
+}
+
+/* 3) Keep the inner container normal (so it fills that full-bleed area) */
+.gallery-container {
+  margin: 0 auto;
+  padding: 0;
+  width: 100%;
+}
+
+/* 4) Screenshots strip stays gapless & scrollable */
+.screenshots {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+
+/* (Your existing rules for .screenshots img and media queries can stay as-is) */
+
+
+.screenshots::-webkit-scrollbar {
+  height: 6px;
+}
+.screenshots::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 3px;
+}
+.screenshots::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.screenshots img {
+  height: 600px;
+  flex-shrink: 0;
+  scroll-snap-align: start;
+  margin: 0;
+  border-radius: 0;
+  transition: transform 0.3s ease;
+}
+
+.screenshots img:hover {
+  transform: scale(1.03);
+}
+    .swipe-indicator { margin-top:1rem; font-size:0.9rem; color:var(--color-subtext); user-select:none; }
+    .features-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 40px;
+      text-align: left;
+    }
+    .feature-card {
+      background: #ffffff;
+      padding: 24px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      opacity: 0;
+      transform: translateY(40px);
+    }
+    .feature-card.visible { opacity:1; transform:translateY(0); }
+    .feature-card:hover { transform:translateY(-4px); box-shadow:0 10px 22px rgba(0,0,0,0.08);}    
+    .feature-card h3 { font-size:1.125rem; font-weight:600; margin-bottom:0.5rem;}    
+    footer { background:var(--color-card-bg); text-align:center; padding:3rem 1.25rem; color:var(--color-subtext); font-size:0.875rem; }
+    footer a:hover, footer a:focus { color:var(--color-accent); }
+    a:focus, button:focus { outline:2px dashed var(--color-accent); outline-offset:3px; }
+    img { max-width:100%; display:block; }
+    @media (max-width:768px) { .headline{font-size:2.25rem;} .subhead{font-size:1.1rem;} .screenshots img{height:280px;} }
+
+        @media (max-width: 768px) {
+  .navbar-inner {
+    flex-direction: column;
+    align-items: center;
+  }
+  /* Put the links on their own line, centered */
+  .navbar-links {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 12px;
+    width: 100%;
+  }
+  /* Remove left-margin push on each link */
+  .navbar-links a {
+    margin: 0;
+  }
     }
   </style>
 </head>
 <body>
+  <div id="progress-bar" style="position:fixed;top:0;left:0;height:4px;background:var(--color-accent);width:0;"></div>
   <nav role="navigation" aria-label="Main navigation">
     <div class="navbar-inner">
-      <a href="/" class="logo">
+      <a href="#" class="logo">
         <img src="https://studylock.github.io/img/logo.png" alt="StudyLock logo" loading="lazy">
         StudyLock
       </a>
       <div class="nav-links">
         <a href="#contact">Contact Us</a>
-        <a href="terms.html">Terms of Use</a>
-        <a href="privacy.html">Privacy Policy</a>
+        <a href="#terms">Terms of Use</a>
+        <a href="#privacy">Privacy Policy</a>
       </div>
     </div>
   </nav>
-
   <main role="main">
-    <h1>Terms of Use</h1>
-    <p><strong>Effective Date:</strong> May 6, 2025</p>
-
-    <h2>1. Introduction</h2>
-    <p>Welcome to StudyLock. By accessing or using our application, you agree to be bound by these Terms of Use. If you do not agree with any part of these terms, please do not use the app.</p>
-
-    <h2>2. Definitions</h2>
-    <p><strong>App:</strong> The StudyLock mobile application.<br>
-       <strong>User:</strong> Anyone who downloads, installs, or uses the App.<br>
-       <strong>Content:</strong> Any data, text, study material, images, or other information displayed or used within the App.</p>
-
-    <h2>3. User Responsibilities</h2>
-    <ul>
-      <li>Use the App only for lawful purposes and in accordance with all applicable laws.</li>
-      <li>Do not upload content that is harmful, illegal, or infringes on third-party rights.</li>
-      <li>Do not attempt to disrupt or exploit the App or its users.</li>
-    </ul>
-
-    <h2>4. Intellectual Property</h2>
-    <p>All content, branding, and functionality of the App are the property of the StudyLock team. You may use the App only for personal, non-commercial purposes unless given express written permission.</p>
-
-    <h2>5. Use of the App</h2>
-    <ul>
-      <li>Do not reverse engineer or modify any part of the App.</li>
-      <li>Do not resell, sublicense, or distribute the App without permission.</li>
-    </ul>
-
-    <h2>6. Data Collection and Privacy</h2>
-    <p>StudyLock does not collect personal data by default. The only instance where personal data (such as an email address) may be collected is when a user voluntarily signs in to join a Study Group using their Google or Microsoft account.</p>
-    <p>For more information, please review our <a href="privacy.html">Privacy Policy</a>.</p>
-
-    <h2>7. Disclaimers and Limitation of Liability</h2>
-    <p>The App is provided "as is" without any warranties, express or implied. We do not guarantee uninterrupted or error-free service. StudyLock is not responsible for any losses or damages arising from your use of the App.</p>
-
-    <h2>8. Modifications to Terms</h2>
-    <p>We may update these Terms at any time. Changes will be communicated through the app or website. Continued use of the App implies acceptance of the updated Terms.</p>
-
-    <h2>9. Contact</h2>
-    <p>If you have any questions, please contact us at: <strong>studylock@icloud.com</strong></p>
+    <section class="section" id="hero">
+      <h1 class="headline">Struggling to stay focused while studying?</h1>
+      <p class="subhead">StudyLock helps you stay on track by blocking distracting apps — and only unlocking them once you’ve studied and passed a quiz.</p>
+      <div class="hero-ctas">
+        <a href="https://apps.apple.com/app/studylock/id6744610901" class="btn btn-primary" target="_blank" loading="lazy">Download on App Store</a>
+        <a href="#demo" class="btn btn-outline">Watch Demo</a>
+      </div>
+      <div class="scroll-hint">↓ Scroll to Learn More ↓</div>
+    </section>
+    <section class="section" id="how-it-works">
+      <h2 class="headline">How It Works</h2>
+      <div class="step-box"><div class="step-number">1</div><p><strong>Upload your study material</strong><br>(PDFs or images)</p></div>
+      <div class="arrow">↓</div>
+      <div class="step-box"><div class="step-number">2</div><p><strong>Choose which apps to block</strong><br>(yes, even TikTok)</p></div>
+      <div class="arrow">↓</div>
+      <div class="step-box"><div class="step-number">3</div><p><strong>Get AI-powered summaries</strong><br>in your preferred language</p></div>
+      <div class="arrow">↓</div>
+      <div class="step-box"><div class="step-number">4</div><p><strong>Take a quiz to test your understanding</strong><br>and track your learning</p></div>
+      <div class="arrow">↓</div>
+      <div class="step-box"><div class="step-number">5</div><p><strong>Unlock your apps</strong><br>only if you pass</p></div>
+    </section>
+    <section class="section" id="focus-results">
+      <h2 class="headline">Real focus, real results.</h2>
+      <p class="subhead">Whether you're preparing for exams, tackling daily assignments, or working on long-term projects, StudyLock creates a structured, distraction-free environment powered by AI to support your learning.</p>
+    </section>
+    <section class="gallery-section" id="demo">
+  <h2 class="gallery-title">Explore the App</h2>
+  <div class="gallery-container">
+    <div class="screenshots">
+      <img src="https://studylock.github.io/img/01.png" alt="screenshot 1">
+      <img src="https://studylock.github.io/img/02.png" alt="screenshot 2">
+      <img src="https://studylock.github.io/img/03.png" alt="screenshot 3">
+      <img src="https://studylock.github.io/img/04.png" alt="screenshot 4">
+      <img src="https://studylock.github.io/img/05.png" alt="screenshot 5">
+      <img src="https://studylock.github.io/img/06.png" alt="screenshot 6">
+      <img src="https://studylock.github.io/img/07.png" alt="screenshot 7">
+      <img src="https://studylock.github.io/img/08.png" alt="screenshot 8">
+      <img src="https://studylock.github.io/img/09.png" alt="screenshot 9">
+    </div>
+    <div class="swipe-indicator">← Swipe to explore →</div>
+  </div>
+</section>
+    <section class="section" id="features">
+      <h2 class="headline">Features</h2>
+      <div class="features-grid">
+        <div class="feature-card"><h3>📄 Upload Study Materials</h3>Add your PDFs or images to start focused learning.</div>
+        <div class="feature-card"><h3>📵 Block Distracting Apps</h3>Fully block apps like TikTok, Instagram, and more.</div>
+        <div class="feature-card"><h3>🧠 AI-Powered Summaries</h3>Learn faster with generated insights from your content.</div>
+        <div class="feature-card"><h3>📝 Custom Quizzes</h3>Prove you studied with auto-generated quizzes.</div>
+        <div class="feature-card"><h3>🔓 Unlock with Results</h3>Your apps stay locked until you meet your score threshold.</div>
+        <div class="feature-card"><h3>🌍 Study in Your Language</h3>Get summaries and quizzes in your preferred language.</div>
+        <div class="feature-card"><h3>📈 Progress Tracking</h3>Track session history, time spent, and completion stats.</div>
+        <div class="feature-card"><h3>👥 Study Groups</h3>Join with your school email to stay motivated together.</div>
+      </div>
+    </section>
+    <section class="section" id="final-cta">
+      <h2 class="headline">Earn your screen time with real study time.</h2>
+      <a href="https://apps.apple.com/app/studylock/id6744610901" class="btn btn-primary" target="_blank" loading="lazy">Download on App Store</a>
+    </section>
   </main>
-
   <footer role="contentinfo">
     <p id="contact">Contact us at: studylock@icloud.com</p>
-    <p>By using StudyLock, you agree to our <a href="terms.html">Terms of Use</a>.</p>
-    <p>Your data is protected. Read our <a href="privacy.html">Privacy Policy</a>.</p>
+    <p id="terms">By using StudyLock, you agree to our <a href="#terms">Terms of Use</a>.</p>
+    <p id="privacy">Your data is protected. Read our <a href="#privacy">Privacy Policy</a>.</p>
     <p style="margin-top:2rem;">&copy; 2025 StudyLock</p>
   </footer>
+  <script>
+    // Fade-in on scroll
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.3 });
+    document.querySelectorAll('.section, .step-box, .feature-card').forEach(el => observer.observe(el));
+
+    // Scroll progress
+    const progress = document.getElementById('progress-bar');
+    window.addEventListener('scroll', () => {
+      const scrolled = window.scrollY;
+      const total = document.body.scrollHeight - window.innerHeight;
+      progress.style.width = ${(scrolled/total)*100}%;
+    });
+  </script>
 </body>
 </html>
