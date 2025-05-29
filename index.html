@@ -183,6 +183,31 @@
   width: 100%;
 }
 
+    /* ===== Partners logos layout ===== */
+.partners-logos {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 2rem 0;
+}
+.partners-logos img {
+  max-height: 60px;    /* uniform height */
+  padding: 0.5rem;     /* breathing room */
+  object-fit: contain;
+}
+
+/* Mobile: shrink and stack if needed */
+@media (max-width: 480px) {
+  .partners-logos {
+    gap: 1rem;
+  }
+  .partners-logos img {
+    max-height: 40px;
+  }
+}
+
 
 /* (Your existing rules for .screenshots img and media queries can stay as-is) */
 
@@ -302,7 +327,7 @@
     <!-- Partners Section -->
     <section class="section" id="partners">
       <h2 class="headline">Our Partners</h2>
-      <div class="partners-logos" style="display:flex;justify-content:center;align-items:center;gap:2rem;flex-wrap:wrap;">
+  <div class="partners-logos">
         <a href="#" target="_blank">
           <img src="img/brocoli.png" alt="Brocoli logo" loading="lazy" />
         </a>
