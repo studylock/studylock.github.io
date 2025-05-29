@@ -198,6 +198,10 @@
   object-fit: contain;
 }
 
+    .partners-logos img.partner-srf {
+  max-height: 280px;
+}
+
 /* Mobile: shrink and stack if needed */
 @media (max-width: 480px) {
   .partners-logos {
@@ -206,6 +210,11 @@
   .partners-logos img {
     max-height: 80px;
   }
+
+    .partners-logos img.partner-srf {
+    max-height: 160px;
+  }
+  
 }
 
 
@@ -332,7 +341,7 @@
           <img src="img/brocoli.png" alt="Brocoli logo" loading="lazy" />
         </a>
         <a href="#" target="_blank">
-          <img src="img/srf.png" alt="SRF logo" loading="lazy" />
+    <img src="img/srf.png" alt="SRF logo" class="partner-srf" loading="lazy" />
         </a>
         <a href="#" target="_blank">
           <img src="img/unyp.png" alt="UNYP logo" loading="lazy" />
