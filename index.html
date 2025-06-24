@@ -6,15 +6,15 @@
   <title>StudyLock</title>
   <link rel="icon" type="image/png" href="https://studylock.github.io/img/logo.png" />
 
-
   <!-- SEO / Social Preview -->
   <meta property="og:title" content="StudyLock: Earn Screen Time with Real Study Time" />
   <meta property="og:description" content="StudyLock helps you stay on track by blocking distracting apps — and only unlocking them once you’ve studied and passed a quiz." />
   <meta property="og:image" content="https://studylock.github.io/img/og-image.png" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="trustpilot-one-time-domain-verification-id" content="c18c9f2f-5715-4f87-b43f-f77888a14672"/>
-    <meta name="apple-itunes-app" content="app-id=6744610901, app-argument=myURL" />
-<script src="https://cdn.amplitude.com/script/dbf2be95c2056ed25dab1cfcadc0dad7.js"></script><script>window.amplitude.add(window.sessionReplay.plugin({sampleRate: 1}));window.amplitude.init('dbf2be95c2056ed25dab1cfcadc0dad7', {"fetchRemoteConfig":true,"autocapture":true});</script>
+  <meta name="apple-itunes-app" content="app-id=6744610901, app-argument=myURL" />
+  <script src="https://cdn.amplitude.com/script/dbf2be95c2056ed25dab1cfcadc0dad7.js"></script>
+  <script>window.amplitude.add(window.sessionReplay.plugin({sampleRate: 1}));window.amplitude.init('dbf2be95c2056ed25dab1cfcadc0dad7', {"fetchRemoteConfig":true,"autocapture":true});</script>
   <!-- Preconnect & Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -149,103 +149,90 @@
     .arrow { font-size:2rem; color:var(--color-subtext); margin:-0.5rem 0 1rem;}    
     .gallery-title { font-size:2.5rem; font-weight:800; margin-bottom:2rem; }
 
-    
-/* 1) Override the main‐section padding just for the gallery */
-/* 1) Reset the gallery section’s default padding/width */
-/* 1) Reset the gallery-section’s default centering/padding */
-[role="main"] .gallery-section {
-  max-width: none;    /* don’t cap at 1000px */
-  margin: 0;          /* remove auto-center */
-  padding: 4rem 0;    /* your vertical spacing */
-}
-
-/* 2) Break that section out to full-bleed */
-.gallery-section {
-  position: relative;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100vw;
-}
-
-/* 3) Keep the inner container normal (so it fills that full-bleed area) */
-.gallery-container {
-  margin: 0 auto;
-  padding: 0;
-  width: 100%;
-}
-
-/* 4) Screenshots strip stays gapless & scrollable */
-.screenshots {
-  display: flex;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  gap: 0;
-  margin: 0;
-  padding: 0;
-  width: 100%;
-}
+    /* 1) Override the main‐section padding just for the gallery */
+    [role="main"] .gallery-section {
+      max-width: none;
+      margin: 0;
+      padding: 4rem 0;
+    }
+    .gallery-section {
+      position: relative;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100vw;
+    }
+    .gallery-container {
+      margin: 0 auto;
+      padding: 0;
+      width: 100%;
+    }
+    .screenshots {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      gap: 0;
+      margin: 0;
+      padding: 0;
+      width: 100%;
+    }
 
     /* ===== Partners logos layout ===== */
-.partners-logos {
-  display: flex;
-  justify-content: center;
-  gap: 2rem;
-  flex-wrap: wrap;
-  align-items: center;
-  padding: 2rem 0;
-}
-.partners-logos img {
-  max-height: 180px;    /* uniform height */
-  padding: 0.5rem;     /* breathing room */
-  object-fit: contain;
-}
-
+    .partners-logos {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: nowrap;
+      align-items: center;
+      padding: 2rem 0;
+      overflow-x: auto;
+    }
+    .partners-logos img {
+      max-height: 180px;
+      padding: 0.5rem;
+      object-fit: contain;
+    }
     .partners-logos img.partner-srf {
-  max-height: 280px;
-}
+      max-height: 280px;
+    }
 
-/* Mobile: shrink and stack if needed */
-@media (max-width: 480px) {
-  .partners-logos {
-    gap: 1rem;
-  }
-  .partners-logos img {
-    max-height: 80px;
-  }
+    /* Mobile: stack vertically */
+    @media (max-width: 480px) {
+      .partners-logos {
+        flex-direction: column;
+        gap: 1rem;
+        flex-wrap: wrap;
+      }
+      .partners-logos img {
+        max-height: 80px;
+      }
+      .partners-logos img.partner-srf {
+        max-height: 160px;
+      }
+    }
 
-    .partners-logos img.partner-srf {
-    max-height: 160px;
-  }
-  
-}
+    .screenshots::-webkit-scrollbar {
+      height: 6px;
+    }
+    .screenshots::-webkit-scrollbar-thumb {
+      background: #ccc;
+      border-radius: 3px;
+    }
+    .screenshots::-webkit-scrollbar-track {
+      background: transparent;
+    }
 
+    .screenshots img {
+      height: 600px;
+      flex-shrink: 0;
+      scroll-snap-align: start;
+      margin: 0;
+      border-radius: 0;
+      transition: transform 0.3s ease;
+    }
 
-/* (Your existing rules for .screenshots img and media queries can stay as-is) */
-
-
-.screenshots::-webkit-scrollbar {
-  height: 6px;
-}
-.screenshots::-webkit-scrollbar-thumb {
-  background: #ccc;
-  border-radius: 3px;
-}
-.screenshots::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.screenshots img {
-  height: 600px;
-  flex-shrink: 0;
-  scroll-snap-align: start;
-  margin: 0;
-  border-radius: 0;
-  transition: transform 0.3s ease;
-}
-
-.screenshots img:hover {
-  transform: scale(1.03);
-}
+    .screenshots img:hover {
+      transform: scale(1.03);
+    }
     .swipe-indicator { margin-top:1rem; font-size:0.9rem; color:var(--color-subtext); user-select:none; }
     .features-grid {
       display: grid;
@@ -272,23 +259,21 @@
     img { max-width:100%; display:block; }
     @media (max-width:768px) { .headline{font-size:2.25rem;} .subhead{font-size:1.1rem;} .screenshots img{height:280px;} }
 
-        @media (max-width: 768px) {
-  .navbar-inner {
-    flex-direction: column;
-    align-items: center;
-  }
-  /* Put the links on their own line, centered */
-  .navbar-links {
-    display: flex;
-    justify-content: center;
-    gap: 16px;
-    margin-top: 12px;
-    width: 100%;
-  }
-  /* Remove left-margin push on each link */
-  .navbar-links a {
-    margin: 0;
-  }
+    @media (max-width: 768px) {
+      .navbar-inner {
+        flex-direction: column;
+        align-items: center;
+      }
+      .navbar-links {
+        display: flex;
+        justify-content: center;
+        gap: 16px;
+        margin-top: 12px;
+        width: 100%;
+      }
+      .navbar-links a {
+        margin: 0;
+      }
     }
   </style>
 </head>
@@ -302,7 +287,7 @@
       </a>
       <div class="nav-links">
         <a href="#partners">Our Partners</a>
-<a href="mailto:studylock@icloud.com">Contact Us</a>
+        <a href="mailto:studylock@icloud.com">Contact Us</a>
         <a href="/terms">Terms of Use</a>
         <a href="/privacy">Privacy Policy</a>
       </div>
@@ -340,15 +325,15 @@
       <h2 class="headline">Our Partners</h2>
       <p class="subhead">StudyLock is proud to collaborate with educational institutions and student communities who support focused learning and academic success.</p>
 
-  <div class="partners-logos">
+      <div class="partners-logos">
         <a href="https://erasmusinprague.com/" target="_blank">
           <img src="img/erasmus.png" alt="ERASMUS logo" loading="lazy" />
-    
+        </a>
         <a href="https://www.bro-coli.com/" target="_blank">
           <img src="img/brocoli.png" alt="Brocoli logo" loading="lazy" />
         </a>
         <a href="https://student-room-flat.com/" target="_blank">
-    <img src="img/srf.png" alt="SRF logo" class="partner-srf" loading="lazy" />
+          <img src="img/srf.png" alt="SRF logo" class="partner-srf" loading="lazy" />
         </a>
         <a href="https://www.unyp.cz/" target="_blank">
           <img src="img/unyp.png" alt="UNYP logo" loading="lazy" />
@@ -357,47 +342,43 @@
     </section>
     
     <section class="gallery-section" id="demo">
-  <h2 class="gallery-title">Explore the App</h2>
-  <div class="gallery-container">
-    <div class="screenshots">
-      <img src="https://studylock.github.io/img/01.png" alt="screenshot 1">
-      <img src="https://studylock.github.io/img/02.png" alt="screenshot 2">
-      <img src="https://studylock.github.io/img/03.png" alt="screenshot 3">
-      <img src="https://studylock.github.io/img/04.png" alt="screenshot 4">
-      <img src="https://studylock.github.io/img/05.png" alt="screenshot 5">
-      <img src="https://studylock.github.io/img/06.png" alt="screenshot 6">
-      <img src="https://studylock.github.io/img/07.png" alt="screenshot 7">
-      <img src="https://studylock.github.io/img/08.png" alt="screenshot 8">
-      <img src="https://studylock.github.io/img/09.png" alt="screenshot 9">
-    </div>
-    <div class="swipe-indicator">← Swipe to explore →</div>
-  </div>
-</section>
+      <h2 class="gallery-title">Explore the App</h2>
+      <div class="gallery-container">
+        <div class="screenshots">
+          <img src="https://studylock.github.io/img/01.png" alt="screenshot 1">
+          <img src="https://studylock.github.io/img/02.png" alt="screenshot 2">
+          <img src="https://studylock.github.io/img/03.png" alt="screenshot 3">
+          <img src="https://studylock.github.io/img/04.png" alt="screenshot 4">
+          <img src="https://studylock.github.io/img/05.png" alt="screenshot 5">
+          <img src="https://studylock.github.io/img/06.png" alt="screenshot 6">
+          <img src="https://studylock.github.io/img/07.png" alt="screenshot 7">
+          <img src="https://studylock.github.io/img/08.png" alt="screenshot 8">
+          <img src="https://studylock.github.io/img/09.png" alt="screenshot 9">
+        </div>
+        <div class="swipe-indicator">← Swipe to explore →</div>
+      </div>
+    </section>
     <section class="section" id="features">
       <h2 class="headline">Features</h2>
       <div class="features-grid">
         <div class="feature-card"><h3>📄 Upload Study Materials</h3>Add your PDFs or images to start focused learning.</div>
         <div class="feature-card"><h3>📵 Block Distracting Apps</h3>Fully block apps like TikTok, Instagram, and more.</div>
-<div class="feature-card">
-  <h3>🧠 AI-Powered Summaries</h3>
-  Learn faster with generated insights from your content.
-</div>
-
-<div class="feature-card">
-  <h3>🔊 Interactive Read-Aloud</h3>
-  Listen as your study material is read aloud, with each word highlighted as it’s spoken.
-</div>
-
-<div class="feature-card">
-  <h3>🔎 Adjustable Reading Experience</h3>
-  Change text size and background color for easier, more comfortable reading.
-</div>
-
-<div class="feature-card">
-  <h3>📝 Custom Quizzes</h3>
-  Prove you studied with auto-generated quizzes.
-</div>
-
+        <div class="feature-card">
+          <h3>🧠 AI-Powered Summaries</h3>
+          Learn faster with generated insights from your content.
+        </div>
+        <div class="feature-card">
+          <h3>🔊 Interactive Read-Aloud</h3>
+          Listen as your study material is read aloud, with each word highlighted as it’s spoken.
+        </div>
+        <div class="feature-card">
+          <h3>🔎 Adjustable Reading Experience</h3>
+          Change text size and background color for easier, more comfortable reading.
+        </div>
+        <div class="feature-card">
+          <h3>📝 Custom Quizzes</h3>
+          Prove you studied with auto-generated quizzes.
+        </div>
         <div class="feature-card"><h3>🔓 Unlock with Results</h3>Your apps stay locked until you meet your score threshold.</div>
         <div class="feature-card"><h3>🌍 Study in Your Language</h3>Get summaries and quizzes in your preferred language.</div>
         <div class="feature-card"><h3>📈 Progress Tracking</h3>Track session history, time spent, and completion stats.</div>
@@ -414,7 +395,7 @@
     <p id="terms">By using StudyLock, you agree to our <a href="/terms">Terms of Use</a>.</p>
     <p id="privacy">Your data is protected. Read our <a href="/privacy">Privacy Policy</a>.</p>
 
-<center><p><a href="https://startupfa.me/s/studylock?utm_source=studylock.github.io" target="_blank"><img src="https://startupfa.me/badges/featured/light.webp" alt="Featured on Startup Fame" width="171" height="54" /></a> </p></center>
+    <center><p><a href="https://startupfa.me/s/studylock?utm_source=studylock.github.io" target="_blank"><img src="https://startupfa.me/badges/featured/light.webp" alt="Featured on Startup Fame" width="171" height="54" /></a></p></center>
     <center><p><a href="https://fazier.com/launches/studylock" target="_blank"><img src="https://fazier.com/api/v1/public/badges/embed_image.svg?launch_id=4520&badge_type=daily&theme=light" width="270" alt="Fazier badge" /></a></p></center>
     <p style="margin-top:2rem;">&copy; 2025 StudyLock</p>
   </footer>
