@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>StudyLock — Earn Screen Time with Real Study Time</title>
+  <link rel="icon" type="image/png" href="https://studylock.github.io/img/logo.png" />
+
+  <!-- SEO / Social Preview -->
+  <meta property="og:title" content="StudyLock: Earn Screen Time with Real Study Time" />
+  <meta property="og:description" content="Block distracting apps, study with AI, pass a quiz, and unlock your screen time. iOS only." />
+  <meta property="og:image" content="https://studylock.github.io/img/og-image.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="trustpilot-one-time-domain-verification-id" content="c18c9f2f-5715-4f87-b43f-f77888a14672" />
+  <meta name="apple-itunes-app" content="app-id=6744610901, app-argument=myURL" />
+
+  <!-- Analytics (Amplitude + Session Replay) -->
+  <script src="https://cdn.amplitude.com/script/dbf2be95c2056ed25dab1cfcadc0dad7.js" async></script>
+  <script>
+    window.addEventListener('load', function(){
+      if (!window.amplitude || !window.sessionReplay) return;
+      try {
+        window.amplitude.add(window.sessionReplay.plugin({ sampleRate: 1 }));
+        window.amplitude.init('dbf2be95c2056ed25dab1cfcadc0dad7', { fetchRemoteConfig: true, autocapture: true });
+      } catch(e) { /* no-op */ }
+    });
+  </script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Schema.org -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"MobileApplication",
+    "name":"StudyLock",
+    "operatingSystem":"iOS",
+    "applicationCategory":"EducationalApplication",
+    "url":"https://studylock.github.io/",
+    "downloadUrl":"https://apps.apple.com/app/studylock/id6744610901",
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg: #0b0d12;
+      --surface: #121622;
+      --card: #151a2b;
+      --text: #e9ecf1;
+      --muted: #a8b0c2;
+      --accent: #6ea8ff;
+      --accent-2: #7b7bff;
+      --ring: rgba(110,168,255,.5);
+      --radius: 16px;
+      --container: 1120px;
+      --shadow-1: 0 10px 25px rgba(0,0,0,.25);
+      --shadow-2: 0 30px 80px rgba(0,0,0,.35);
+    }
+
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg: #f6f7fb;
+        --surface: #ffffff;
+        --card: #ffffff;
+        --text: #0d1020;
+        --muted: #475069;
+        --accent: #246bff;
+        --accent-2: #6b4bff;
+        --ring: rgba(36,107,255,.3);
+      }
+    }
+
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      font-family: Manrope, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(60vw 60vw at -10% -10%, rgba(100,120,255,.14), transparent 40%),
+        radial-gradient(50vw 50vw at 120% 10%, rgba(60,190,255,.12), transparent 45%),
+        var(--bg);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    .container { max-width: var(--container); margin: 0 auto; padding: 0 20px; }
+    a { color: inherit; text-decoration: none; }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      padding: 12px 18px; border-radius: 12px; font-weight: 800; letter-spacing: .2px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: white; box-shadow: var(--shadow-1);
+      transition: transform .15s ease, box-shadow .2s ease, opacity .2s ease;
+    }
+    .btn:hover { transform: translateY(-1px); box-shadow: var(--shadow-2); }
+    .btn:focus-visible { outline: 3px solid var(--ring); outline-offset: 2px; }
+    .btn--ghost { background: transparent; border: 1px solid rgba(255,255,255,.16); color: var(--text); }
+    .btn--ghost:hover { background: rgba(255,255,255,.06); }
+
+    /* ───── Nav ───── */
+    .nav-wrap {
+      position: sticky; top: 0; z-index: 50;
+      backdrop-filter: saturate(140%) blur(12px);
+      background: color-mix(in oklab, var(--bg), transparent 30%);
+      border-bottom: 1px solid rgba(255,255,255,.06);
+    }
+    .nav { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+    .brand { display: inline-flex; align-items: center; gap: 10px; font-weight: 800; }
+    .brand img { width: 36px; height: 36px; border-radius: 8px; }
+    .navlinks { display: flex; align-items: center; gap: 22px; }
+    .navlinks a { color: var(--muted); font-weight: 600; }
+    .navlinks a:hover, .navlinks a:focus-visible { color: var(--text); }
+    .nav-cta { display: none; gap: 10px; }
+    .nav-toggle { display:none; }
+
+    @media (min-width: 940px) { .nav-cta { display:flex; } }
+    @media (max-width: 939px) {
+      .nav { height: 64px; }
+      .navlinks { display:none; }
+      .nav-toggle { display: inline-flex; gap: 8px; align-items:center; }
+      .mobile-menu { position: fixed; inset: 64px 0 auto 0; background: var(--surface); border-bottom: 1px solid rgba(255,255,255,.06); display:none; }
+      .mobile-menu.open { display:block; }
+      .mobile-menu a { display:block; padding: 14px 20px; border-top: 1px solid rgba(255,255,255,.06); color: var(--muted); }
+      .mobile-menu a:focus-visible, .mobile-menu a:hover { background: rgba(255,255,255,.04); color: var(--text); }
+    }
+
+    /* ───── Hero ───── */
+    .hero { padding: 72px 0 40px; position: relative; overflow: hidden; }
+    .hero-grid { display: grid; grid-template-columns: 1.2fr .8fr; gap: 40px; align-items: center; }
+    .eyebrow { display:inline-block; font-weight:800; color: var(--muted); letter-spacing: .24em; text-transform: uppercase; font-size: .82rem; }
+    h1 { font-size: clamp(2rem, 5vw, 3.25rem); line-height: 1.1; margin: 10px 0 14px; font-weight: 800; }
+    .lead { color: var(--muted); font-size: clamp(1rem, 2.3vw, 1.2rem); max-width: 52ch; }
+    .hero-ctas { display:flex; flex-wrap: wrap; gap: 12px; margin: 22px 0 6px; }
+    .trust { display:flex; align-items:center; gap: 22px; margin-top: 22px; color: var(--muted); font-size: .95rem; }
+    .trust img { height: 26px; opacity: .9; }
+
+    .mock { position: relative; width: 100%; aspect-ratio: 9/16; border-radius: 28px; background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02)); border:1px solid rgba(255,255,255,.12); box-shadow: 0 30px 90px rgba(0,0,0,.45); overflow: hidden; }
+    .mock .placeholder { position: absolute; inset: 12px; border-radius: 22px; background: repeating-linear-gradient( 45deg, rgba(255,255,255,.06) 0 14px, rgba(255,255,255,.1) 14px 28px ); display: grid; place-items:center; color: var(--muted); font-weight: 700; letter-spacing:.08em; }
+    .faux-notch { position:absolute; top: 10px; left: 50%; transform: translateX(-50%); height: 22px; width: 120px; background: rgba(0,0,0,.5); border-radius: 0 0 16px 16px; filter: blur(.3px); }
+
+    @media (max-width: 939px) {
+      .hero { padding: 42px 0 18px; }
+      .hero-grid { grid-template-columns: 1fr; }
+      .mock { order: -1; height: auto; }
+      .trust { flex-wrap: wrap; }
+    }
+
+    /* ───── Highlights strip ───── */
+    .strip { margin: 24px 0 12px; border: 1px solid rgba(255,255,255,.06); background: color-mix(in oklab, var(--surface), transparent 10%); border-radius: 14px; padding: 14px; display:grid; grid-template-columns: repeat(3,1fr); gap: 12px; }
+    .pill { background: var(--card); border: 1px solid rgba(255,255,255,.06); border-radius: 12px; padding: 14px 16px; font-weight: 700; display:flex; gap:10px; align-items:center; }
+    .pill i { font-style: normal; font-weight: 800; opacity: .6; }
+    @media (max-width: 720px){ .strip { grid-template-columns: 1fr; } }
+
+    /* ───── Partners ───── */
+    .partners { padding: 56px 0; }
+    .partners h2 { font-size: 1.8rem; margin: 0 0 6px; }
+    .partners p { color: var(--muted); margin: 0 0 22px; }
+    .logo-row { display:flex; gap: 28px; align-items: center; justify-content: center; flex-wrap: wrap; }
+    .logo-row img { height: 44px; opacity: .9; filter: saturate(0.9); }
+    .logo-row img.partner-srf { height: 64px; }
+
+    /* ───── How it works ───── */
+    .how { padding: 72px 0; }
+    .section-title { text-align:center; font-size: clamp(1.6rem, 3.8vw, 2.4rem); margin-bottom: 18px; }
+    .section-sub { text-align:center; color: var(--muted); max-width: 70ch; margin: 0 auto 28px; }
+    .steps { display: grid; grid-template-columns: repeat(5,1fr); gap: 14px; }
+    .step { background: var(--card); border: 1px solid rgba(255,255,255,.07); border-radius: 16px; padding: 18px; position: relative; }
+    .num { width: 36px; height: 36px; display:grid; place-items:center; border-radius: 999px; font-weight: 800; color: white; background: linear-gradient(135deg, var(--accent), var(--accent-2)); box-shadow: var(--shadow-1); margin-bottom: 10px; }
+    .step h3 { margin: 6px 0 6px; font-size: 1rem; }
+    .step p { margin: 0; color: var(--muted); font-size: .95rem; }
+    @media (max-width: 980px){ .steps { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 560px){ .steps { grid-template-columns: 1fr; } }
+
+    /* ───── Feature grid ───── */
+    .features { padding: 24px 0 72px; }
+    .grid { display:grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .card { background: var(--card); border: 1px solid rgba(255,255,255,.07); border-radius: 16px; padding: 18px; transition: transform .18s ease, box-shadow .2s ease; }
+    .card:hover { transform: translateY(-3px); box-shadow: var(--shadow-2); }
+    .card h4 { margin: 2px 0 8px; }
+    .badge { display:inline-grid; place-items:center; width: 40px; height: 40px; border-radius: 10px; background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: #fff; font-weight:800; }
+    @media (max-width: 980px){ .grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 560px){ .grid { grid-template-columns: 1fr; } }
+
+    /* ───── Gallery (placeholders) ───── */
+    .gallery { padding: 60px 0; }
+    .scroller { display:flex; gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 10px 4px; }
+    .shot { flex: 0 0 clamp(240px, 30vw, 320px); aspect-ratio: 9/16; border-radius: 28px; background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)); border:1px solid rgba(255,255,255,.1); scroll-snap-align: start; position: relative; box-shadow: var(--shadow-1); }
+    .shot::after { content:"Screenshot"; position:absolute; inset: 12px; border-radius: 22px; display:grid; place-items:center; color: var(--muted); font-weight:800; letter-spacing:.08em; border:1px dashed rgba(255,255,255,.14); }
+    .swipe { text-align:center; color: var(--muted); margin-top: 12px; }
+
+    /* ───── FAQ ───── */
+    .faq { padding: 60px 0; }
+    .faq details { background: var(--card); border: 1px solid rgba(255,255,255,.08); border-radius: 14px; padding: 14px 16px; margin: 12px 0; }
+    .faq summary { cursor: pointer; font-weight: 700; }
+    .faq p { color: var(--muted); margin: 8px 0 0; }
+
+    /* ───── CTA band ───── */
+    .cta { margin: 40px 0 80px; background: linear-gradient(135deg, color-mix(in oklab, var(--accent), #00c2ff 40%), color-mix(in oklab, var(--accent-2), #9a6bff 40%)); border-radius: 22px; padding: 28px; box-shadow: var(--shadow-2); }
+    .cta-inner { display:flex; align-items:center; justify-content: space-between; gap: 16px; }
+    .cta h3 { margin: 0; font-size: clamp(1.2rem, 3vw, 1.8rem); }
+    .cta p { margin: 4px 0 0; opacity: .95; }
+    @media (max-width: 720px){ .cta-inner { flex-direction: column; align-items: start; } }
+
+    /* ───── Footer ───── */
+    footer { border-top: 1px solid rgba(255,255,255,.08); background: color-mix(in oklab, var(--surface), transparent 6%); padding: 40px 0; color: var(--muted); }
+    .footgrid { display:grid; grid-template-columns: 1.4fr .8fr; gap: 20px; align-items:center; }
+    .footgrid p { margin: 6px 0; }
+    .footlinks { display:flex; gap: 16px; flex-wrap: wrap; }
+    .tiny { font-size: .9rem; }
+    @media (max-width: 800px){ .footgrid { grid-template-columns: 1fr; text-align: center; } .footlinks{ justify-content:center; } }
+
+    /* ───── Motion reduce ───── */
+    @media (prefers-reduced-motion: reduce) {
+      .btn, .card, .shot { transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Progress bar -->
+  <div id="progress" style="position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--accent-2));width:0;z-index:60"></div>
+
+  <!-- NAV -->
+  <div class="nav-wrap" role="navigation" aria-label="Primary">
+    <div class="container nav">
+      <a href="#top" class="brand">
+        <img src="https://studylock.github.io/img/logo.png" alt="StudyLock logo" loading="eager" />
+        <span>StudyLock</span>
+      </a>
+      <div class="navlinks" aria-label="Sections">
+        <a href="#how">How it works</a>
+        <a href="#features">Features</a>
+        <a href="#partners">Partners</a>
+        <a href="#faq">FAQ</a>
+      </div>
+      <div class="nav-cta">
+        <a class="btn btn--ghost" href="mailto:studylock@icloud.com" aria-label="Contact StudyLock">Contact</a>
+        <a class="btn" id="dlTop" href="https://apps.apple.com/app/studylock/id6744610901" target="_blank" rel="noopener">Download</a>
+      </div>
+      <button class="nav-toggle btn btn--ghost" aria-expanded="false" aria-controls="mobilemenu">Menu</button>
+    </div>
+    <div id="mobilemenu" class="mobile-menu" role="menu">
+      <a href="#how" role="menuitem">How it works</a>
+      <a href="#features" role="menuitem">Features</a>
+      <a href="#partners" role="menuitem">Partners</a>
+      <a href="#faq" role="menuitem">FAQ</a>
+      <a href="mailto:studylock@icloud.com" role="menuitem">Contact</a>
+      <a href="https://apps.apple.com/app/studylock/id6744610901" target="_blank" rel="noopener" role="menuitem">Download</a>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <header id="top" class="hero">
+    <div class="container hero-grid">
+      <div>
+        <span class="eyebrow">Built for real focus</span>
+        <h1>Earn screen time with <em>real</em> study time.</h1>
+        <p class="lead">StudyLock blocks distracting apps while you learn. Upload your materials, get AI summaries, pass a quick quiz — then unlock your apps. Simple, motivating, effective.</p>
+        <div class="hero-ctas">
+          <a class="btn" id="dlHero" href="https://apps.apple.com/app/studylock/id6744610901" target="_blank" rel="noopener">Download on the App&nbsp;Store</a>
+          <a class="btn btn--ghost" href="#gallery">Watch demo</a>
+        </div>
+        <div class="strip" aria-label="Highlights">
+          <div class="pill"><i>📵</i>App blocking that actually sticks</div>
+          <div class="pill"><i>🧠</i>AI summaries & quizzes</div>
+          <div class="pill"><i>📈</i>Progress you can see</div>
+        </div>
+        <div class="trust" aria-label="Social proof">
+          <span>Trusted by student communities</span>
+          <img src="https://studylock.github.io/img/unyp.png" alt="UNYP" />
+          <img src="https://studylock.github.io/img/erasmus_new.png" alt="Erasmus in Prague" />
+        </div>
+      </div>
+      <div>
+        <div class="mock" aria-hidden="true">
+          <div class="faux-notch"></div>
+          <div class="placeholder">APP PREVIEW</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- PARTNERS -->
+  <section id="partners" class="partners">
+    <div class="container">
+      <h2 class="section-title">Partners</h2>
+      <p class="section-sub">We collaborate with student organizations and universities that value focused learning.</p>
+      <div class="logo-row">
+        <a href="https://erasmusinprague.com/" target="_blank" rel="noopener"><img src="img/erasmus_new.png" alt="Erasmus in Prague logo" loading="lazy"></a>
+        <a href="https://www.unyp.cz/" target="_blank" rel="noopener"><img src="img/unyp.png" alt="UNYP logo" loading="lazy"></a>
+        <a href="https://www.bro-coli.com/" target="_blank" rel="noopener"><img src="img/brocoli.png" alt="Brocoli logo" loading="lazy"></a>
+        <a href="https://student-room-flat.com/" target="_blank" rel="noopener"><img src="img/srf.png" class="partner-srf" alt="Student Room Flat logo" loading="lazy"></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section id="how" class="how">
+    <div class="container">
+      <h2 class="section-title">How it works</h2>
+      <p class="section-sub">Five simple steps from distraction to focus.</p>
+      <div class="steps" role="list">
+        <div class="step" role="listitem">
+          <div class="num">1</div>
+          <h3>Upload material</h3>
+          <p>PDFs or images — in any language.</p>
+        </div>
+        <div class="step" role="listitem">
+          <div class="num">2</div>
+          <h3>Choose what to block</h3>
+          <p>Pick your most distracting apps (yes, even TikTok).</p>
+        </div>
+        <div class="step" role="listitem">
+          <div class="num">3</div>
+          <h3>Learn with AI</h3>
+          <p>Get clear summaries and a comfortable reading mode.</p>
+        </div>
+        <div class="step" role="listitem">
+          <div class="num">4</div>
+          <h3>Take a quick quiz</h3>
+          <p>Prove you studied — we’ll track results.</p>
+        </div>
+        <div class="step" role="listitem">
+          <div class="num">5</div>
+          <h3>Unlock your apps</h3>
+          <p>Pass the threshold you set and you’re free.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section id="features" class="features">
+    <div class="container">
+      <h2 class="section-title">Everything you need to stay on track</h2>
+      <p class="section-sub">Smart guardrails, better reading, and quick checks that keep you honest.</p>
+      <div class="grid" role="list">
+        <div class="card" role="listitem">
+          <div class="badge" aria-hidden="true">📄</div>
+          <h4>Upload study materials</h4>
+          <p class="tiny">Add PDFs or images to start focused learning.</p>
+        </div>
+        <div class="card" role="listitem">
+          <div class="badge" aria-hidden="true">📵</div>
+          <h4>Block distracting apps</h4>
+          <p class="tiny">Full block for TikTok, Instagram, games, and more.</p>
+        </div>
+        <div class="card" role="listitem">
+          <div class="badge" aria-hidden="true">🧠</div>
+          <h4>AI-powered summaries</h4>
+          <p class="tiny">Understand faster with generated insights.</p>
+        </div>
+        <div class="card" role="listitem">
+          <div class="badge" aria-hidden="true">🔊</div>
+          <h4>Interactive read‑aloud</h4>
+          <p class="tiny">Listen while each word is highlighted.</p>
+        </div>
+        <div class="card" role="listitem">
+          <div class="badge" aria-hidden="true">🔎</div>
+          <h4>Comfortable reading</h4>
+          <p class="tiny">Adjust text size and background to your eyes.</p>
+        </div>
+        <div class="card" role="listitem">
+          <div class="badge" aria-hidden="true">📝</div>
+          <h4>Custom quizzes</h4>
+          <p class="tiny">Auto‑generated questions to test understanding.</p>
+        </div>
+        <div class="card" role="listitem">
+          <div class="badge" aria-hidden="true">🔓</div>
+          <h4>Unlock with results</h4>
+          <p class="tiny">Apps stay locked until you hit your target score.</p>
+        </div>
+        <div class="card" role="listitem">
+          <div class="badge" aria-hidden="true">🌍</div>
+          <h4>In your language</h4>
+          <p class="tiny">Summaries & quizzes in your preferred language.</p>
+        </div>
+        <div class="card" role="listitem">
+          <div class="badge" aria-hidden="true">📈</div>
+          <h4>Progress tracking</h4>
+          <p class="tiny">View sessions, time spent, and completion stats.</p>
+        </div>
+        <div class="card" role="listitem">
+          <div class="badge" aria-hidden="true">👥</div>
+          <h4>Study Groups</h4>
+          <p class="tiny">Join with your school email and learn together.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY (Placeholders instead of screenshots) -->
+  <section id="gallery" class="gallery">
+    <div class="container">
+      <h2 class="section-title">Explore the app</h2>
+      <div class="scroller" aria-label="Screenshots (placeholders)">
+        <div class="shot" aria-hidden="true"></div>
+        <div class="shot" aria-hidden="true"></div>
+        <div class="shot" aria-hidden="true"></div>
+        <div class="shot" aria-hidden="true"></div>
+        <div class="shot" aria-hidden="true"></div>
+        <div class="shot" aria-hidden="true"></div>
+        <div class="shot" aria-hidden="true"></div>
+        <div class="shot" aria-hidden="true"></div>
+        <div class="shot" aria-hidden="true"></div>
+      </div>
+      <p class="swipe">← Swipe to explore →</p>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="faq">
+    <div class="container">
+      <h2 class="section-title">FAQ</h2>
+      <details>
+        <summary>Does StudyLock work on iPhone and iPad?</summary>
+        <p>Yes — StudyLock is built for iOS and works on iPhone and iPad (iOS 16+ recommended).</p>
+      </details>
+      <details>
+        <summary>Can I choose which apps to block?</summary>
+        <p>Absolutely. Pick any installed apps to block while you study. They’ll unlock only after you pass your quiz.</p>
+      </details>
+      <details>
+        <summary>Do you store my documents?</summary>
+        <p>Your privacy matters. Documents are used to generate summaries and quizzes; see our <a href="/privacy">Privacy Policy</a> for details.</p>
+      </details>
+      <details>
+        <summary>Is there a free version?</summary>
+        <p>Yes. You can download and start for free, then upgrade if you want more power features.</p>
+      </details>
+    </div>
+  </section>
+
+  <!-- CTA Band -->
+  <section class="container cta" aria-label="Get StudyLock">
+    <div class="cta-inner">
+      <div>
+        <h3>Ready to turn study time into screen time?</h3>
+        <p>Download StudyLock and focus without the struggle.</p>
+      </div>
+      <a class="btn" id="dlBottom" href="https://apps.apple.com/app/studylock/id6744610901" target="_blank" rel="noopener">Download on the App&nbsp;Store</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer role="contentinfo">
+    <div class="container footgrid">
+      <div>
+        <div class="brand" style="gap:10px">
+          <img src="https://studylock.github.io/img/logo.png" alt="StudyLock logo small" width="32" height="32" />
+          <strong>StudyLock</strong>
+        </div>
+        <p class="tiny">© 2025 StudyLock</p>
+        <p class="tiny">Contact: <a href="mailto:studylock@icloud.com">studylock@icloud.com</a></p>
+        <p class="tiny">By using StudyLock, you agree to our <a href="/terms">Terms of Use</a> and <a href="/privacy">Privacy Policy</a>.</p>
+        <p class="tiny"><a href="https://startupfa.me/s/studylock?utm_source=studylock.github.io" target="_blank" rel="noopener"><img src="https://startupfa.me/badges/featured/light.webp" alt="Featured on Startup Fame" width="171" height="54"></a></p>
+        <p class="tiny"><a href="https://fazier.com/launches/studylock" target="_blank" rel="noopener"><img src="https://fazier.com/api/v1/public/badges/embed_image.svg?launch_id=4520&badge_type=daily&theme=light" width="270" alt="Fazier badge"></a></p>
+      </div>
+      <div>
+        <nav class="footlinks" aria-label="Footer links">
+          <a href="#how">How it works</a>
+          <a href="#features">Features</a>
+          <a href="#partners">Partners</a>
+          <a href="#faq">FAQ</a>
+          <a href="https://apps.apple.com/app/studylock/id6744610901" target="_blank" rel="noopener">Download</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile menu toggle
+    (function(){
+      const toggle = document.querySelector('.nav-toggle');
+      const menu = document.getElementById('mobilemenu');
+      if (!toggle || !menu) return;
+      toggle.addEventListener('click', () => {
+        const open = menu.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', String(open));
+      });
+      menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+        menu.classList.remove('open');
+        toggle.setAttribute('aria-expanded','false');
+      }));
+    })();
+
+    // Scroll progress bar
+    (function(){
+      const bar = document.getElementById('progress');
+      if (!bar) return;
+      const onScroll = () => {
+        const max = document.documentElement.scrollHeight - innerHeight;
+        const p = Math.max(0, Math.min(1, scrollY / max));
+        bar.style.width = (p * 100).toFixed(2) + '%';
+      };
+      addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+    })();
+
+    // Amplitude events on CTA
+    (function(){
+      function track(id){
+        try { window.amplitude?.track('cta_click', { id }); } catch(e) {}
+      }
+      document.getElementById('dlTop')?.addEventListener('click', () => track('nav'));
+      document.getElementById('dlHero')?.addEventListener('click', () => track('hero'));
+      document.getElementById('dlBottom')?.addEventListener('click', () => track('bottom'));
+    })();
+  </script>
+</body>
+</html>
