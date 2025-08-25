@@ -47,18 +47,19 @@
 
   <style>
     :root {
-      /* Brand — tuned to your purple/blue identity */
-      --brand-1: #6c3eff;   /* Indigo */
-      --brand-2: #2ec5ff;   /* Electric blue */
-      --brand-3: #a66bff;   /* Violet */
-      --bg-deep: #0a0a16;
-      --text: #eef2ff;
-      --muted: #c6c9d9;
-      --glass: rgba(255,255,255,.06);
-      --border: rgba(255,255,255,.12);
-      --shadow-1: 0 20px 60px rgba(0,0,0,.45);
-      --radius: 20px;
-      --container: 1160px;
+      /* EXACT brand gradient from app (top → bottom) */
+      --grad-1: #463278; /* rgb(70,50,120) */
+      --grad-2: #233C73; /* rgb(35,60,115) */
+
+      /* neutrals */
+      --text: #f1f4ff;
+      --muted: #c5cae6;
+      --card: rgba(255,255,255,0.06);
+      --card-border: rgba(255,255,255,0.16);
+      --ring: rgba(255,255,255,0.35);
+      --container: 1120px;
+      --radius: 22px;
+      --shadow-1: 0 18px 50px rgba(0,0,0,.35);
     }
 
     *{box-sizing:border-box}
@@ -67,119 +68,78 @@
       margin:0;
       font-family: Manrope, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
       color:var(--text);
-      background: var(--bg-deep);
+      background: linear-gradient(180deg, var(--grad-1) 0%, var(--grad-2) 100%);
       -webkit-font-smoothing: antialiased;
     }
-
-    /* ===== Aurora / Mesh background ===== */
-    .backdrop {
-      position: fixed; inset: 0; z-index: -1; overflow:hidden;
-      background:
-        radial-gradient(60rem 60rem at 10% -10%, color-mix(in oklab, var(--brand-1), transparent 45%), transparent),
-        radial-gradient(50rem 50rem at 110% 0%, color-mix(in oklab, var(--brand-2), transparent 40%), transparent),
-        radial-gradient(70rem 70rem at 30% 120%, color-mix(in oklab, var(--brand-3), transparent 45%), transparent),
-        linear-gradient(180deg, #0b0b18 0%, #0a0a16 60%, #0a0a16 100%);
-    }
-    .glow {
-      position:absolute; filter: blur(60px); opacity:.35; pointer-events:none; mix-blend-mode: screen;
-    }
-    .glow.one { width:700px; height:700px; background: radial-gradient(circle at 50% 50%, var(--brand-1), transparent 60%); top:-140px; left:-120px; }
-    .glow.two { width:640px; height:640px; background: radial-gradient(circle at 50% 50%, var(--brand-2), transparent 60%); top: -60px; right:-80px; }
-    .glow.three { width:720px; height:720px; background: radial-gradient(circle at 50% 50%, var(--brand-3), transparent 60%); bottom:-180px; left:20%; }
 
     .container{max-width:var(--container); margin:0 auto; padding:0 24px}
     a{color:inherit; text-decoration:none}
 
-    /* ===== Nav (glass) ===== */
-    .nav-wrap{ position: sticky; top:0; z-index:40; backdrop-filter: saturate(140%) blur(14px); border-bottom:1px solid var(--border); background: rgba(8,8,16,.35); }
+    /* ===== Nav ===== */
+    .nav-wrap{ position: sticky; top:0; z-index:50; backdrop-filter: saturate(140%) blur(12px); border-bottom:1px solid var(--card-border); background: rgba(0,0,0,.2); }
     .nav{ display:flex; align-items:center; justify-content:space-between; height:76px; }
     .brand{ display:flex; align-items:center; gap:12px; font-weight:800 }
-    .brand img{ width:36px; height:36px; border-radius:10px }
+    .brand img{ width:36px; height:36px; border-radius:8px }
     .navlinks{ display:flex; gap:22px }
     .navlinks a{ color: var(--muted); font-weight:700 }
     .navlinks a:hover, .navlinks a:focus-visible{ color:#fff }
     .nav-cta{ display:flex; gap:12px }
-    .btn{ display:inline-flex; align-items:center; justify-content:center; font-weight:800; padding:12px 18px; border-radius:14px; box-shadow:var(--shadow-1) }
-    .btn-primary{ background:linear-gradient(135deg, var(--brand-1), var(--brand-2)); color:#fff }
-    .btn-ghost{ background:transparent; border:1px solid var(--border); color:#fff }
+    .btn{ display:inline-flex; align-items:center; justify-content:center; font-weight:800; padding:12px 18px; border-radius:14px; box-shadow:var(--shadow-1); border:1px solid var(--card-border); background: var(--card); }
+    .btn-primary{ background: #ffffff14; border-color:#ffffff33; color:#fff }
 
-    /* ===== Hero ===== */
-    .hero{ padding: 64px 0 24px; }
-    .hero-grid{ display:grid; grid-template-columns: 1.05fr .95fr; gap:40px; align-items:center }
+    /* ===== Hero (CENTERED) ===== */
+    .hero{ padding: 72px 0 40px; text-align:center }
+    .hero-grid{ display:grid; grid-template-columns: 1fr; justify-items:center; gap:28px }
     .eyebrow{ display:inline-block; letter-spacing:.22em; text-transform:uppercase; color: color-mix(in oklab, var(--muted), #fff 10%); font-weight:800 }
-    h1{ font-size: clamp(2.2rem, 4.8vw, 4rem); line-height:1.05; margin:10px 0 14px; font-weight:800 }
-    .lead{ color:var(--muted); font-size: clamp(1rem, 2.2vw, 1.22rem) }
-    .hero-ctas{ display:flex; flex-wrap:wrap; gap:12px; margin:22px 0 10px }
+    h1{ font-size: clamp(2.4rem, 5vw, 4rem); line-height:1.05; margin:10px 0 14px; font-weight:800 }
+    .lead{ color:var(--muted); font-size: clamp(1rem, 2.2vw, 1.22rem); max-width: 68ch; margin: 0 auto }
+    .hero-ctas{ display:flex; flex-wrap:wrap; gap:12px; margin:22px 0 10px; justify-content:center }
 
-    /* Device mock (placeholder) */
-    .device{ position:relative; width:100%; aspect-ratio: 9/16; border-radius:34px; border:1px solid var(--border); background: rgba(255,255,255,.06); box-shadow: var(--shadow-1); transform: perspective(1200px) rotateY(-12deg) rotateX(2deg); }
-    .notch{ position:absolute; top:10px; left:50%; transform:translateX(-50%); width:120px; height:22px; background:#000; border-radius:0 0 16px 16px; opacity:.5 }
-    .screen{ position:absolute; inset:12px; border-radius:28px; border:1px dashed rgba(255,255,255,.24); display:grid; place-items:center; color:var(--muted); font-weight:800; letter-spacing:.08em }
+    /* Device mock — perfectly centered */
+    .device-xl{ width:min(420px, 86vw); aspect-ratio: 9/16; border-radius:34px; border:1px solid var(--card-border); background: var(--card); box-shadow: var(--shadow-1); display:grid; place-items:center; margin: 6px auto 0; }
+    .device{ width:min(360px, 86vw); aspect-ratio: 9/16; border-radius:34px; border:1px solid var(--card-border); background: var(--card); box-shadow: var(--shadow-1); display:grid; place-items:center; margin: 0 auto; }
+    .screen{ position:relative; width: calc(100% - 24px); height: calc(100% - 24px); border:1px dashed #ffffff33; border-radius:28px; display:grid; place-items:center; color:var(--muted); font-weight:800; letter-spacing:.08em }
 
-    /* Highlights pills */
-    .strip{ display:grid; grid-template-columns: repeat(3,1fr); gap:12px; margin-top:16px }
-    .pill{ background: rgba(255,255,255,.06); border:1px solid var(--border); border-radius:14px; padding:14px 16px; font-weight:800; display:flex; align-items:center; gap:10px }
+    /* Generic section heading */
+    .section{ padding: 64px 0; text-align:center }
+    .kicker{ display:inline-block; letter-spacing:.22em; text-transform:uppercase; opacity:.9; font-weight:800; font-size:.9rem }
+    .title{ font-size: clamp(1.8rem, 4.2vw, 2.6rem); margin:.4rem 0 .6rem; font-weight:800 }
+    .sub{ color:var(--muted); max-width: 72ch; margin:0 auto }
 
-    /* Partners */
-    .partners{ padding: 40px 0 20px }
-    .section-title{ text-align:center; font-size: clamp(1.6rem, 3.6vw, 2.4rem); margin: 4px 0 10px; font-weight:800 }
-    .section-sub{ text-align:center; color:var(--muted); max-width:70ch; margin: 0 auto 24px }
-    .logo-row{ display:flex; gap:28px; align-items:center; justify-content:center; flex-wrap:wrap }
-    .logo-row img{ height:44px; opacity:.95; filter:saturate(.95) }
-    .logo-row img.partner-srf{ height:64px }
+    /* Walkthrough grid */
+    .steps{ margin-top:24px; display:grid; grid-template-columns: repeat(4,1fr); gap:16px }
+    .step{ background: var(--card); border:1px solid var(--card-border); border-radius:16px; padding:18px; text-align:left }
+    .num{ width:36px; height:36px; display:grid; place-items:center; border-radius:999px; font-weight:800; color:#fff; background: linear-gradient(180deg, var(--grad-1), var(--grad-2)); margin-bottom:8px }
+    .step h3{ margin:6px 0 6px; font-size:1.05rem }
+    .step p{ margin:0; color:var(--muted); font-size:.96rem }
 
-    /* How it works */
-    .how{ padding: 40px 0 }
-    .steps{ display:grid; grid-template-columns: repeat(5,1fr); gap:14px }
-    .step{ background: rgba(255,255,255,.06); border:1px solid var(--border); border-radius:16px; padding:18px }
-    .num{ width:36px; height:36px; display:grid; place-items:center; border-radius:999px; font-weight:800; color:#fff; background:linear-gradient(135deg, var(--brand-1), var(--brand-2)); margin-bottom:10px }
-    .step h3{ margin:6px 0 6px; font-size:1rem }
-    .step p{ margin:0; color:var(--muted); font-size:.95rem }
+    /* Split sections (text + device) */
+    .split{ display:grid; grid-template-columns: 1.05fr .95fr; gap:40px; align-items:center; text-align:left; margin-top:28px }
+    .split.reverse{ grid-template-columns: .95fr 1.05fr }
+    .split .copy{ align-self:center }
+    .copy h3{ font-size: clamp(1.3rem, 3.8vw, 2rem); margin:.2rem 0 .4rem; font-weight:800 }
+    .copy h2{ font-size: clamp(1.8rem, 4.2vw, 2.4rem); margin:.2rem 0 .4rem; font-weight:800 }
+    .copy p{ color:var(--muted) }
 
-    /* Features */
-    .features{ padding:20px 0 40px }
-    .grid{ display:grid; grid-template-columns: repeat(3,1fr); gap:16px }
-    .card{ background: rgba(255,255,255,.06); border:1px solid var(--border); border-radius:16px; padding:18px; transition: transform .18s ease, box-shadow .2s ease }
-    .card:hover{ transform: translateY(-4px) }
-    .badge{ display:grid; place-items:center; width:40px; height:40px; border-radius:10px; background:linear-gradient(135deg, var(--brand-1), var(--brand-2)); color:#fff; font-weight:800; margin-bottom:6px }
-    .tiny{ color:var(--muted); font-size:.95rem; margin:6px 0 0 }
-
-    /* Gallery (placeholder shots) */
-    .gallery{ padding: 30px 0 40px }
-    .scroller{ display:flex; gap:16px; overflow-x:auto; scroll-snap-type:x mandatory; padding:8px 4px }
-    .shot{ flex:0 0 clamp(240px, 30vw, 320px); aspect-ratio:9/16; border-radius:28px; background: rgba(255,255,255,.06); border:1px solid var(--border); scroll-snap-align:start; position:relative }
-    .shot::after{ content:"SCREENSHOT"; position:absolute; inset:12px; border-radius:22px; border:1px dashed rgba(255,255,255,.22); display:grid; place-items:center; color:var(--muted); font-weight:800; letter-spacing:.08em }
-    .swipe{ text-align:center; color:var(--muted); margin-top:10px }
-
-    /* CTA band */
-    .cta{ margin: 30px 0 70px; background:linear-gradient(135deg, color-mix(in oklab, var(--brand-1), #00c2ff 35%), color-mix(in oklab, var(--brand-3), #8b5dff 35%)); border-radius:22px; padding:26px; box-shadow:var(--shadow-1) }
+    /* FAQ / CTA / Footer */
+    .faq details { background: var(--card); border: 1px solid var(--card-border); border-radius: 14px; padding: 14px 16px; margin: 12px 0; }
+    .faq summary { cursor: pointer; font-weight: 800; }
+    .cta{ margin: 36px 0 80px; border-radius: 20px; padding: 26px; background: #ffffff10; border:1px solid #ffffff26 }
     .cta-inner{ display:flex; align-items:center; justify-content:space-between; gap:16px }
-    .cta h3{ margin:0; font-size: clamp(1.2rem, 3vw, 1.8rem) }
-
-    /* Footer */
-    footer{ border-top:1px solid var(--border); background: rgba(0,0,0,.25); padding:36px 0; color:var(--muted) }
+    footer{ border-top:1px solid var(--card-border); background: #00000020; padding:36px 0; color:var(--muted) }
     .footgrid{ display:grid; grid-template-columns: 1.4fr .8fr; gap:20px; align-items:center }
-    .footlinks{ display:flex; gap:16px; flex-wrap:wrap }
+    .footlinks{ display:flex; gap:16px; flex-wrap:wrap; justify-content:center }
 
-    /* Responsive tweaks */
-    @media (max-width: 1024px){ .hero-grid{ grid-template-columns:1fr } .device{ transform:none } .strip{ grid-template-columns:1fr; } }
-    @media (max-width: 900px){ .grid{ grid-template-columns:1fr 1fr } .steps{ grid-template-columns:1fr 1fr } }
-    @media (max-width: 560px){ .grid{ grid-template-columns:1fr } .steps{ grid-template-columns:1fr } }
+    /* Responsive */
+    @media (max-width: 1000px){ .split{ grid-template-columns:1fr; text-align:center } .split .copy{ text-align:center } }
+    @media (max-width: 880px){ .steps{ grid-template-columns: 1fr 1fr } }
+    @media (max-width: 520px){ .steps{ grid-template-columns: 1fr } }
 
-    /* Progress bar */
-    #progress{ position:fixed; top:0; left:0; height:3px; background:linear-gradient(90deg, var(--brand-1), var(--brand-2)); width:0; z-index:50 }
-
-    /* Focus styles */
-    .btn:focus-visible, a:focus-visible { outline: 3px solid color-mix(in oklab, var(--brand-2), white 10%); outline-offset: 2px }
+    /* Progress */
+    #progress{ position:fixed; top:0; left:0; height:3px; background: linear-gradient(90deg, var(--grad-1), var(--grad-2)); width:0; z-index:60 }
   </style>
 </head>
 <body>
-  <div class="backdrop" aria-hidden="true">
-    <div class="glow one"></div>
-    <div class="glow two"></div>
-    <div class="glow three"></div>
-  </div>
-
   <div id="progress"></div>
 
   <!-- NAV -->
@@ -190,198 +150,126 @@
         <span>StudyLock</span>
       </a>
       <nav class="navlinks" aria-label="Sections">
-        <a href="#how">How it works</a>
-        <a href="#features">Features</a>
-        <a href="#partners">Partners</a>
-        <a href="#faq">FAQ</a>
+        <a href="#walkthrough">Walkthrough</a>
+        <a href="#active">Active</a>
+        <a href="#learn">Learn</a>
+        <a href="#quiz">Quiz</a>
+        <a href="#social">Social</a>
       </nav>
       <div class="nav-cta">
-        <a class="btn btn-ghost" href="mailto:studylock@icloud.com">Contact</a>
+        <a class="btn" href="mailto:studylock@icloud.com">Contact</a>
         <a class="btn btn-primary" id="dlTop" href="https://apps.apple.com/app/studylock/id6744610901" target="_blank" rel="noopener">Download</a>
       </div>
     </div>
   </div>
 
-  <!-- HERO -->
+  <!-- HERO (perfectly centered) -->
   <header id="top" class="hero">
     <div class="container hero-grid">
       <div>
         <span class="eyebrow">Built for real focus</span>
         <h1>Earn screen time with <em>real</em> study time.</h1>
-        <p class="lead">StudyLock blocks distracting apps while you learn. Upload materials, get AI summaries, pass a quick quiz — then unlock your apps. Simple, motivating, effective.</p>
+        <p class="lead">StudyLock blocks distracting apps while you learn. Upload your materials, get AI summaries, pass a quick quiz — then unlock your apps. Simple, motivating, effective.</p>
         <div class="hero-ctas">
           <a class="btn btn-primary" id="dlHero" href="https://apps.apple.com/app/studylock/id6744610901" target="_blank" rel="noopener">Download on the App&nbsp;Store</a>
-          <a class="btn btn-ghost" href="#gallery">Watch demo</a>
-        </div>
-        <div class="strip" aria-label="Highlights">
-          <div class="pill">📵 App blocking that actually sticks</div>
-          <div class="pill">🧠 AI summaries & quizzes</div>
-          <div class="pill">📈 Progress you can see</div>
+          <a class="btn" href="#walkthrough">See how it works</a>
         </div>
       </div>
-      <div>
-        <div class="device" aria-hidden="true">
-          <div class="notch"></div>
-          <div class="screen">APP PREVIEW</div>
-        </div>
+      <div class="device-xl" aria-hidden="true">
+        <div class="screen">MAIN APP IMAGE</div>
       </div>
     </div>
   </header>
 
-  <!-- PARTNERS -->
-  <section id="partners" class="partners">
+  <!-- PRODUCT WALKTHROUGH -->
+  <section id="walkthrough" class="section">
     <div class="container">
-      <h2 class="section-title">Partners</h2>
-      <p class="section-sub">We collaborate with student organizations and universities that value focused learning.</p>
-      <div class="logo-row">
-        <a href="https://erasmusinprague.com/" target="_blank" rel="noopener"><img src="img/erasmus_new.png" alt="Erasmus in Prague logo" loading="lazy"></a>
-        <a href="https://www.unyp.cz/" target="_blank" rel="noopener"><img src="img/unyp.png" alt="UNYP logo" loading="lazy"></a>
-        <a href="https://www.bro-coli.com/" target="_blank" rel="noopener"><img src="img/brocoli.png" alt="Brocoli logo" loading="lazy"></a>
-        <a href="https://student-room-flat.com/" target="_blank" rel="noopener"><img src="img/srf.png" class="partner-srf" alt="Student Room Flat logo" loading="lazy"></a>
-      </div>
-    </div>
-  </section>
+      <span class="kicker">Product Walkthrough</span>
+      <h2 class="title">From setup to focus in four steps</h2>
+      <p class="sub">Everything you need to start a distraction‑free session in minutes.</p>
 
-  <!-- HOW IT WORKS -->
-  <section id="how" class="how">
-    <div class="container">
-      <h2 class="section-title">How it works</h2>
-      <p class="section-sub">Five simple steps from distraction to focus.</p>
       <div class="steps" role="list">
         <div class="step" role="listitem">
           <div class="num">1</div>
-          <h3>Upload material</h3>
-          <p>PDFs or images — in any language.</p>
+          <h3>Upload Study Content</h3>
+          <p>Use your camera, photo library, or upload a PDF.</p>
         </div>
         <div class="step" role="listitem">
           <div class="num">2</div>
-          <h3>Choose what to block</h3>
-          <p>Pick your most distracting apps (yes, even TikTok).</p>
+          <h3>Choose apps to block</h3>
+          <p>Keep distractions away during study time.</p>
         </div>
         <div class="step" role="listitem">
           <div class="num">3</div>
-          <h3>Learn with AI</h3>
-          <p>Get clear summaries and a comfortable reading mode.</p>
+          <h3>Set your quiz accuracy</h3>
+          <p>Pick the required score to unlock your apps.</p>
         </div>
         <div class="step" role="listitem">
           <div class="num">4</div>
-          <h3>Take a quick quiz</h3>
-          <p>Prove you studied — we’ll track results.</p>
-        </div>
-        <div class="step" role="listitem">
-          <div class="num">5</div>
-          <h3>Unlock your apps</h3>
-          <p>Pass the threshold you set and you’re free.</p>
+          <h3>Select study language</h3>
+          <p>Learn in English, Czech, Russian, and more.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- FEATURES -->
-  <section id="features" class="features">
+  <!-- ACTIVE INTERFACE -->
+  <section id="active" class="section">
     <div class="container">
-      <h2 class="section-title">Everything you need to stay on track</h2>
-      <p class="section-sub">Smart guardrails, better reading, and quick checks that keep you honest.</p>
-      <div class="grid" role="list">
-        <div class="card" role="listitem">
-          <div class="badge">📄</div>
-          <h4>Upload study materials</h4>
-          <p class="tiny">Add PDFs or images to start focused learning.</p>
+      <span class="kicker">Active Session Interface</span>
+      <div class="split">
+        <div class="copy">
+          <h2 class="title">Stay focused while StudyLock has your back</h2>
+          <p class="sub">See your session timer, blocked apps status, and goal progress — all in one clean view.</p>
         </div>
-        <div class="card" role="listitem">
-          <div class="badge">📵</div>
-          <h4>Block distracting apps</h4>
-          <p class="tiny">Full block for TikTok, Instagram, games, and more.</p>
-        </div>
-        <div class="card" role="listitem">
-          <div class="badge">🧠</div>
-          <h4>AI-powered summaries</h4>
-          <p class="tiny">Understand faster with generated insights.</p>
-        </div>
-        <div class="card" role="listitem">
-          <div class="badge">🔊</div>
-          <h4>Interactive read‑aloud</h4>
-          <p class="tiny">Listen while each word is highlighted.</p>
-        </div>
-        <div class="card" role="listitem">
-          <div class="badge">🔎</div>
-          <h4>Comfortable reading</h4>
-          <p class="tiny">Adjust text size and background to your eyes.</p>
-        </div>
-        <div class="card" role="listitem">
-          <div class="badge">📝</div>
-          <h4>Custom quizzes</h4>
-          <p class="tiny">Auto‑generated questions to test understanding.</p>
-        </div>
-        <div class="card" role="listitem">
-          <div class="badge">🔓</div>
-          <h4>Unlock with results</h4>
-          <p class="tiny">Apps stay locked until you hit your target score.</p>
-        </div>
-        <div class="card" role="listitem">
-          <div class="badge">🌍</div>
-          <h4>In your language</h4>
-          <p class="tiny">Summaries & quizzes in your preferred language.</p>
-        </div>
-        <div class="card" role="listitem">
-          <div class="badge">📈</div>
-          <h4>Progress tracking</h4>
-          <p class="tiny">View sessions, time spent, and completion stats.</p>
-        </div>
-        <div class="card" role="listitem">
-          <div class="badge">👥</div>
-          <h4>Study Groups</h4>
-          <p class="tiny">Join with your school email and learn together.</p>
-        </div>
+        <div class="device" aria-hidden="true"><div class="screen">ACTIVE INTERFACE</div></div>
       </div>
     </div>
   </section>
 
-  <!-- GALLERY (placeholders) -->
-  <section id="gallery" class="gallery">
+  <!-- LEARN INTERFACE -->
+  <section id="learn" class="section">
     <div class="container">
-      <h2 class="section-title">Explore the app</h2>
-      <div class="scroller" aria-label="Screenshots (placeholders)">
-        <div class="shot"></div>
-        <div class="shot"></div>
-        <div class="shot"></div>
-        <div class="shot"></div>
-        <div class="shot"></div>
-        <div class="shot"></div>
-        <div class="shot"></div>
-        <div class="shot"></div>
-        <div class="shot"></div>
+      <span class="kicker">AI‑Powered Learning Interface</span>
+      <div class="split reverse">
+        <div class="device" aria-hidden="true"><div class="screen">LEARN INTERFACE</div></div>
+        <div class="copy">
+          <h2 class="title">Delivers Clean, Digestible Study Content</h2>
+          <p class="sub">Summarized study content is presented in a clean, accessible format — with options to zoom, switch reading mode, and listen with audio narration.</p>
+        </div>
       </div>
-      <p class="swipe">← Swipe to explore →</p>
     </div>
   </section>
 
-  <!-- FAQ -->
-  <section id="faq" class="how">
+  <!-- QUIZ INTERFACE -->
+  <section id="quiz" class="section">
     <div class="container">
-      <h2 class="section-title">FAQ</h2>
-      <div class="steps" style="grid-template-columns:1fr; gap:12px">
-        <div class="step">
-          <h3>Does StudyLock work on iPhone and iPad?</h3>
-          <p>Yes — StudyLock is built for iOS and works on iPhone and iPad (iOS 16+ recommended).</p>
+      <span class="kicker">Knowledge Checkpoint</span>
+      <div class="split">
+        <div class="copy">
+          <h2 class="title">Prove You Learned With a Quick Quiz</h2>
+          <p class="sub">Auto‑generated questions help test your understanding, improve retention, and unlock apps only after reaching the required accuracy threshold.</p>
         </div>
-        <div class="step">
-          <h3>Can I choose which apps to block?</h3>
-          <p>Absolutely. Pick any installed apps to block while you study. They’ll unlock only after you pass your quiz.</p>
-        </div>
-        <div class="step">
-          <h3>Do you store my documents?</h3>
-          <p>Your privacy matters. Documents are used to generate summaries and quizzes; see our <a href="/privacy">Privacy Policy</a> for details.</p>
-        </div>
-        <div class="step">
-          <h3>Is there a free version?</h3>
-          <p>Yes. You can download and start for free, then upgrade if you want more power features.</p>
+        <div class="device" aria-hidden="true"><div class="screen">QUIZ INTERFACE</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOCIAL LEARNING -->
+  <section id="social" class="section">
+    <div class="container">
+      <span class="kicker">Social Learning Made Easy</span>
+      <div class="split reverse">
+        <div class="device" aria-hidden="true"><div class="screen">SOCIAL / GROUPS</div></div>
+        <div class="copy">
+          <h2 class="title">Study Smarter — Together</h2>
+          <p class="sub">Join a study group using your school or organization email. Share sessions, track activity, and stay motivated through a built‑in social element.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- CTA Band -->
+  <!-- CTA -->
   <section class="container cta" aria-label="Get StudyLock">
     <div class="cta-inner">
       <div>
@@ -400,17 +288,16 @@
           <img src="https://studylock.github.io/img/logo.png" alt="StudyLock logo small" width="32" height="32" />
           <strong>StudyLock</strong>
         </div>
-        <p class="tiny">© 2025 StudyLock</p>
-        <p class="tiny">Contact: <a href="mailto:studylock@icloud.com">studylock@icloud.com</a></p>
-        <p class="tiny">By using StudyLock, you agree to our <a href="/terms">Terms of Use</a> and <a href="/privacy">Privacy Policy</a>.</p>
-        <p class="tiny"><a href="https://startupfa.me/s/studylock?utm_source=studylock.github.io" target="_blank" rel="noopener"><img src="https://startupfa.me/badges/featured/light.webp" alt="Featured on Startup Fame" width="171" height="54"></a></p>
-        <p class="tiny"><a href="https://fazier.com/launches/studylock" target="_blank" rel="noopener"><img src="https://fazier.com/api/v1/public/badges/embed_image.svg?launch_id=4520&badge_type=daily&theme=light" width="270" alt="Fazier badge"></a></p>
+        <p class="sub" style="margin:.2rem 0 0">© 2025 StudyLock</p>
+        <p class="sub" style="margin:.2rem 0 0">Contact: <a href="mailto:studylock@icloud.com">studylock@icloud.com</a></p>
+        <p class="sub" style="margin:.2rem 0 0">By using StudyLock, you agree to our <a href="/terms">Terms of Use</a> and <a href="/privacy">Privacy Policy</a>.</p>
       </div>
       <nav class="footlinks" aria-label="Footer links">
-        <a href="#how">How it works</a>
-        <a href="#features">Features</a>
-        <a href="#partners">Partners</a>
-        <a href="#faq">FAQ</a>
+        <a href="#walkthrough">Walkthrough</a>
+        <a href="#active">Active</a>
+        <a href="#learn">Learn</a>
+        <a href="#quiz">Quiz</a>
+        <a href="#social">Social</a>
         <a href="https://apps.apple.com/app/studylock/id6744610901" target="_blank" rel="noopener">Download</a>
       </nav>
     </div>
