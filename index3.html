@@ -51,13 +51,11 @@
       --grad-1: #463278; /* rgb(70,50,120) */
       --grad-2: #233C73; /* rgb(35,60,115) */
 
-      /* neutrals */
       --text: #f1f4ff;
       --muted: #c5cae6;
       --card: rgba(255,255,255,0.06);
       --card-border: rgba(255,255,255,0.16);
-      --ring: rgba(255,255,255,0.35);
-      --container: 1120px;
+      --container: 1160px;
       --radius: 22px;
       --shadow-1: 0 18px 50px rgba(0,0,0,.35);
     }
@@ -72,11 +70,16 @@
       -webkit-font-smoothing: antialiased;
     }
 
+    /* One container width everywhere */
     .container{max-width:var(--container); margin:0 auto; padding:0 24px}
     a{color:inherit; text-decoration:none}
 
-    /* ===== Nav ===== */
-    .nav-wrap{ position: sticky; top:0; z-index:50; backdrop-filter: saturate(140%) blur(12px); border-bottom:1px solid var(--card-border); background: rgba(0,0,0,.2); }
+    /* Section rhythm + dividers */
+    section{ padding: 68px 0; }
+    section + section{ border-top:1px solid var(--card-border); }
+
+    /* ===== Nav (simple, aligned) ===== */
+    .nav-wrap{ position: sticky; top:0; z-index:50; backdrop-filter: saturate(140%) blur(12px); border-bottom:1px solid var(--card-border); background: rgba(0,0,0,.18); }
     .nav{ display:flex; align-items:center; justify-content:space-between; height:76px; }
     .brand{ display:flex; align-items:center; gap:12px; font-weight:800 }
     .brand img{ width:36px; height:36px; border-radius:8px }
@@ -84,54 +87,60 @@
     .navlinks a{ color: var(--muted); font-weight:700 }
     .navlinks a:hover, .navlinks a:focus-visible{ color:#fff }
     .nav-cta{ display:flex; gap:12px }
-    .btn{ display:inline-flex; align-items:center; justify-content:center; font-weight:800; padding:12px 18px; border-radius:14px; box-shadow:var(--shadow-1); border:1px solid var(--card-border); background: var(--card); }
-    .btn-primary{ background: #ffffff14; border-color:#ffffff33; color:#fff }
+    .btn{ display:inline-flex; align-items:center; justify-content:center; font-weight:800; padding:12px 18px; border-radius:14px; border:1px solid var(--card-border); background: var(--card); box-shadow:var(--shadow-1) }
+    .btn-primary{ background:#ffffff14; color:#fff }
 
-    /* ===== Hero (CENTERED) ===== */
-    .hero{ padding: 72px 0 40px; text-align:center }
-    .hero-grid{ display:grid; grid-template-columns: 1fr; justify-items:center; gap:28px }
+    /* ===== Hero — LEFT TEXT / RIGHT IMAGE ===== */
+    .hero .grid{ display:grid; grid-template-columns: 1.1fr .9fr; gap:46px; align-items:center }
     .eyebrow{ display:inline-block; letter-spacing:.22em; text-transform:uppercase; color: color-mix(in oklab, var(--muted), #fff 10%); font-weight:800 }
     h1{ font-size: clamp(2.4rem, 5vw, 4rem); line-height:1.05; margin:10px 0 14px; font-weight:800 }
-    .lead{ color:var(--muted); font-size: clamp(1rem, 2.2vw, 1.22rem); max-width: 68ch; margin: 0 auto }
-    .hero-ctas{ display:flex; flex-wrap:wrap; gap:12px; margin:22px 0 10px; justify-content:center }
+    .lead{ color:var(--muted); font-size: clamp(1rem, 2.2vw, 1.22rem); max-width: 62ch }
+    .hero-ctas{ display:flex; flex-wrap:wrap; gap:12px; margin:22px 0 10px }
 
-    /* Device mock — perfectly centered */
-    .device-xl{ width:min(420px, 86vw); aspect-ratio: 9/16; border-radius:34px; border:1px solid var(--card-border); background: var(--card); box-shadow: var(--shadow-1); display:grid; place-items:center; margin: 6px auto 0; }
-    .device{ width:min(360px, 86vw); aspect-ratio: 9/16; border-radius:34px; border:1px solid var(--card-border); background: var(--card); box-shadow: var(--shadow-1); display:grid; place-items:center; margin: 0 auto; }
-    .screen{ position:relative; width: calc(100% - 24px); height: calc(100% - 24px); border:1px dashed #ffffff33; border-radius:28px; display:grid; place-items:center; color:var(--muted); font-weight:800; letter-spacing:.08em }
+    /* Device mock — right column, centered inside its track */
+    .device{ width: min(420px, 90%); aspect-ratio: 9/16; border-radius:34px; border:1px solid var(--card-border); background: var(--card); box-shadow: var(--shadow-1); margin-left:auto; display:grid; place-items:center }
+    .screen{ width: calc(100% - 24px); height: calc(100% - 24px); border:1px dashed #ffffff33; border-radius:28px; display:grid; place-items:center; color:var(--muted); font-weight:800; letter-spacing:.08em }
 
-    /* Generic section heading */
-    .section{ padding: 64px 0; text-align:center }
+    /* Headings */
     .kicker{ display:inline-block; letter-spacing:.22em; text-transform:uppercase; opacity:.9; font-weight:800; font-size:.9rem }
-    .title{ font-size: clamp(1.8rem, 4.2vw, 2.6rem); margin:.4rem 0 .6rem; font-weight:800 }
-    .sub{ color:var(--muted); max-width: 72ch; margin:0 auto }
+    .title{ font-size: clamp(1.9rem, 4.2vw, 2.7rem); margin:.4rem 0 .6rem; font-weight:800 }
+    .sub{ color:var(--muted); max-width: 72ch }
 
     /* Walkthrough grid */
     .steps{ margin-top:24px; display:grid; grid-template-columns: repeat(4,1fr); gap:16px }
-    .step{ background: var(--card); border:1px solid var(--card-border); border-radius:16px; padding:18px; text-align:left }
+    .step{ background: var(--card); border:1px solid var(--card-border); border-radius:16px; padding:18px }
     .num{ width:36px; height:36px; display:grid; place-items:center; border-radius:999px; font-weight:800; color:#fff; background: linear-gradient(180deg, var(--grad-1), var(--grad-2)); margin-bottom:8px }
     .step h3{ margin:6px 0 6px; font-size:1.05rem }
     .step p{ margin:0; color:var(--muted); font-size:.96rem }
 
     /* Split sections (text + device) */
-    .split{ display:grid; grid-template-columns: 1.05fr .95fr; gap:40px; align-items:center; text-align:left; margin-top:28px }
+    .split{ display:grid; grid-template-columns: 1.05fr .95fr; gap:40px; align-items:center; }
     .split.reverse{ grid-template-columns: .95fr 1.05fr }
-    .split .copy{ align-self:center }
-    .copy h3{ font-size: clamp(1.3rem, 3.8vw, 2rem); margin:.2rem 0 .4rem; font-weight:800 }
     .copy h2{ font-size: clamp(1.8rem, 4.2vw, 2.4rem); margin:.2rem 0 .4rem; font-weight:800 }
-    .copy p{ color:var(--muted) }
 
-    /* FAQ / CTA / Footer */
+    /* FAQ */
     .faq details { background: var(--card); border: 1px solid var(--card-border); border-radius: 14px; padding: 14px 16px; margin: 12px 0; }
     .faq summary { cursor: pointer; font-weight: 800; }
-    .cta{ margin: 36px 0 80px; border-radius: 20px; padding: 26px; background: #ffffff10; border:1px solid #ffffff26 }
-    .cta-inner{ display:flex; align-items:center; justify-content:space-between; gap:16px }
-    footer{ border-top:1px solid var(--card-border); background: #00000020; padding:36px 0; color:var(--muted) }
-    .footgrid{ display:grid; grid-template-columns: 1.4fr .8fr; gap:20px; align-items:center }
-    .footlinks{ display:flex; gap:16px; flex-wrap:wrap; justify-content:center }
+
+    /* FULL-WIDTH CTA band (centered) */
+    .cta-band{ width:100%; border-top:1px solid var(--card-border); border-bottom:1px solid var(--card-border); }
+    .cta-band .inner{ padding: 64px 0; text-align:center }
+    .cta-band h3{ font-size: clamp(1.4rem, 3.6vw, 2rem); margin:0 0 .3rem; font-weight:800 }
+    .cta-band p{ margin:.2rem 0 1rem; color:var(--muted) }
+
+    /* Footer (clean) */
+    footer{ border-top:1px solid var(--card-border); padding: 36px 0; }
+    .footgrid{ display:grid; grid-template-columns: 1.2fr .8fr; gap:20px; align-items:center }
+    .foot-brand{ display:flex; align-items:center; gap:12px; font-weight:800 }
+    .footlinks{ display:flex; gap:16px; flex-wrap:wrap; justify-content:flex-end }
 
     /* Responsive */
-    @media (max-width: 1000px){ .split{ grid-template-columns:1fr; text-align:center } .split .copy{ text-align:center } }
+    @media (max-width: 1024px){
+      .hero .grid{ grid-template-columns:1fr; text-align:center }
+      .device{ margin: 10px auto 0 }
+      .footgrid{ grid-template-columns:1fr; text-align:center }
+      .footlinks{ justify-content:center }
+    }
     @media (max-width: 880px){ .steps{ grid-template-columns: 1fr 1fr } }
     @media (max-width: 520px){ .steps{ grid-template-columns: 1fr } }
 
@@ -163,26 +172,24 @@
     </div>
   </div>
 
-  <!-- HERO (perfectly centered) -->
-  <header id="top" class="hero">
-    <div class="container hero-grid">
+  <!-- HERO: left text / right image -->
+  <section id="top" class="hero">
+    <div class="container grid">
       <div>
         <span class="eyebrow">Built for real focus</span>
         <h1>Earn screen time with <em>real</em> study time.</h1>
-        <p class="lead">StudyLock blocks distracting apps while you learn. Upload your materials, get AI summaries, pass a quick quiz — then unlock your apps. Simple, motivating, effective.</p>
+        <p class="lead">StudyLock blocks distracting apps while you learn. Upload materials, get AI summaries, pass a quick quiz — then unlock your apps. Simple, motivating, effective.</p>
         <div class="hero-ctas">
           <a class="btn btn-primary" id="dlHero" href="https://apps.apple.com/app/studylock/id6744610901" target="_blank" rel="noopener">Download on the App&nbsp;Store</a>
           <a class="btn" href="#walkthrough">See how it works</a>
         </div>
       </div>
-      <div class="device-xl" aria-hidden="true">
-        <div class="screen">MAIN APP IMAGE</div>
-      </div>
+      <div class="device" aria-hidden="true"><div class="screen">MAIN APP IMAGE</div></div>
     </div>
-  </header>
+  </section>
 
   <!-- PRODUCT WALKTHROUGH -->
-  <section id="walkthrough" class="section">
+  <section id="walkthrough">
     <div class="container">
       <span class="kicker">Product Walkthrough</span>
       <h2 class="title">From setup to focus in four steps</h2>
@@ -201,8 +208,8 @@
         </div>
         <div class="step" role="listitem">
           <div class="num">3</div>
-          <h3>Set your quiz accuracy</h3>
-          <p>Pick the required score to unlock your apps.</p>
+          <h3>Set required quiz accuracy</h3>
+          <p>Pick the score needed to unlock your apps.</p>
         </div>
         <div class="step" role="listitem">
           <div class="num">4</div>
@@ -214,11 +221,11 @@
   </section>
 
   <!-- ACTIVE INTERFACE -->
-  <section id="active" class="section">
+  <section id="active">
     <div class="container">
-      <span class="kicker">Active Session Interface</span>
       <div class="split">
         <div class="copy">
+          <span class="kicker">Active Session Interface</span>
           <h2 class="title">Stay focused while StudyLock has your back</h2>
           <p class="sub">See your session timer, blocked apps status, and goal progress — all in one clean view.</p>
         </div>
@@ -228,12 +235,12 @@
   </section>
 
   <!-- LEARN INTERFACE -->
-  <section id="learn" class="section">
+  <section id="learn">
     <div class="container">
-      <span class="kicker">AI‑Powered Learning Interface</span>
       <div class="split reverse">
         <div class="device" aria-hidden="true"><div class="screen">LEARN INTERFACE</div></div>
         <div class="copy">
+          <span class="kicker">AI‑Powered Learning Interface</span>
           <h2 class="title">Delivers Clean, Digestible Study Content</h2>
           <p class="sub">Summarized study content is presented in a clean, accessible format — with options to zoom, switch reading mode, and listen with audio narration.</p>
         </div>
@@ -242,11 +249,11 @@
   </section>
 
   <!-- QUIZ INTERFACE -->
-  <section id="quiz" class="section">
+  <section id="quiz">
     <div class="container">
-      <span class="kicker">Knowledge Checkpoint</span>
       <div class="split">
         <div class="copy">
+          <span class="kicker">Knowledge Checkpoint</span>
           <h2 class="title">Prove You Learned With a Quick Quiz</h2>
           <p class="sub">Auto‑generated questions help test your understanding, improve retention, and unlock apps only after reaching the required accuracy threshold.</p>
         </div>
@@ -256,12 +263,12 @@
   </section>
 
   <!-- SOCIAL LEARNING -->
-  <section id="social" class="section">
+  <section id="social">
     <div class="container">
-      <span class="kicker">Social Learning Made Easy</span>
       <div class="split reverse">
         <div class="device" aria-hidden="true"><div class="screen">SOCIAL / GROUPS</div></div>
         <div class="copy">
+          <span class="kicker">Social Learning Made Easy</span>
           <h2 class="title">Study Smarter — Together</h2>
           <p class="sub">Join a study group using your school or organization email. Share sessions, track activity, and stay motivated through a built‑in social element.</p>
         </div>
@@ -269,28 +276,21 @@
     </div>
   </section>
 
-  <!-- CTA -->
-  <section class="container cta" aria-label="Get StudyLock">
-    <div class="cta-inner">
-      <div>
-        <h3>Ready to turn study time into screen time?</h3>
-        <p>Download StudyLock and focus without the struggle.</p>
-      </div>
+  <!-- FULL-WIDTH CTA (centered) -->
+  <section class="cta-band" aria-label="Get StudyLock">
+    <div class="container inner">
+      <h3>Ready to turn study time into screen time?</h3>
+      <p>Download StudyLock and focus without the struggle.</p>
       <a class="btn btn-primary" id="dlBottom" href="https://apps.apple.com/app/studylock/id6744610901" target="_blank" rel="noopener">Download on the App&nbsp;Store</a>
     </div>
   </section>
 
-  <!-- FOOTER -->
+  <!-- FOOTER (simple & centered on mobile) -->
   <footer role="contentinfo">
     <div class="container footgrid">
-      <div>
-        <div class="brand" style="gap:10px">
-          <img src="https://studylock.github.io/img/logo.png" alt="StudyLock logo small" width="32" height="32" />
-          <strong>StudyLock</strong>
-        </div>
-        <p class="sub" style="margin:.2rem 0 0">© 2025 StudyLock</p>
-        <p class="sub" style="margin:.2rem 0 0">Contact: <a href="mailto:studylock@icloud.com">studylock@icloud.com</a></p>
-        <p class="sub" style="margin:.2rem 0 0">By using StudyLock, you agree to our <a href="/terms">Terms of Use</a> and <a href="/privacy">Privacy Policy</a>.</p>
+      <div class="foot-brand">
+        <img src="https://studylock.github.io/img/logo.png" alt="StudyLock logo small" width="32" height="32" />
+        <strong>StudyLock</strong>
       </div>
       <nav class="footlinks" aria-label="Footer links">
         <a href="#walkthrough">Walkthrough</a>
@@ -298,6 +298,9 @@
         <a href="#learn">Learn</a>
         <a href="#quiz">Quiz</a>
         <a href="#social">Social</a>
+        <a href="mailto:studylock@icloud.com">Contact</a>
+        <a href="/terms">Terms</a>
+        <a href="/privacy">Privacy</a>
         <a href="https://apps.apple.com/app/studylock/id6744610901" target="_blank" rel="noopener">Download</a>
       </nav>
     </div>
