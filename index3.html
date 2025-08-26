@@ -18,11 +18,10 @@
       --card-border: rgba(255,255,255,0.16);
       --container: 1160px;
       --shadow-1: 0 18px 40px rgba(0,0,0,.35);
-      /* unified phone sizing */
-      --phone-w: 320px;                  /* desktop width for ALL mockups */
-      --phone-w-sm: 280px;               /* mobile width */
-      --overlap: 140px;                  /* hero overlap on desktop */
-      --overlap-sm: 90px;                /* hero overlap on mobile */
+      --phone-w: 320px;       /* desktop width for ALL mockups */
+      --phone-w-sm: 280px;    /* mobile width */
+      --overlap: 140px;       /* hero overlap on desktop */
+      --overlap-sm: 90px;     /* hero overlap on mobile */
     }
 
     body{
@@ -33,6 +32,18 @@
     .container{max-width:var(--container); margin:0 auto; padding:0 24px}
     a{color:inherit; text-decoration:none}
 
+    /* ===== NAV ===== */
+    .nav-wrap{ position:sticky; top:0; z-index:50; backdrop-filter: blur(12px); background: rgba(0,0,0,.18); border-bottom:1px solid var(--card-border); }
+    .nav{ display:flex; align-items:center; justify-content:space-between; height:70px; }
+    .brand{ display:flex; align-items:center; gap:10px; font-weight:800 }
+    .brand img{ width:28px; height:28px }
+    .navlinks{ display:flex; gap:18px }
+    .navlinks a{ color: var(--muted); font-weight:600 }
+    .navlinks a:hover{ color:#fff }
+    .btn{ padding:10px 16px; border-radius:12px; border:1px solid var(--card-border); background: rgba(255,255,255,0.08); font-weight:700; display:inline-flex; align-items:center; justify-content:center }
+    .btn-primary{ background:#ffffff14; color:#fff }
+
+    /* ===== Sections ===== */
     section{ padding: 60px 0; position:relative; }
     section::after { content:""; position:absolute; bottom:0; left:50%; transform:translateX(-50%); width:80%; height:1px; background:linear-gradient(90deg, transparent, #ffffff33, transparent); }
     section:last-of-type::after{ display:none }
@@ -42,28 +53,59 @@
     .lead{ color:var(--muted); font-size:1.05rem; max-width:50ch }
     .hero-ctas{ margin-top:16px; display:flex; gap:12px; flex-wrap:wrap }
 
-    /* ===== Unified phone frame (used everywhere) ===== */
+    /* ===== Unified phone frame ===== */
     .phone{ width:var(--phone-w); aspect-ratio: 390 / 844; border-radius:40px; padding:10px; background:#000; border:2px solid var(--card-border); box-shadow:var(--shadow-1); overflow:hidden; }
     .phone img{ width:100%; height:100%; object-fit: contain; border-radius:28px; background:#000; }
 
-    /* ===== Hero overlapping pair (SAME SIZE as .phone) ===== */
+    /* ===== Hero overlapping pair ===== */
     .device-stack{ position:relative; width: calc(var(--phone-w) * 2 - var(--overlap)); height: calc(var(--phone-w) * (844 / 390)); margin:0 auto; }
     .device-stack .phone{ position:absolute; top:0; }
     .device-stack .left{ left:0; transform: rotate(-7deg); z-index:1; }
     .device-stack .right{ left: calc(var(--phone-w) - var(--overlap)); transform: rotate(7deg); z-index:2; }
 
+    /* ===== Walkthrough ===== */
+    .walk{ text-align:center }
+    .kicker{ text-transform:uppercase; letter-spacing:.22em; font-weight:700; font-size:.85rem; color:var(--muted) }
+    .title{ font-size:2rem; margin:.4rem 0 .6rem; font-weight:800 }
+    .sub{ color:var(--muted); max-width:70ch; margin:0 auto }
+
+    .walk-grid{ margin-top:24px; display:grid; grid-template-columns:1fr 1fr; gap:18px }
+    .step{ background:rgba(255,255,255,0.06); border:1px solid var(--card-border); border-radius:16px; padding:16px; text-align:left }
+    .step h3{ margin:.3rem 0 .2rem; font-size:1.05rem }
+    .step p{ margin:0; color:var(--muted) }
+    .shot-ph{ margin-bottom:10px; width:100%; aspect-ratio:390/844; border:2px dashed var(--card-border); border-radius:28px; display:grid; place-items:center; color:var(--muted); background: rgba(0,0,0,0.25); font-weight:700; letter-spacing:.06em }
+
     /* ===== Split sections ===== */
     .split{ display:grid; grid-template-columns:1fr 1fr; gap:32px; align-items:center }
+
+    /* ===== Footer ===== */
+    footer{ background:rgba(0,0,0,0.2); padding:30px 0; text-align:center; }
+    .footlinks{ margin-top:12px; display:flex; flex-wrap:wrap; justify-content:center; gap:16px; font-size:.85rem; color:var(--muted) }
 
     /* Responsive */
     @media(max-width: 900px){
       .hero .grid,.split{grid-template-columns:1fr; text-align:center}
       :root{ --phone-w: var(--phone-w-sm); --overlap: var(--overlap-sm); }
       .device-stack{ width: calc(var(--phone-w) * 2 - var(--overlap)); height: calc(var(--phone-w) * (844 / 390)); }
+      .walk-grid{ grid-template-columns:1fr }
     }
   </style>
 </head>
 <body>
+  <!-- NAV -->
+  <div class="nav-wrap">
+    <div class="container nav">
+      <a href="#top" class="brand"><img src="https://studylock.github.io/img/logo.png" alt="logo"/> StudyLock</a>
+      <nav class="navlinks">
+        <a href="#walkthrough">Walkthrough</a>
+        <a href="#learn">Learn</a>
+        <a href="#quiz">Quiz</a>
+        <a href="#social">Social</a>
+      </nav>
+      <a class="btn btn-primary" href="https://apps.apple.com/app/studylock/id6744610901" target="_blank">Download</a>
+    </div>
+  </div>
+
   <!-- HERO -->
   <section id="top" class="hero">
     <div class="container grid">
@@ -77,6 +119,37 @@
       <div class="device-stack">
         <div class="phone left"><img src="img/blocked.PNG" alt="Blocked Apps Screenshot"></div>
         <div class="phone right"><img src="img/main-screen.PNG" alt="Main App Screenshot"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUCT WALKTHROUGH (2 per row) -->
+  <section id="walkthrough" class="walk">
+    <div class="container">
+      <span class="kicker">Product Walkthrough</span>
+      <h2 class="title">From setup to focus in four steps</h2>
+      <p class="sub">Each step will have its own screenshot — placeholders below.</p>
+      <div class="walk-grid">
+        <div class="step">
+          <div class="shot-ph">STEP 1 IMAGE</div>
+          <h3>Step 1 — Upload Study Content</h3>
+          <p>Use your camera, photo library, or upload a PDF.</p>
+        </div>
+        <div class="step">
+          <div class="shot-ph">STEP 2 IMAGE</div>
+          <h3>Step 2 — Choose apps to block</h3>
+          <p>Pick apps to block during study time.</p>
+        </div>
+        <div class="step">
+          <div class="shot-ph">STEP 3 IMAGE</div>
+          <h3>Step 3 — Set required quiz accuracy</h3>
+          <p>Choose the score needed to unlock apps.</p>
+        </div>
+        <div class="step">
+          <div class="shot-ph">STEP 4 IMAGE</div>
+          <h3>Step 4 — Select study language</h3>
+          <p>Learn in your preferred language.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -104,5 +177,22 @@
       <div class="copy"><h2 class="title">Social Learning</h2><p class="sub">Join groups with your school email, share sessions, and stay motivated together.</p></div>
     </div>
   </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div><img src="https://studylock.github.io/img/logo.png" width="28" alt="logo"/> <strong>StudyLock</strong></div>
+      <div class="footlinks">
+        <a href="#walkthrough">Walkthrough</a>
+        <a href="#learn">Learn</a>
+        <a href="#quiz">Quiz</a>
+        <a href="#social">Social</a>
+        <a href="mailto:studylock@icloud.com">Contact</a>
+        <a href="/terms">Terms</a>
+        <a href="/privacy">Privacy</a>
+      </div>
+      <p style="margin-top:16px;font-size:.8rem;color:var(--muted)">© 2025 StudyLock</p>
+    </div>
+  </footer>
 </body>
 </html>
