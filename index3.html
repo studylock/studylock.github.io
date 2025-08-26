@@ -18,12 +18,15 @@
       --card-border: rgba(255,255,255,0.16);
       --container: 1160px;
       --shadow-1: 0 18px 40px rgba(0,0,0,.35);
+      /* unified phone sizing */
+      --phone-w: 320px;                  /* desktop width for ALL mockups */
+      --phone-w-sm: 280px;               /* mobile width */
+      --overlap: 140px;                  /* hero overlap on desktop */
+      --overlap-sm: 90px;                /* hero overlap on mobile */
     }
 
     body{
-      margin:0;
-      font-family: Manrope, sans-serif;
-      color:var(--text);
+      margin:0; font-family: Manrope, sans-serif; color:var(--text);
       background: linear-gradient(180deg, var(--grad-1) 0%, var(--grad-2) 100%) fixed;
     }
 
@@ -31,12 +34,7 @@
     a{color:inherit; text-decoration:none}
 
     section{ padding: 60px 0; position:relative; }
-    section::after {
-      content:"";
-      position:absolute; bottom:0; left:50%; transform:translateX(-50%);
-      width:80%; height:1px;
-      background:linear-gradient(90deg, transparent, #ffffff33, transparent);
-    }
+    section::after { content:""; position:absolute; bottom:0; left:50%; transform:translateX(-50%); width:80%; height:1px; background:linear-gradient(90deg, transparent, #ffffff33, transparent); }
     section:last-of-type::after{ display:none }
 
     .hero .grid{ display:grid; grid-template-columns:1fr 1fr; gap:32px; align-items:center }
@@ -44,43 +42,24 @@
     .lead{ color:var(--muted); font-size:1.05rem; max-width:50ch }
     .hero-ctas{ margin-top:16px; display:flex; gap:12px; flex-wrap:wrap }
 
-    /* Device frame styling */
-    .device-stack{ position:relative; width:600px; height:560px; margin:0 auto; }
-    .device-frame{
-      position:absolute;
-      width:320px;
-      height:560px;
-      border-radius:40px;
-      padding:10px;
-      background:#000;
-      border:2px solid var(--card-border);
-      box-shadow:var(--shadow-1);
-      overflow:hidden;
-    }
-    .device-frame img{
-      width:100%; height:100%; object-fit:cover; border-radius:28px;
-    }
-    .device-frame.left{
-      transform: rotate(-8deg) translateX(-50px);
-      top:0; left:40px;
-      z-index:1;
-    }
-    .device-frame.right{
-      transform: rotate(8deg) translateX(50px);
-      top:0; left:240px;
-      z-index:2;
-    }
+    /* ===== Unified phone frame (used everywhere) ===== */
+    .phone{ width:var(--phone-w); aspect-ratio: 390 / 844; border-radius:40px; padding:10px; background:#000; border:2px solid var(--card-border); box-shadow:var(--shadow-1); overflow:hidden; }
+    .phone img{ width:100%; height:100%; object-fit: contain; border-radius:28px; background:#000; }
 
+    /* ===== Hero overlapping pair (SAME SIZE as .phone) ===== */
+    .device-stack{ position:relative; width: calc(var(--phone-w) * 2 - var(--overlap)); height: calc(var(--phone-w) * (844 / 390)); margin:0 auto; }
+    .device-stack .phone{ position:absolute; top:0; }
+    .device-stack .left{ left:0; transform: rotate(-7deg); z-index:1; }
+    .device-stack .right{ left: calc(var(--phone-w) - var(--overlap)); transform: rotate(7deg); z-index:2; }
+
+    /* ===== Split sections ===== */
     .split{ display:grid; grid-template-columns:1fr 1fr; gap:32px; align-items:center }
-    .device-single{ max-width:320px; margin:0 auto; border-radius:40px; padding:10px; background:#000; border:2px solid var(--card-border); box-shadow:var(--shadow-1); }
-    .device-single img{ width:100%; border-radius:28px; }
 
-    @media(max-width:900px){
-      .hero .grid,.split{grid-template-columns:1fr;text-align:center}
-      .device-stack{width:340px; height:500px;}
-      .device-frame{width:280px; height:500px;}
-      .device-frame.left{transform: rotate(-6deg) translateX(-20px); left:20px;}
-      .device-frame.right{transform: rotate(6deg) translateX(20px); left:60px;}
+    /* Responsive */
+    @media(max-width: 900px){
+      .hero .grid,.split{grid-template-columns:1fr; text-align:center}
+      :root{ --phone-w: var(--phone-w-sm); --overlap: var(--overlap-sm); }
+      .device-stack{ width: calc(var(--phone-w) * 2 - var(--overlap)); height: calc(var(--phone-w) * (844 / 390)); }
     }
   </style>
 </head>
@@ -96,8 +75,8 @@
         </div>
       </div>
       <div class="device-stack">
-        <div class="device-frame left"><img src="img/blocked.PNG" alt="Blocked Apps Screenshot"></div>
-        <div class="device-frame right"><img src="img/main-screen.PNG" alt="Main App Screenshot"></div>
+        <div class="phone left"><img src="img/blocked.PNG" alt="Blocked Apps Screenshot"></div>
+        <div class="phone right"><img src="img/main-screen.PNG" alt="Main App Screenshot"></div>
       </div>
     </div>
   </section>
@@ -105,21 +84,23 @@
   <!-- Learn -->
   <section id="learn">
     <div class="container split reverse">
-      <div class="device-single"><img src="img/learn.PNG" alt="Learn Interface Screenshot"></div>
+      <div class="phone"><img src="img/learn.PNG" alt="Learn Interface Screenshot"></div>
       <div class="copy"><h2 class="title">AI-Powered Learning</h2><p class="sub">Summarized content with zoom, reading modes, and audio narration.</p></div>
     </div>
   </section>
 
+  <!-- Quiz -->
   <section id="quiz">
     <div class="container split">
       <div class="copy"><h2 class="title">Knowledge Checkpoint</h2><p class="sub">Auto-generated quizzes prove your learning and unlock apps after accuracy.</p></div>
-      <div class="device-single"><img src="img/quiz.PNG" alt="Quiz Interface Screenshot"></div>
+      <div class="phone"><img src="img/quiz.PNG" alt="Quiz Interface Screenshot"></div>
     </div>
   </section>
 
+  <!-- Social -->
   <section id="social">
     <div class="container split reverse">
-      <div class="device-single"><img src="img/group.PNG" alt="Group Interface Screenshot"></div>
+      <div class="phone"><img src="img/group.PNG" alt="Group Interface Screenshot"></div>
       <div class="copy"><h2 class="title">Social Learning</h2><p class="sub">Join groups with your school email, share sessions, and stay motivated together.</p></div>
     </div>
   </section>
