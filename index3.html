@@ -20,8 +20,6 @@
       --shadow-1: 0 18px 40px rgba(0,0,0,.35);
       --phone-w: 320px;       /* desktop width for ALL mockups */
       --phone-w-sm: 280px;    /* mobile width */
-      --overlap: 140px;       /* hero overlap on desktop */
-      --overlap-sm: 90px;     /* hero overlap on mobile */
     }
 
     body{
@@ -48,20 +46,15 @@
     section::after { content:""; position:absolute; bottom:0; left:50%; transform:translateX(-50%); width:80%; height:1px; background:linear-gradient(90deg, transparent, #ffffff33, transparent); }
     section:last-of-type::after{ display:none }
 
-    .hero .grid{ display:grid; grid-template-columns:1fr 1fr; gap:32px; align-items:center }
-    h1{ font-size:2.2rem; margin:0 0 12px; font-weight:800 }
-    .lead{ color:var(--muted); font-size:1.05rem; max-width:50ch }
-    .hero-ctas{ margin-top:16px; display:flex; gap:12px; flex-wrap:wrap }
+    /* ===== Hero (centered, single image) ===== */
+    .hero-center{ text-align:center; display:grid; justify-items:center; gap:16px }
+    h1{ font-size:2.2rem; margin:0 0 8px; font-weight:800 }
+    .lead{ color:var(--muted); font-size:1.05rem; max-width:60ch; margin:0 auto }
+    .hero-ctas{ margin-top:8px; display:flex; gap:12px; flex-wrap:wrap; justify-content:center }
 
     /* ===== Unified phone frame ===== */
     .phone{ width:var(--phone-w); aspect-ratio: 390 / 844; border-radius:40px; padding:10px; background:#000; border:2px solid var(--card-border); box-shadow:var(--shadow-1); overflow:hidden; }
     .phone img{ width:100%; height:100%; object-fit: contain; border-radius:28px; background:#000; }
-
-    /* ===== Hero overlapping pair ===== */
-    .device-stack{ position:relative; width: calc(var(--phone-w) * 2 - var(--overlap)); height: calc(var(--phone-w) * (844 / 390)); margin:0 auto; }
-    .device-stack .phone{ position:absolute; top:0; }
-    .device-stack .left{ left:0; transform: rotate(-7deg); z-index:1; }
-    .device-stack .right{ left: calc(var(--phone-w) - var(--overlap)); transform: rotate(7deg); z-index:2; }
 
     /* ===== Walkthrough ===== */
     .walk{ text-align:center }
@@ -75,8 +68,8 @@
     .step p{ margin:0; color:var(--muted) }
     .shot-ph{ margin-bottom:10px; width:100%; aspect-ratio:390/844; border:2px dashed var(--card-border); border-radius:28px; display:grid; place-items:center; color:var(--muted); background: rgba(0,0,0,0.25); font-weight:700; letter-spacing:.06em }
 
-    /* ===== Split sections ===== */
-    .split{ display:grid; grid-template-columns:1fr 1fr; gap:32px; align-items:center }
+    /* ===== Simple centered section with one phone ===== */
+    .center-section{ text-align:center; display:grid; justify-items:center; gap:14px }
 
     /* ===== Footer ===== */
     footer{ background:rgba(0,0,0,0.2); padding:30px 0; text-align:center; }
@@ -84,9 +77,7 @@
 
     /* Responsive */
     @media(max-width: 900px){
-      .hero .grid,.split{grid-template-columns:1fr; text-align:center}
-      :root{ --phone-w: var(--phone-w-sm); --overlap: var(--overlap-sm); }
-      .device-stack{ width: calc(var(--phone-w) * 2 - var(--overlap)); height: calc(var(--phone-w) * (844 / 390)); }
+      :root{ --phone-w: var(--phone-w-sm); }
       .walk-grid{ grid-template-columns:1fr }
     }
   </style>
@@ -98,28 +89,24 @@
       <a href="#top" class="brand"><img src="https://studylock.github.io/img/logo.png" alt="logo"/> StudyLock</a>
       <nav class="navlinks">
         <a href="#walkthrough">Walkthrough</a>
-        <a href="#learn">Learn</a>
-        <a href="#quiz">Quiz</a>
-        <a href="#social">Social</a>
+        <a href="#prepare">Prepare</a>
+        <a href="#block">Block</a>
+        <a href="#unblock">Unblock</a>
+        <a href="#language">Language</a>
       </nav>
       <a class="btn btn-primary" href="https://apps.apple.com/app/studylock/id6744610901" target="_blank">Download</a>
     </div>
   </div>
 
-  <!-- HERO -->
+  <!-- HERO (single centered image) -->
   <section id="top" class="hero">
-    <div class="container grid">
-      <div>
-        <h1>Earn screen time with <em>real</em> study time.</h1>
-        <p class="lead">Block distracting apps, upload study content, learn with AI, and unlock your apps only when you pass.</p>
-        <div class="hero-ctas">
-          <a class="btn btn-primary" href="https://apps.apple.com/app/studylock/id6744610901" target="_blank">Download</a>
-        </div>
+    <div class="container hero-center">
+      <h1>Earn screen time with <em>real</em> study time.</h1>
+      <p class="lead">Block distracting apps, upload study content, learn with AI, and unlock your apps only when you pass.</p>
+      <div class="hero-ctas">
+        <a class="btn btn-primary" href="https://apps.apple.com/app/studylock/id6744610901" target="_blank">Download</a>
       </div>
-      <div class="device-stack">
-        <div class="phone left"><img src="img/main-screen.PNG" alt="Blocked Apps Screenshot"></div>
-        <div class="phone right"><img src="img/blocked.PNG" alt="Main App Screenshot"></div>
-      </div>
+      <div class="phone" style="margin-top:10px"><img src="img/main-screen.PNG" alt="Main App Screenshot"></div>
     </div>
   </section>
 
@@ -154,27 +141,43 @@
     </div>
   </section>
 
-  <!-- Learn -->
-  <section id="learn">
-    <div class="container split reverse">
-      <div class="phone"><img src="img/learn.PNG" alt="Learn Interface Screenshot"></div>
-      <div class="copy"><h2 class="title">AI-Powered Learning</h2><p class="sub">Summarized content with zoom, reading modes, and audio narration.</p></div>
+  <!-- PREPARE -->
+  <section id="prepare" class="center-section">
+    <div class="container">
+      <span class="kicker">Prepare</span>
+      <h2 class="title">Get your study content ready</h2>
+      <p class="sub">Use the camera, photo library, or upload a PDF — whatever you study, StudyLock adapts.</p>
+      <div class="phone"><img src="img/prepare.png" alt="Prepare screenshot"></div>
     </div>
   </section>
 
-  <!-- Quiz -->
-  <section id="quiz">
-    <div class="container split">
-      <div class="copy"><h2 class="title">Knowledge Checkpoint</h2><p class="sub">Auto-generated quizzes prove your learning and unlock apps after accuracy.</p></div>
-      <div class="phone"><img src="img/quiz.PNG" alt="Quiz Interface Screenshot"></div>
+  <!-- BLOCK -->
+  <section id="block" class="center-section">
+    <div class="container">
+      <span class="kicker">Block</span>
+      <h2 class="title">Silence distractions</h2>
+      <p class="sub">Choose the apps to block while you study so you can focus on what matters.</p>
+      <div class="phone"><img src="img/block.png" alt="Block apps screenshot"></div>
     </div>
   </section>
 
-  <!-- Social -->
-  <section id="social">
-    <div class="container split reverse">
-      <div class="phone"><img src="img/group.PNG" alt="Group Interface Screenshot"></div>
-      <div class="copy"><h2 class="title">Social Learning</h2><p class="sub">Join groups with your school email, share sessions, and stay motivated together.</p></div>
+  <!-- UNBLOCK -->
+  <section id="unblock" class="center-section">
+    <div class="container">
+      <span class="kicker">Unblock</span>
+      <h2 class="title">Earn your screen time</h2>
+      <p class="sub">Pass the quiz at your chosen accuracy to unlock your apps — no shortcuts.</p>
+      <div class="phone"><img src="img/unblock.png" alt="Unblock after quiz screenshot"></div>
+    </div>
+  </section>
+
+  <!-- LANGUAGE -->
+  <section id="language" class="center-section">
+    <div class="container">
+      <span class="kicker">Language</span>
+      <h2 class="title">Study in your language</h2>
+      <p class="sub">Switch your preferred language for AI summaries and quizzes.</p>
+      <div class="phone"><img src="img/language.png" alt="Language selection screenshot"></div>
     </div>
   </section>
 
@@ -184,9 +187,10 @@
       <div><img src="https://studylock.github.io/img/logo.png" width="28" alt="logo"/> <strong>StudyLock</strong></div>
       <div class="footlinks">
         <a href="#walkthrough">Walkthrough</a>
-        <a href="#learn">Learn</a>
-        <a href="#quiz">Quiz</a>
-        <a href="#social">Social</a>
+        <a href="#prepare">Prepare</a>
+        <a href="#block">Block</a>
+        <a href="#unblock">Unblock</a>
+        <a href="#language">Language</a>
         <a href="mailto:studylock@icloud.com">Contact</a>
         <a href="/terms">Terms</a>
         <a href="/privacy">Privacy</a>
