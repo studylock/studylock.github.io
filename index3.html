@@ -45,12 +45,11 @@
     .hero-ctas{ margin-top:16px; display:flex; gap:12px; flex-wrap:wrap }
 
     /* Device frame styling */
-    .device-stack{ position:relative; width:320px; height:460px; margin:0 auto; }
+    .device-stack{ position:relative; width:560px; height:500px; margin:0 auto; }
     .device-frame{
       position:absolute;
-      top:0; left:0;
-      width:260px;
-      height:460px;
+      width:280px;
+      height:500px;
       border-radius:40px;
       padding:10px;
       background:#000;
@@ -62,24 +61,26 @@
       width:100%; height:100%; object-fit:cover; border-radius:28px;
     }
     .device-frame.left{
-      transform: rotate(-6deg) translateX(-40px);
+      transform: rotate(-8deg) translateX(-50px);
+      top:0; left:40px;
       z-index:1;
     }
     .device-frame.right{
-      transform: rotate(6deg) translateX(40px);
+      transform: rotate(8deg) translateX(50px);
+      top:0; left:200px;
       z-index:2;
     }
 
     .split{ display:grid; grid-template-columns:1fr 1fr; gap:32px; align-items:center }
-    .device-single{ max-width:260px; margin:0 auto; border-radius:40px; padding:10px; background:#000; border:2px solid var(--card-border); box-shadow:var(--shadow-1); }
+    .device-single{ max-width:280px; margin:0 auto; border-radius:40px; padding:10px; background:#000; border:2px solid var(--card-border); box-shadow:var(--shadow-1); }
     .device-single img{ width:100%; border-radius:28px; }
 
     @media(max-width:900px){
       .hero .grid,.split{grid-template-columns:1fr;text-align:center}
-      .device-stack{width:260px; height:420px;}
-      .device-frame{width:220px; height:400px;}
-      .device-frame.left{transform: rotate(-5deg) translateX(-20px);}
-      .device-frame.right{transform: rotate(5deg) translateX(20px);}
+      .device-stack{width:320px; height:460px;}
+      .device-frame{width:260px; height:460px;}
+      .device-frame.left{transform: rotate(-6deg) translateX(-20px); left:20px;}
+      .device-frame.right{transform: rotate(6deg) translateX(20px); left:60px;}
     }
   </style>
 </head>
@@ -101,7 +102,7 @@
     </div>
   </section>
 
-  <!-- Other Sections -->
+  <!-- Learn -->
   <section id="learn">
     <div class="container split reverse">
       <div class="device-single"><img src="img/learn.PNG" alt="Learn Interface Screenshot"></div>
