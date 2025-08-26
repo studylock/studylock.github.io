@@ -21,10 +21,9 @@
       --grad-2: #233C73;
       --text: #f1f4ff;
       --muted: #c5cae6;
-      --card: rgba(255,255,255,0.06);
       --card-border: rgba(255,255,255,0.16);
       --container: 1160px;
-      --shadow-1: 0 18px 50px rgba(0,0,0,.35);
+      --shadow-1: 0 18px 40px rgba(0,0,0,.35);
     }
 
     body{
@@ -53,23 +52,36 @@
     .navlinks{ display:flex; gap:20px }
     .navlinks a{ color: var(--muted); font-weight:600 }
     .navlinks a:hover{ color:#fff }
-    .btn{ padding:10px 16px; border-radius:12px; border:1px solid var(--card-border); background: var(--card); font-weight:700 }
+    .btn{ padding:10px 16px; border-radius:12px; border:1px solid var(--card-border); background: rgba(255,255,255,0.08); font-weight:700 }
     .btn-primary{ background:#ffffff14; color:#fff }
 
-    /* Compact hero */
     .hero .grid{ display:grid; grid-template-columns:1fr 1fr; gap:32px; align-items:center }
-    h1{ font-size:2.4rem; margin:0 0 12px; font-weight:800 }
+    h1{ font-size:2.2rem; margin:0 0 12px; font-weight:800 }
     .lead{ color:var(--muted); font-size:1.05rem; max-width:50ch }
     .hero-ctas{ margin-top:16px; display:flex; gap:12px; flex-wrap:wrap }
 
-    .device img{ width:100%; border-radius:24px; box-shadow:var(--shadow-1); border:1px solid var(--card-border) }
+    /* Device frame styling */
+    .device-frame{
+      max-width:300px;
+      margin:0 auto;
+      border-radius:40px;
+      padding:10px;
+      background:#000;
+      border:2px solid var(--card-border);
+      box-shadow:var(--shadow-1);
+    }
+    .device-frame img{
+      display:block;
+      width:100%;
+      border-radius:28px;
+    }
 
     .kicker{ text-transform:uppercase; letter-spacing:.22em; font-weight:700; font-size:.85rem; color:var(--muted) }
     .title{ font-size:2rem; margin:.4rem 0 .6rem; font-weight:800 }
     .sub{ color:var(--muted); max-width:70ch }
 
     .steps{ margin-top:24px; display:grid; grid-template-columns:repeat(4,1fr); gap:16px }
-    .step{ background:var(--card); border:1px solid var(--card-border); border-radius:14px; padding:16px }
+    .step{ background:rgba(255,255,255,0.06); border:1px solid var(--card-border); border-radius:14px; padding:16px }
 
     .split{ display:grid; grid-template-columns:1fr 1fr; gap:32px; align-items:center }
     .split.reverse{ grid-template-columns:1fr 1fr; }
@@ -81,7 +93,7 @@
     footer{ background:rgba(0,0,0,0.2); padding:30px 0; text-align:center; }
     .footlinks{ margin-top:12px; display:flex; flex-wrap:wrap; justify-content:center; gap:16px; font-size:.85rem; color:var(--muted) }
 
-    @media(max-width:900px){.hero .grid,.split{grid-template-columns:1fr;text-align:center}.device img{margin:0 auto}} 
+    @media(max-width:900px){.hero .grid,.split{grid-template-columns:1fr;text-align:center}.device-frame{margin:20px auto}} 
   </style>
 </head>
 <body>
@@ -109,7 +121,7 @@
           <a class="btn btn-primary" href="https://apps.apple.com/app/studylock/id6744610901" target="_blank">Download</a>
         </div>
       </div>
-      <div class="device"><img src="img/main-screen.PNG" alt="Main App Screenshot"></div>
+      <div class="device-frame"><img src="img/main-screen.PNG" alt="Main App Screenshot"></div>
     </div>
   </section>
 
@@ -131,30 +143,30 @@
   <section id="active">
     <div class="container split">
       <div class="copy"><h2 class="title">Active Interface</h2><p class="sub">See your session timer, blocked apps, and progress clearly.</p></div>
-      <div class="device"><img src="img/main-screen.PNG" alt="Active Interface Screenshot"></div>
+      <div class="device-frame"><img src="img/main-screen.PNG" alt="Active Interface Screenshot"></div>
     </div>
   </section>
 
   <!-- Learn -->
   <section id="learn">
     <div class="container split reverse">
-      <div class="device"><img src="img/learn.png" alt="Learn Interface Screenshot"></div>
-      <div class="copy"><h2 class="title">AI‑Powered Learning</h2><p class="sub">Summarized content in a clean, accessible format with zoom, reading modes, and audio narration.</p></div>
+      <div class="device-frame"><img src="img/learn.PNG" alt="Learn Interface Screenshot"></div>
+      <div class="copy"><h2 class="title">AI-Powered Learning</h2><p class="sub">Summarized content in a clean, accessible format with zoom, reading modes, and audio narration.</p></div>
     </div>
   </section>
 
   <!-- Quiz -->
   <section id="quiz">
     <div class="container split">
-      <div class="copy"><h2 class="title">Knowledge Checkpoint</h2><p class="sub">Auto‑generated quizzes prove your learning and unlock apps after reaching accuracy.</p></div>
-      <div class="device"><img src="img/quiz.png" alt="Quiz Interface Screenshot"></div>
+      <div class="copy"><h2 class="title">Knowledge Checkpoint</h2><p class="sub">Auto-generated quizzes prove your learning and unlock apps after reaching accuracy.</p></div>
+      <div class="device-frame"><img src="img/quiz.PNG" alt="Quiz Interface Screenshot"></div>
     </div>
   </section>
 
   <!-- Social -->
   <section id="social">
     <div class="container split reverse">
-      <div class="device"><img src="img/group.png" alt="Group Interface Screenshot"></div>
+      <div class="device-frame"><img src="img/group.PNG" alt="Group Interface Screenshot"></div>
       <div class="copy"><h2 class="title">Social Learning</h2><p class="sub">Join groups with your school email, share sessions, and stay motivated together.</p></div>
     </div>
   </section>
