@@ -442,6 +442,22 @@
 html { scroll-behavior: smooth; }
 
 
+
+.yt-portrait {
+  width: 100%;
+  height: 100%;
+  background: #000;
+  display: grid;
+  place-items: center;
+}
+
+#ytPlayer {
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+    
 /* === NAV LAYOUT: centered links + proper stacking === */
 
 /* Let the bar grow in height; use padding instead of a fixed height */
@@ -855,48 +871,86 @@ html { scroll-behavior: smooth; }
   <div class="video-modal__backdrop" data-close-video></div>
   <div class="video-modal__dialog" role="document">
     <button class="video-modal__close" aria-label="Close video" data-close-video>&times;</button>
-<video id="heroVideo" class="video-modal__player" controls preload="metadata" playsinline>
-  <source src="https://rawcdn.githack.com/studylock/studylock.github.io/main/StudyLock.mp4" type="video/mp4">
-  <source src="StudyLock.webm" type="video/webm">
-  Sorry, your browser doesn’t support embedded videos.
-</video>
+<div class="video-modal__dialog" role="document">
+  <button class="video-modal__close" aria-label="Close video" data-close-video>&times;</button>
+
+  <!-- Default local player -->
+  <video id="heroVideo" class="video-modal__player" controls preload="metadata" playsinline>
+    <source src="StudyLock.webm" type="video/webm">
+    <source src="https://rawcdn.githack.com/studylock/studylock.github.io/main/StudyLock.mp4" type="video/mp4">
+    Sorry, your browser doesn’t support embedded videos.
+  </video>
+
+  <!-- YouTube fallback (hidden unless on iOS) -->
+  <div id="ytWrapper" class="yt-portrait" style="display:none;">
+    <iframe id="ytPlayer"
+      title="StudyLock Demo"
+      src=""
+      allow="autoplay; fullscreen; picture-in-picture; encrypted-media"
+      allowfullscreen
+      referrerpolicy="strict-origin-when-cross-origin">
+    </iframe>
+  </div>
+</div>
+
 
   </div>
 </div>
 
-  <script>
-  (function(){
-    const openBtn = document.querySelector('[data-open-video]');
-    const modal   = document.getElementById('video-modal');
-    const closeEls= modal.querySelectorAll('[data-close-video]');
-    const video   = document.getElementById('heroVideo');
+<script>
+(function(){
+  const openBtn  = document.querySelector('[data-open-video]');
+  const modal    = document.getElementById('video-modal');
+  const closeEls = modal.querySelectorAll('[data-close-video]');
+  const video    = document.getElementById('heroVideo');
+  const ytWrap   = document.getElementById('ytWrapper');
+  const ytPlayer = document.getElementById('ytPlayer');
 
-    function openModal(){
-      modal.classList.add('is-open');
-      document.body.classList.add('body-lock');
+  const YT_ID = "7TzK9_a4JfM";
+  const YT_EMBED = `https://www.youtube-nocookie.com/embed/${YT_ID}?modestbranding=1&rel=0&iv_load_policy=3&playsinline=1&controls=0&autoplay=1&mute=0`;
+
+  // Detect iOS Safari
+  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+
+  function openModal(){
+    modal.classList.add('is-open');
+    document.body.classList.add('body-lock');
+
+    if(isIOS){
+      // Use YouTube fallback
+      video.style.display = "none";
+      ytWrap.style.display = "grid";
+      ytPlayer.src = YT_EMBED;
+    } else {
+      // Use local video
+      video.style.display = "block";
+      ytWrap.style.display = "none";
       video.currentTime = 0;
-      video.play().catch(()=>{}); // autoplay on user gesture
+      video.play().catch(()=>{});
     }
-    function closeModal(){
-      modal.classList.remove('is-open');
-      document.body.classList.remove('body-lock');
-      video.pause();
-    }
+  }
 
-    openBtn?.addEventListener('click', openModal);
-    closeEls.forEach(el => el.addEventListener('click', closeModal));
+  function closeModal(){
+    modal.classList.remove('is-open');
+    document.body.classList.remove('body-lock');
 
-    // Close on ESC
-    document.addEventListener('keydown', (e)=>{
-      if(e.key === 'Escape' && modal.classList.contains('is-open')) closeModal();
-    });
+    // Stop both
+    video.pause();
+    ytPlayer.src = "";
+  }
 
-    // Close when clicking backdrop (only backdrop, not video)
-    modal.addEventListener('click', (e)=>{
-      if(e.target.classList.contains('video-modal__backdrop')) closeModal();
-    });
-  })();
+  openBtn?.addEventListener('click', openModal);
+  closeEls.forEach(el => el.addEventListener('click', closeModal));
+
+  document.addEventListener('keydown', (e)=>{
+    if(e.key === 'Escape' && modal.classList.contains('is-open')) closeModal();
+  });
+  modal.addEventListener('click', (e)=>{
+    if(e.target.classList.contains('video-modal__backdrop')) closeModal();
+  });
+})();
 </script>
+
 
 
   
