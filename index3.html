@@ -63,8 +63,29 @@
     .step p{ margin:0; color:var(--muted); font-size:1rem }
     .step img{ max-width:340px; width:100%; height:auto; display:block; margin:0 auto 14px; border-radius:12px; }
 
-    .split{ display:grid; grid-template-columns:1fr 1fr; gap:32px; align-items:center }
+.split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  align-items: center;
+}
+    @media (max-width: 900px){
+  .split {
+    grid-template-columns: 1fr;     /* single column */
+    gap: 24px;
+  }
+  .split .copy {
+    order: 1;                       /* text always first */
+    text-align: center;             /* center align on mobile */
+  }
+  .split .phone {
+    order: 2;                       /* image always below */
+    margin: 0 auto;                 /* center the phone mockup */
+  }
+}
 
+
+    
 
 
 /* === Walkthrough: Journey style with badges + arrows (no HTML changes) === */
