@@ -126,6 +126,25 @@
   flex-grow: 0;
 }
 
+    /* Simple text section under How It Works */
+#results .results-center{
+  text-align: center;
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+}
+#results .title{
+  margin: .2rem 0 .4rem;
+}
+#results .sub{
+  max-width: 70ch;    /* keeps lines readable */
+  margin: 0 auto;
+  padding: 0 12px;    /* small side padding so it never hugs the edges */
+  word-wrap: break-word;
+  line-height: 1.55;
+}
+
+
 
 /* Desktop: turn the grid into a horizontal “journey” with arrows */
 @media (min-width: 901px){
@@ -215,6 +234,18 @@
       </div>
     </div>
   </section>
+
+  <!-- Results (simple text section) -->
+<section id="results">
+  <div class="container results-center">
+    <h2 class="title">Real focus, real results.</h2>
+    <p class="sub">
+      Whether you're preparing for exams, tackling daily assignments, or working on long-term projects,
+      StudyLock creates a structured, distraction-free environment powered by AI to support your learning.
+    </p>
+  </div>
+</section>
+
 
   <!-- Learn -->
   <section id="learn">
