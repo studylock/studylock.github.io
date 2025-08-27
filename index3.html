@@ -118,20 +118,30 @@
   flex-direction: column;
   justify-content: flex-start;
 }
-/* --- Walkthrough image fit fix --- */
-#walkthrough .step { overflow: hidden; }  /* nothing can spill outside the card */
+/* === Walkthrough fixes: no inner frame, keep arrows visible, add breathing room === */
 
-/* Keep screenshots inside the frame even with padding */
+/* Let the arrow pseudo-element remain visible */
+#walkthrough .step { overflow: visible; }
+
+/* Remove the dark box & padding on the image; add side/bottom spacing by width calc */
 #walkthrough .step img{
-  box-sizing: border-box;   /* include padding in the element’s width */
+  box-sizing: content-box;     /* ignore padding in width calc */
+  padding: 0;                  /* remove previous padding */
+  background: transparent;     /* remove dark background */
+  border-radius: 10px;
+
+  /* side gap inside the card without adding padding */
+  max-width: calc(100% - 32px); /* ~16px left & right */
   width: 100%;
-  max-width: 320px;         /* slightly smaller to compensate for padding */
-  height: auto;
-  padding: 12px;            /* inner breathing room around screenshot */
-  margin: 0 auto 14px;
-  background: rgba(0,0,0,0.15);
-  border-radius: 12px;
+  margin: 0 auto 18px;         /* extra bottom space below screenshot */
 }
+
+/* Make sure the arrows sit on top and don't snag clicks */
+#walkthrough .step::after{
+  z-index: 2;
+  pointer-events: none;
+}
+
 
 
 #walkthrough .step h3 {
