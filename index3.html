@@ -118,12 +118,21 @@
   flex-direction: column;
   justify-content: flex-start;
 }
-#walkthrough .step img {
-  flex-shrink: 0;
-  padding: 12px;             /* add padding inside frame around image */
+/* --- Walkthrough image fit fix --- */
+#walkthrough .step { overflow: hidden; }  /* nothing can spill outside the card */
+
+/* Keep screenshots inside the frame even with padding */
+#walkthrough .step img{
+  box-sizing: border-box;   /* include padding in the element’s width */
+  width: 100%;
+  max-width: 320px;         /* slightly smaller to compensate for padding */
+  height: auto;
+  padding: 12px;            /* inner breathing room around screenshot */
+  margin: 0 auto 14px;
   background: rgba(0,0,0,0.15);
   border-radius: 12px;
 }
+
 
 #walkthrough .step h3 {
   margin: 0.8rem 0 0.4rem;   /* a bit more spacing above/below title */
