@@ -417,6 +417,32 @@
 .body-lock{ overflow: hidden; }
 
     
+/* Smooth scroll for in-page links */
+html { scroll-behavior: smooth; }
+
+/* Layout for right-side actions */
+.nav-actions{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Make nav wrap nicely on small screens */
+@media (max-width: 900px){
+  .nav{
+    flex-wrap: wrap;
+    row-gap: 10px;
+  }
+  .navlinks{
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+  }
+  .nav-actions{
+    width: 100%;
+    justify-content: center;
+  }
+}
 
 
 
@@ -519,16 +545,30 @@
 </head>
 <body>
   <div class="nav-wrap">
-    <div class="container nav">
-      <a href="#top" class="brand"><img src="https://studylock.github.io/img/logo.png" alt="logo"/> StudyLock</a>
-      <nav class="navlinks">
-        <a href="#walkthrough">Walkthrough</a>
-        <a href="#learn">Learn</a>
-        <a href="#quiz">Quiz</a>
-        <a href="#social">Social</a>
-      </nav>
-      <a class="btn btn-primary" href="https://apps.apple.com/app/studylock/id6744610901" target="_blank">Download</a>
-    </div>
+<div class="container nav">
+  <a href="#top" class="brand">
+    <img src="https://studylock.github.io/img/logo.png" alt="StudyLock logo"/> StudyLock
+  </a>
+
+  <nav class="navlinks" aria-label="Primary">
+    <a href="#walkthrough">Walkthrough</a>
+    <a href="#learn">Learn</a>
+    <a href="#quiz">Quiz</a>
+    <a href="#social">Social</a>
+    <a href="#features">Features</a>          <!-- jumps to “Everything you need to stay focused” -->
+    <a href="#partners">Our Partners</a>
+    <a href="terms.html">Terms of Use</a>
+    <a href="privacy.html">Privacy Policy</a>
+  </nav>
+
+  <div class="nav-actions">
+    <a class="btn" href="mailto:studylock@icloud.com">Contact Us</a>
+    <a class="btn btn-primary" href="https://apps.apple.com/app/studylock/id6744610901" target="_blank" rel="noopener">
+      Download
+    </a>
+  </div>
+</div>
+
   </div>
 
   <!-- HERO -->
