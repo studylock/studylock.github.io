@@ -181,14 +181,14 @@
   gap: 10px;
 }
 
-.partners-logos{
+.partners-logos {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 2rem;
   padding: 2rem 0;
   flex-wrap: nowrap;
-  overflow-x: auto;             /* scroll horizontally on small screens */
+  overflow-x: auto;
   -webkit-overflow-scrolling: touch;
 }
 
@@ -197,12 +197,13 @@
   align-items: center;
   justify-content: center;
   padding: 1rem;
-  background: rgba(255,255,255,0.06);    /* subtle card bg */
+  background: rgba(255,255,255,0.06);
   border: 1px solid var(--card-border);
   border-radius: 16px;
   transition: transform .2s ease, box-shadow .2s ease;
-  min-width: 160px;  /* ensures consistent base size */
-  min-height: 100px; /* gives enough space for logos */
+  width: 200px;     /* fixed width for all frames */
+  height: 140px;    /* fixed height for all frames */
+  flex-shrink: 0;   /* prevents collapsing in scroll */
 }
 
 .partners-logos a:hover {
@@ -211,15 +212,28 @@
 }
 
 .partners-logos img {
-  max-height: 80px;   /* consistent logo scaling */
+  max-height: 100px;  /* ~20% bigger than before */
+  max-width: 160px;
   width: auto;
   object-fit: contain;
-  filter: none;       /* no extra shadow on logos inside frames */
 }
 
-.partners-logos img.partner-srf {
-  max-height: 120px;  /* exception for the taller logo */
+@media (max-width: 600px){
+  .partners-logos {
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .partners-logos a {
+    width: 150px;
+    height: 110px;
+    padding: .75rem;
+  }
+  .partners-logos img {
+    max-height: 80px;
+    max-width: 130px;
+  }
 }
+
 
 @media (max-width: 600px){
   .partners-logos {
