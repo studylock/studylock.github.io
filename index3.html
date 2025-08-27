@@ -254,6 +254,49 @@
 }
 
 
+    /* Features grid (2 per row on desktop, 1 on mobile) */
+#features .features-grid{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  margin-top: 16px;
+}
+
+#features .feature-card{
+  background: rgba(255,255,255,0.08);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  padding: 18px 18px 16px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.18);
+  transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+  min-height: 132px;                  /* keeps rows even */
+  display: flex; flex-direction: column; justify-content: center;
+}
+
+#features .feature-card:hover{
+  transform: translateY(-3px);
+  box-shadow: 0 12px 26px rgba(0,0,0,0.25);
+  background: rgba(255,255,255,0.10);
+}
+
+#features .feature-card h3{
+  margin: 0 0 .4rem 0;
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+#features .feature-card p{
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+/* Mobile: single column */
+@media (max-width: 900px){
+  #features .features-grid{ grid-template-columns: 1fr; }
+}
+
+
+
 @media (max-width: 600px){
   .partners-logos {
     flex-wrap: wrap;
@@ -481,6 +524,60 @@
   </div>
 </section>
 
+
+  <!-- Features -->
+<section id="features">
+  <div class="container">
+    <h2 class="title" style="text-align:center;">Everything you need to stay focused</h2>
+
+    <div class="features-grid">
+      <div class="feature-card">
+        <h3>📄 Upload Study Materials</h3>
+        <p>Add your PDFs or images to start focused learning.</p>
+      </div>
+      <div class="feature-card">
+        <h3>📵 Block Distracting Apps</h3>
+        <p>Fully block apps like TikTok, Instagram, and more.</p>
+      </div>
+
+      <div class="feature-card">
+        <h3>🧠 AI-Powered Summaries</h3>
+        <p>Learn faster with generated insights from your content.</p>
+      </div>
+      <div class="feature-card">
+        <h3>🔊 Interactive Read-Aloud</h3>
+        <p>Listen as your study material is read aloud, with each word highlighted as it’s spoken.</p>
+      </div>
+
+      <div class="feature-card">
+        <h3>🔎 Adjustable Reading Experience</h3>
+        <p>Change text size and background color for easier, more comfortable reading.</p>
+      </div>
+      <div class="feature-card">
+        <h3>📝 Custom Quizzes</h3>
+        <p>Prove you studied with auto-generated quizzes.</p>
+      </div>
+
+      <div class="feature-card">
+        <h3>🔓 Unlock with Results</h3>
+        <p>Your apps stay locked until you meet your score threshold.</p>
+      </div>
+      <div class="feature-card">
+        <h3>🌍 Study in Your Language</h3>
+        <p>Get summaries and quizzes in your preferred language.</p>
+      </div>
+
+      <div class="feature-card">
+        <h3>📈 Progress Tracking</h3>
+        <p>Track session history, time spent, and completion stats.</p>
+      </div>
+      <div class="feature-card">
+        <h3>👥 Study Groups</h3>
+        <p>Join with your school email to stay motivated together.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
 
 
