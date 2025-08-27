@@ -306,6 +306,53 @@
   line-height: 1.4;
 }
 
+
+    /* Final CTA */
+#final-cta .cta-card{
+  background: rgba(255,255,255,0.08);
+  border: 1px solid var(--card-border);
+  border-radius: 20px;
+  padding: 28px 26px;
+  max-width: 820px;
+  margin: 0 auto;                /* center the card */
+  text-align: center;
+  box-shadow: 0 14px 40px rgba(0,0,0,.28);
+  backdrop-filter: blur(8px);
+}
+
+#final-cta .cta-headline{
+  margin: 0 0 .5rem 0;
+  font-weight: 800;
+  font-size: clamp(1.9rem, 4.2vw, 2.6rem);
+  line-height: 1.1;
+  color: #fff;
+}
+
+#final-cta .cta-sub{
+  margin: 0 0 1.1rem 0;
+  color: var(--muted);
+  font-size: 1.05rem;
+  line-height: 1.55;
+  max-width: 60ch;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 8px;                 /* tiny side padding on very small screens */
+}
+
+#final-cta .btn-cta{
+  padding: 12px 20px;
+  font-size: 1rem;
+  border-radius: 12px;
+  border: 1px solid #ffffff2a;
+  box-shadow: 0 6px 18px rgba(0,0,0,.25);
+  transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
+}
+#final-cta .btn-cta:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 12px 26px rgba(0,0,0,.28);
+}
+
+
 /* Mobile: one column */
 @media (max-width: 900px){
   #features .features-grid {
@@ -597,6 +644,22 @@
     </div>
   </div>
 </section>
+
+  <!-- Final CTA -->
+<section id="final-cta">
+  <div class="container">
+    <div class="cta-card">
+      <h2 class="cta-headline">Ready to turn study time into screen time?</h2>
+      <p class="cta-sub">
+        Block distractions, learn faster with AI, and unlock your apps only after you pass.
+      </p>
+      <a class="btn btn-primary btn-cta" href="https://apps.apple.com/app/studylock/id6744610901" target="_blank" rel="noopener">
+        Download on the App Store
+      </a>
+    </div>
+  </div>
+</section>
+
 
 
 
