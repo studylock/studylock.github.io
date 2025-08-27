@@ -378,9 +378,9 @@
 .video-modal__dialog{
   position: absolute; inset: 0;
   margin: auto;
-  width: min(920px, 92vw);
-  height: min(520px, 56vw);       /* keep landscape ratio-ish */
-  background: #000;
+  width: min(92vw, 720px);   /* generous but not full width */
+  height: min(92vh, 1200px); /* tall enough for portrait */
+  background: #000;          /* fill unused space with black */
   border:1px solid var(--card-border);
   border-radius: 16px;
   box-shadow: 0 24px 60px rgba(0,0,0,.55);
@@ -390,9 +390,16 @@
 .video-modal__player{
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  display: block;
-  background: #000;
+  object-fit: contain;       /* show the entire video (no zoom/crop) */
+  object-position: center;
+  background: #000;          /* black bars around the video */
+}
+
+    @media (orientation: landscape){
+  .video-modal__dialog{
+    width: min(92vw, 860px);
+    height: min(92vh, 980px);
+  }
 }
 
 .video-modal__close{
@@ -408,6 +415,8 @@
 
 /* Prevent body scroll when modal open (we’ll toggle a class in JS) */
 .body-lock{ overflow: hidden; }
+
+    
 
 
 
