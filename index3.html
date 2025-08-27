@@ -120,11 +120,22 @@
 }
 #walkthrough .step img {
   flex-shrink: 0;
+  padding: 12px;             /* add padding inside frame around image */
+  background: rgba(0,0,0,0.15);
+  border-radius: 12px;
 }
-#walkthrough .step h3,
+
+#walkthrough .step h3 {
+  margin: 0.8rem 0 0.4rem;   /* a bit more spacing above/below title */
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
 #walkthrough .step p {
   flex-grow: 0;
+  margin-bottom: 1rem;       /* extra space below subtitle */
 }
+
 
     /* Simple text section under How It Works */
 #results .results-center{
