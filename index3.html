@@ -99,6 +99,34 @@
   box-shadow: 0 6px 16px rgba(0,0,0,.25);
 }
 
+    /* Ensure subtitles wrap neatly and have side padding */
+#walkthrough .step p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 1rem;
+  padding: 0 14px;       /* left-right breathing room */
+  word-wrap: break-word; /* avoid overflow */
+  line-height: 1.4;
+}
+
+/* Equal height for all step blocks */
+#walkthrough .walk-grid {
+  align-items: stretch; /* children stretch to same height */
+}
+#walkthrough .step {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+#walkthrough .step img {
+  flex-shrink: 0;
+}
+#walkthrough .step h3,
+#walkthrough .step p {
+  flex-grow: 0;
+}
+
+
 /* Desktop: turn the grid into a horizontal “journey” with arrows */
 @media (min-width: 901px){
   #walkthrough .walk-grid{
