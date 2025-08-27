@@ -61,10 +61,68 @@
     .step{ text-align:center }
     .step h3{ margin:.5rem 0 .3rem; font-size:1.2rem; font-weight:700 }
     .step p{ margin:0; color:var(--muted); font-size:1rem }
-    .step img{ max-width:320px; width:100%; height:auto; display:block; margin:0 auto 14px; border-radius:12px; }
+    .step img{ max-width:340px; width:100%; height:auto; display:block; margin:0 auto 14px; border-radius:12px; }
 
     .split{ display:grid; grid-template-columns:1fr 1fr; gap:32px; align-items:center }
 
+
+
+/* === Walkthrough: Journey style with badges + arrows (no HTML changes) === */
+#walkthrough .walk-grid { counter-reset: step; }
+
+/* Step card polish */
+#walkthrough .step{
+  position: relative;
+  padding-top: 20px; /* room for number badge */
+  background: rgba(255,255,255,0.08);
+  border: 1px solid var(--card-border);
+  border-radius: 18px;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+#walkthrough .step:hover{
+  transform: translateY(-4px);
+  box-shadow: 0 10px 26px rgba(0,0,0,.28);
+}
+
+/* Number badge (1–4) – auto-generated, centered above each card */
+#walkthrough .step::before{
+  counter-increment: step;
+  content: counter(step);
+  position: absolute;
+  top: -18px; left: 50%;
+  transform: translateX(-50%);
+  width: 36px; height: 36px; border-radius: 999px;
+  display: grid; place-items: center;
+  font-weight: 800;
+  background: linear-gradient(180deg, var(--grad-1), var(--grad-2));
+  border: 1px solid #ffffff30;
+  box-shadow: 0 6px 16px rgba(0,0,0,.25);
+}
+
+/* Desktop: turn the grid into a horizontal “journey” with arrows */
+@media (min-width: 901px){
+  #walkthrough .walk-grid{
+    display: flex;              /* replaces the 2x2 grid on desktop */
+    align-items: stretch;
+    justify-content: space-between;
+    gap: 28px;
+  }
+  #walkthrough .step{ flex: 1 1 0; }
+
+  /* Connector arrows between cards */
+  #walkthrough .step:not(:last-child)::after{
+    content: "➜";
+    position: absolute;
+    right: -18px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 26px;
+    color: var(--muted);
+    opacity: .9;
+  }
+}
+
+    
     footer{ background:rgba(0,0,0,0.2); padding:30px 0; text-align:center; }
     .footlinks{ margin-top:12px; display:flex; flex-wrap:wrap; justify-content:center; gap:16px; font-size:.85rem; color:var(--muted) }
 
