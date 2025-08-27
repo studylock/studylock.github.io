@@ -260,11 +260,20 @@
   margin-bottom: 24px;   /* space between title and cards */
 }
 
+#features .container {
+  max-width: 800px;     /* narrower than the global 1160px */
+  margin: 0 auto;
+}
+
 #features .features-grid {
-  display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 14px;             /* smaller gaps between cards */
-  margin-top: 0;         /* remove extra margin */
+  gap: 16px;
+  justify-content: center;   /* keep grid centered */
+}
+
+#features .feature-card {
+  flex: 1;
+  min-width: 0;         /* prevent overflow */
 }
 
 #features .feature-card {
