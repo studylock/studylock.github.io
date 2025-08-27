@@ -265,16 +265,15 @@
   margin: 0 auto;
 }
 
-#features .features-grid {
+#features .features-grid{
+  display: grid;                 /* <-- missing; this is why it stacked */
   grid-template-columns: 1fr 1fr;
   gap: 16px;
-  justify-content: center;   /* keep grid centered */
+  justify-items: stretch;        /* cards fill their grid cell */
 }
 
-#features .feature-card {
-  flex: 1;
-  min-width: 0;         /* prevent overflow */
-}
+
+
 
 #features .feature-card {
   background: rgba(255,255,255,0.05);
