@@ -192,29 +192,53 @@
   -webkit-overflow-scrolling: touch;
 }
 
-.partners-logos a{
-  display: inline-flex;
+.partners-logos a {
+  display: flex;
   align-items: center;
   justify-content: center;
-  padding: .25rem;
-  transition: transform .2s ease, opacity .2s ease;
+  padding: 1rem;
+  background: rgba(255,255,255,0.06);    /* subtle card bg */
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  transition: transform .2s ease, box-shadow .2s ease;
+  min-width: 160px;  /* ensures consistent base size */
+  min-height: 100px; /* gives enough space for logos */
 }
 
-.partners-logos a:hover{
-  transform: translateY(-2px);
-  opacity: .95;
+.partners-logos a:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 22px rgba(0,0,0,0.25);
 }
 
-.partners-logos img{
-  max-height: 180px;
+.partners-logos img {
+  max-height: 80px;   /* consistent logo scaling */
+  width: auto;
   object-fit: contain;
-  padding: .5rem;
-  filter: drop-shadow(0 2px 8px rgba(0,0,0,.15));   /* subtle lift on dark bg */
+  filter: none;       /* no extra shadow on logos inside frames */
 }
 
-.partners-logos img.partner-srf{
-  max-height: 280px;
+.partners-logos img.partner-srf {
+  max-height: 120px;  /* exception for the taller logo */
 }
+
+@media (max-width: 600px){
+  .partners-logos {
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .partners-logos a {
+    min-width: 120px;
+    min-height: 80px;
+    padding: .75rem;
+  }
+  .partners-logos img {
+    max-height: 60px;
+  }
+  .partners-logos img.partner-srf {
+    max-height: 90px;
+  }
+}
+
 
 /* Tighten spacing on mobile and allow wrap */
 @media (max-width: 600px){
