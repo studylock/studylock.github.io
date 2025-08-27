@@ -420,29 +420,69 @@
 /* Smooth scroll for in-page links */
 html { scroll-behavior: smooth; }
 
-/* Layout for right-side actions */
-.nav-actions{
-  display: flex;
+
+/* === NAV LAYOUT: centered links + proper stacking === */
+
+/* Let the bar grow in height; use padding instead of a fixed height */
+.nav {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr; /* brand | links | actions */
   align-items: center;
-  gap: 10px;
+  column-gap: 16px;
+
+  /* remove fixed height and allow multi-line */
+  height: auto;
+  padding: 10px 0;
+  min-height: 70px; /* keeps a nice bar height when single-line */
 }
 
-/* Make nav wrap nicely on small screens */
+/* center the 4 links perfectly on desktop */
+.navlinks {
+  display: flex;
+  gap: 18px;
+  justify-content: center;   /* <-- keeps them centered */
+  align-items: center;
+  flex-wrap: nowrap;
+  margin: 0;
+}
+
+/* left/right alignment for brand/actions in grid */
+.brand { justify-self: start; }
+.nav-actions { justify-self: end; display: flex; align-items: center; gap: 10px; }
+
+/* Ensure the sticky bar's background always covers all rows */
+.nav-wrap {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  backdrop-filter: blur(12px);
+  background: rgba(0,0,0,.18);
+  border-bottom: 1px solid var(--card-border);
+}
+
+/* --- Mobile / small screens: stack to 3 rows, all centered inside the bar --- */
 @media (max-width: 900px){
-  .nav{
-    flex-wrap: wrap;
-    row-gap: 10px;
+  .nav {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+    row-gap: 8px;
   }
-  .navlinks{
-    flex-wrap: wrap;
-    justify-content: center;
-    width: 100%;
+
+  .brand {
+    justify-self: center;     /* logo + StudyLock centered */
   }
-  .nav-actions{
-    width: 100%;
-    justify-content: center;
+
+  .navlinks {
+    justify-content: center;  /* links centered on their own row */
+    flex-wrap: wrap;
+    gap: 14px;
+  }
+
+  .nav-actions {
+    justify-self: center;     /* Contact + Download centered on 3rd row */
   }
 }
+
 
 
 
