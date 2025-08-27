@@ -173,6 +173,64 @@
 }
 
 
+    /* Partners */
+.partners-center{
+  text-align: center;
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+}
+
+.partners-logos{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  padding: 2rem 0;
+  flex-wrap: nowrap;
+  overflow-x: auto;             /* scroll horizontally on small screens */
+  -webkit-overflow-scrolling: touch;
+}
+
+.partners-logos a{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: .25rem;
+  transition: transform .2s ease, opacity .2s ease;
+}
+
+.partners-logos a:hover{
+  transform: translateY(-2px);
+  opacity: .95;
+}
+
+.partners-logos img{
+  max-height: 180px;
+  object-fit: contain;
+  padding: .5rem;
+  filter: drop-shadow(0 2px 8px rgba(0,0,0,.15));   /* subtle lift on dark bg */
+}
+
+.partners-logos img.partner-srf{
+  max-height: 280px;
+}
+
+/* Tighten spacing on mobile and allow wrap */
+@media (max-width: 600px){
+  .partners-logos{
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .partners-logos img{
+    max-height: 90px;
+  }
+  .partners-logos img.partner-srf{
+    max-height: 140px;
+  }
+}
+
+
 
 
 /* Desktop: turn the grid into a horizontal “journey” with arrows */
@@ -321,6 +379,34 @@
     </div>
   </div>
 </section>
+
+
+  <!-- Partners -->
+<section id="partners">
+  <div class="container partners-center">
+    <h2 class="title">Our Partners</h2>
+    <p class="sub">
+      StudyLock is proud to collaborate with educational institutions and student communities who
+      support focused learning and academic success.
+    </p>
+
+    <div class="partners-logos" aria-label="Partner logos">
+      <a href="https://erasmusinprague.com/" target="_blank" rel="noopener">
+        <img src="img/erasmus_new.png" alt="ERASMUS logo" loading="lazy" />
+      </a>
+      <a href="https://www.unyp.cz/" target="_blank" rel="noopener">
+        <img src="img/unyp.png" alt="UNYP logo" loading="lazy" />
+      </a>
+      <a href="https://www.bro-coli.com/" target="_blank" rel="noopener">
+        <img src="img/brocoli.png" alt="Brocoli logo" loading="lazy" />
+      </a>
+      <a href="https://student-room-flat.com/" target="_blank" rel="noopener">
+        <img src="img/srf.png" alt="SRF logo" class="partner-srf" loading="lazy" />
+      </a>
+    </div>
+  </div>
+</section>
+
 
 
 
