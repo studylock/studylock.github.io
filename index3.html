@@ -149,6 +149,33 @@
   margin-left: auto;
 }
 
+    .kicker-compact{
+  text-transform: uppercase;
+  letter-spacing: .22em;
+  font-weight: 800;
+  font-size: .9rem;
+  /* purple-ish accent that fits your gradient */
+  color: #AAB3FF;              /* tweak if you want it brighter or dimmer */
+  margin: 0 0 .35rem 0;
+}
+
+.headline-xxl{
+  margin: 0 0 .5rem 0;
+  font-weight: 800;
+  /* Big but responsive */
+  font-size: clamp(2rem, 6vw, 4.25rem);
+  line-height: 1.05;
+  color: #FFFFFF;              /* strong white for contrast on your gradient */
+}
+
+.copy .sub{
+  margin: .35rem 0 0 0;
+  color: var(--muted);
+  font-size: clamp(1rem, 1.2vw, 1.25rem);
+  line-height: 1.55;
+  max-width: 48ch;
+}
+
 
 
 /* Desktop: turn the grid into a horizontal “journey” with arrows */
@@ -252,38 +279,39 @@
 </section>
 
 
-  <!-- Learn -->
-<section id="learn">
-  <div class="container">
-    <h2 class="title" style="text-align:center;">AI-POWERED LEARNING INTERFACE</h2>
-    <div class="split reverse">
-      <div class="phone"><img src="img/learn.PNG" alt="Learn Interface Screenshot"></div>
-      <div class="copy">
-        <p class="sub">
-          Delivers Clean, Digestible Study Content. Summarized study content is presented in a clean,
-          accessible format — with options to zoom, switch reading mode, and listen with audio narration.
-        </p>
-      </div>
-    </div>
-  </div>
-</section>
+    <!-- Quiz -->
+<div class="copy">
+  <div class="kicker-compact">AI-POWERED LEARNING INTERFACE</div>
+  <h2 class="headline-xxl">Delivers Clean, Digestible<br/>Study Content</h2>
+  <p class="sub">
+    Summarized study content is presented in a clean, accessible format —
+    with options to zoom, switch reading mode, and listen with audio narration.
+  </p>
+</div>
+
 
 
   <!-- Quiz -->
-  <section id="quiz">
-    <div class="container split">
-      <div class="copy"><h2 class="title">KNOWLEDGE CHECKPOINT</h2><p class="sub">Prove You Learned With a Quick Quiz. Auto-generated questions help test your understanding, improve retention, and unlock apps only after reaching the required accuracy threshold.</p></div>
-      <div class="phone"><img src="img/quiz.PNG" alt="Quiz Interface Screenshot"></div>
-    </div>
-  </section>
+<div class="copy">
+  <div class="kicker-compact">KNOWLEDGE CHECKPOINT</div>
+  <h2 class="headline-xxl">Prove You Learned With a<br/>Quick Quiz</h2>
+  <p class="sub">
+    Auto-generated questions help test your understanding, improve retention,
+    and unlock apps only after reaching the required accuracy threshold.
+  </p>
+</div>
+
 
   <!-- Social -->
-  <section id="social">
-    <div class="container split reverse">
-      <div class="phone"><img src="img/group.PNG" alt="Group Interface Screenshot"></div>
-      <div class="copy"><h2 class="title">SOCIAL LEARNING MADE EASY</h2><p class="sub">Study Smarter—Together. Join study group using your school or organization email. Share sessions, track activity, and stay motivated through a built-in social element.</p></div>
-    </div>
-  </section>
+<div class="copy">
+  <div class="kicker-compact">SOCIAL LEARNING MADE EASY</div>
+  <h2 class="headline-xxl">Study Smarter—Together</h2>
+  <p class="sub">
+    Join study group using your school or organization email. Share sessions, track activity,
+    and stay motivated through a built-in social element.
+  </p>
+</div>
+
 
   <!-- FOOTER -->
   <footer>
