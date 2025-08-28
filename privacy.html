@@ -4,177 +4,145 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Privacy Policy – StudyLock</title>
-<link rel="icon" type="image/png" href="https://studylock.github.io/img/logo.png" />
-<script src="https://cdn.amplitude.com/script/dbf2be95c2056ed25dab1cfcadc0dad7.js"></script><script>window.amplitude.add(window.sessionReplay.plugin({sampleRate: 1}));window.amplitude.init('dbf2be95c2056ed25dab1cfcadc0dad7', {"fetchRemoteConfig":true,"autocapture":true});</script>
+  <link rel="icon" type="image/png" href="https://studylock.github.io/img/logo.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&display=swap" rel="stylesheet" />
+
   <style>
     :root {
-      --color-bg: #fdfdfc;
-      --color-text: #111;
-      --color-subtext: #555;
-      --color-card-bg: #ffffff;
-      --color-accent: #007aff;
-      --radius: 0.875rem;
-      --gap: 1.5rem;
-      --transition-fast: 0.2s ease;
+      --grad-1: #463278;
+      --grad-2: #233C73;
+      --text: #f1f4ff;
+      --muted: #c5cae6;
+      --card-border: rgba(255,255,255,0.16);
+      --container: 900px;
     }
-    *, *::before, *::after { box-sizing: border-box; }
+
     body {
       margin: 0;
       font-family: 'Manrope', sans-serif;
-      background: var(--color-bg);
-      color: var(--color-text);
+      color: var(--text);
+      background: linear-gradient(180deg, var(--grad-1), var(--grad-2)) fixed;
       line-height: 1.6;
     }
-    nav {
-      position: sticky;
-      top: 0;
-      background: var(--color-card-bg);
-      z-index: 1000;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+
+    /* NAV */
+    .nav-wrap {
+      position: sticky; top:0; z-index:50;
+      backdrop-filter: blur(12px);
+      background: rgba(0,0,0,.18);
+      border-bottom: 1px solid var(--card-border);
     }
-    .navbar-inner {
-      max-width: 1000px;
+    .nav {
+      max-width: var(--container);
       margin: 0 auto;
-      padding: 1rem 1.25rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      display:flex; align-items:center; justify-content:space-between;
+      padding: 14px 20px;
     }
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      text-decoration: none;
-      color: var(--color-text);
-      font-weight: 800;
-      font-size: 1.1rem;
-    }
-    .logo img { height: 40px; }
-    .nav-links {
-      display: flex;
-      gap: 1.5rem;
-    }
-    .nav-links a {
-      text-decoration: none;
-      color: var(--color-text);
-      font-weight: 500;
-    }
-    .nav-links a:hover,
-    .nav-links a:focus {
-      color: var(--color-accent);
-    }
+    .brand { display:flex; align-items:center; gap:10px; font-weight:800; color:#fff; }
+    .brand img { width:26px; height:26px; }
+    .navlinks { display:flex; gap:18px; }
+    .navlinks a { color:var(--muted); text-decoration:none; font-weight:600; }
+    .navlinks a:hover { color:#fff; }
+
+    /* MAIN */
     main {
-      max-width: 1000px;
-      padding: 5rem 1.25rem;
+      max-width: var(--container);
       margin: 0 auto;
+      padding: 60px 20px;
     }
-    h1 {
-      font-size: 2.5rem;
-      font-weight: 800;
-      margin-bottom: 1rem;
+    h1 { font-size:2.2rem; font-weight:800; margin-bottom:1rem; }
+    h2 { font-size:1.4rem; margin-top:2rem; font-weight:700; }
+    p { margin: 1rem 0; color: var(--text); }
+    strong { color:#fff; }
+
+    /* Card-like wrapper for readability */
+    .policy-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 32px;
+      box-shadow: 0 8px 24px rgba(0,0,0,.25);
     }
-    h2 {
-      font-size: 1.5rem;
-      margin-top: 2.5rem;
-      font-weight: 700;
-    }
-    p {
-      margin: 1rem 0;
-      color: var(--color-text);
-    }
-    footer {
-      background: var(--color-card-bg);
+
+    /* FOOTER */
+    .site-footer {
+      background: rgba(0,0,0,0.25);
+      border-top: 1px solid var(--card-border);
+      padding: 30px 20px;
+      font-size: 0.9rem;
       text-align: center;
-      padding: 3rem 1.25rem;
-      color: var(--color-subtext);
-      font-size: 0.875rem;
+      color: var(--muted);
     }
-    footer a:hover,
-    footer a:focus {
-      color: var(--color-accent);
+    .site-footer a {
+      color: var(--muted);
+      text-decoration: underline;
+      text-underline-offset: 2px;
     }
-    @media (max-width: 768px) {
-      h1 { font-size: 2rem; }
-      h2 { font-size: 1.25rem; }
-    }
+    .site-footer a:hover { color:#fff; }
 
-
-        @media (max-width: 768px) {
-  .navbar-inner {
-    flex-direction: column;
-    align-items: center;
-  }
-  /* Put the links on their own line, centered */
-  .navbar-links {
-    display: flex;
-    justify-content: center;
-    gap: 16px;
-    margin-top: 12px;
-    width: 100%;
-  }
-  /* Remove left-margin push on each link */
-  .navbar-links a {
-    margin: 0;
-  }
+    @media(max-width: 768px){
+      h1 { font-size:1.8rem; }
+      h2 { font-size:1.2rem; }
+      .policy-card { padding: 20px; }
     }
-    
   </style>
 </head>
 <body>
-  <nav role="navigation" aria-label="Main navigation">
-    <div class="navbar-inner">
-      <a href="/" class="logo">
-        <img src="https://studylock.github.io/img/logo.png" alt="StudyLock logo" loading="lazy">
-        StudyLock
-      </a>
-      <div class="nav-links">
-<a href="mailto:studylock@icloud.com">Contact Us</a>
-        <a href="/terms.html">Terms of Use</a>
-        <a href="/privacy.html">Privacy Policy</a>
-      </div>
+  <!-- NAV -->
+  <div class="nav-wrap">
+    <div class="nav">
+      <a href="/" class="brand"><img src="https://studylock.github.io/img/logo.png" alt="StudyLock"/> StudyLock</a>
+      <nav class="navlinks">
+        <a href="/terms.html">Terms</a>
+        <a href="/privacy.html">Privacy</a>
+        <a href="mailto:studylock@icloud.com">Contact</a>
+      </nav>
     </div>
-  </nav>
+  </div>
 
-  <main role="main">
-    <h1>Privacy Policy</h1>
-    <p><strong>Effective Date:</strong> May 6, 2025</p>
+  <!-- CONTENT -->
+  <main>
+    <div class="policy-card">
+      <h1>Privacy Policy</h1>
+      <p><strong>Effective Date:</strong> May 6, 2025</p>
 
-    <h2>1. Information We Do Not Collect</h2>
-    <p>By default, StudyLock does not collect any personal or non-personal information. Users can use the app and all its core features without providing any identifiable data.</p>
+      <h2>1. Information We Do Not Collect</h2>
+      <p>By default, StudyLock does not collect any personal or non-personal information. Users can use the app and all its core features without providing any identifiable data.</p>
 
-    <h2>2. Optional Data Collection for Study Groups</h2>
-    <p>If you choose to join a Study Group, we may collect your email address through Google or Microsoft sign-in. This is used solely for group functionality, such as verifying access and syncing your study group status. We do not use this data for tracking, advertising, or analytics.</p>
+      <h2>2. Optional Data Collection for Study Groups</h2>
+      <p>If you choose to join a Study Group, we may collect your email address through Google or Microsoft sign-in. This is used solely for group functionality, such as verifying access and syncing your study group status.</p>
 
-    <h2>3. Use of Information</h2>
-    <p>The email address collected (if any) is used exclusively to enable optional Study Group features. We do not sell, rent, or share this data with any third parties.</p>
+      <h2>3. Use of Information</h2>
+      <p>The email address collected (if any) is used exclusively to enable optional Study Group features. We do not sell, rent, or share this data with any third parties.</p>
 
-    <h2>4. Data Sharing and Disclosure</h2>
-    <p>We do not share or disclose any user information unless legally required to do so. Study Group email data is stored securely and only accessible to maintain functionality.</p>
+      <h2>4. Data Sharing and Disclosure</h2>
+      <p>We do not share or disclose any user information unless legally required to do so.</p>
 
-    <h2>5. Data Security</h2>
-    <p>We take reasonable measures to protect any user data related to Study Groups. While no app can guarantee absolute security, your privacy and data integrity are important to us.</p>
+      <h2>5. Data Security</h2>
+      <p>We take reasonable measures to protect any user data related to Study Groups. While no app can guarantee absolute security, your privacy and data integrity are important to us.</p>
 
-    <h2>6. Data Retention</h2>
-    <p>We retain your Study Group email only as long as necessary for group functionality. You can request removal at any time by contacting us.</p>
+      <h2>6. Data Retention</h2>
+      <p>We retain your Study Group email only as long as necessary. You can request removal at any time by contacting us.</p>
 
-    <h2>7. Changes to This Privacy Policy</h2>
-    <p>We may update this policy from time to time. All changes will be posted on this page. We encourage you to review it periodically. Continued use of StudyLock constitutes acceptance of the latest version.</p>
+      <h2>7. Changes</h2>
+      <p>We may update this policy from time to time. All changes will be posted here.</p>
 
-    <h2>8. Your Consent</h2>
-    <p>By using StudyLock, you consent to this Privacy Policy. If you join a Study Group, you consent to limited data collection as described above.</p>
+      <h2>8. Consent</h2>
+      <p>By using StudyLock, you consent to this Privacy Policy.</p>
 
-    <h2>9. Contact Us</h2>
-    <p>If you have any questions about this Privacy Policy, please contact us at: <strong>studylock@icloud.com</strong></p>
+      <h2>9. Contact Us</h2>
+      <p>If you have any questions, please contact us at: <strong>studylock@icloud.com</strong></p>
+    </div>
   </main>
 
-  <footer role="contentinfo">
-    <p id="contact">Contact us at: studylock@icloud.com</p>
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <p>Contact us at: <a href="mailto:studylock@icloud.com">studylock@icloud.com</a></p>
     <p>By using StudyLock, you agree to our <a href="/terms.html">Terms of Use</a>.</p>
     <p>Your data is protected. Read our <a href="/privacy.html">Privacy Policy</a>.</p>
-    <p style="margin-top:2rem;">&copy; 2025 StudyLock</p>
+    <p style="margin-top:1rem;">&copy; 2025 StudyLock</p>
   </footer>
 </body>
 </html>
