@@ -604,20 +604,20 @@ html { scroll-behavior: smooth; }
   }
 }
 
-    
 footer {
   background: rgba(0,0,0,0.25);
-  padding: 32px 0;
+  padding: 36px 0;
   text-align: center;
   font-size: 0.9rem;
+  line-height: 1.5;
   color: var(--muted);
 }
 
 .footer-center {
-  max-width: 760px;
+  max-width: 720px;
   margin: 0 auto;
   display: grid;
-  gap: 10px;
+  gap: 14px;
 }
 
 footer a {
@@ -635,11 +635,17 @@ footer a:hover {
   color: #fff;
 }
 
-.footer-copy {
-  margin-top: 6px;
-  font-size: 0.8rem;
-  opacity: 0.7;
+.footer-privacy,
+.footer-terms {
+  color: var(--muted);
 }
+
+.footer-copy {
+  margin-top: 4px;
+  font-size: 0.8rem;
+  opacity: 0.75;
+}
+
 
     .footlinks{ margin-top:12px; display:flex; flex-wrap:wrap; justify-content:center; gap:16px; font-size:.85rem; color:var(--muted) }
 
@@ -883,17 +889,25 @@ footer a:hover {
 <footer>
   <div class="container footer-center">
     <p class="footer-contact">
-      Contact us at: <a href="mailto:studylock@icloud.com">studylock@icloud.com</a>
+      📧 Contact us at: <a href="mailto:studylock@icloud.com">studylock@icloud.com</a>
     </p>
-    <p class="footer-links">
+
+    <p class="footer-terms">
       By using StudyLock, you agree to our 
-      <a href="terms.html">Terms of Use</a>. 
-      Your data is protected. Read our 
+      <a href="terms.html">Terms of Use</a>.
+    </p>
+
+    <p class="footer-privacy">
+      🔒 Your data is protected. Read our 
       <a href="privacy.html">Privacy Policy</a>.
     </p>
-    <p class="footer-copy">© 2025 StudyLock. All rights reserved.</p>
+
+    <p class="footer-copy">
+      © 2025 StudyLock. All rights reserved.
+    </p>
   </div>
 </footer>
+
 
 
 <!-- Video Modal -->
