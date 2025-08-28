@@ -69,6 +69,15 @@
   gap: 32px;
   align-items: center;
 }
+
+
+/* Navigation hidden state */
+.nav-wrap.hide {
+  transform: translateY(-100%);
+  transition: transform 0.3s ease;
+}
+
+    
     @media (max-width: 900px){
   .split {
     grid-template-columns: 1fr;     /* single column */
@@ -900,6 +909,28 @@ html { scroll-behavior: smooth; }
     // Close when clicking backdrop (only backdrop, not video)
     modal.addEventListener('click', (e)=>{
       if(e.target.classList.contains('video-modal__backdrop')) closeModal();
+    });
+  })();
+</script>
+
+
+  <script>
+  (function(){
+    const nav = document.querySelector('.nav-wrap');
+    let lastScroll = 0;
+
+    window.addEventListener('scroll', () => {
+      const currentScroll = window.pageYOffset;
+
+      if (currentScroll > lastScroll && currentScroll > 50) {
+        // Scrolling down → hide menu
+        nav.classList.add('hide');
+      } else {
+        // Scrolling up → show menu
+        nav.classList.remove('hide');
+      }
+
+      lastScroll = currentScroll;
     });
   })();
 </script>
