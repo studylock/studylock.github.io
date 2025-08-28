@@ -63,6 +63,13 @@
     p{margin:1rem 0; color:var(--text)}
     @media(max-width:768px){h1{font-size:1.9rem} h2{font-size:1.2rem} .policy-card{padding:22px}}
 
+    /* Navigation hidden state */
+.nav-wrap.hide {
+  transform: translateY(-100%);
+  transition: transform 0.3s ease;
+}
+
+
     /* --- FOOTER (exact structure/styles from index) --- */
     .site-footer{
       background:rgba(6,10,22,.55);
@@ -169,5 +176,27 @@
       </nav>
     </div>
   </footer>
+
+  <script>
+  (function(){
+    const nav = document.querySelector('.nav-wrap');
+    let lastScroll = 0;
+
+    window.addEventListener('scroll', () => {
+      const currentScroll = window.pageYOffset;
+
+      if (currentScroll > lastScroll && currentScroll > 50) {
+        // Scrolling down → hide menu
+        nav.classList.add('hide');
+      } else {
+        // Scrolling up → show menu
+        nav.classList.remove('hide');
+      }
+
+      lastScroll = currentScroll;
+    });
+  })();
+</script>
+
 </body>
 </html>
