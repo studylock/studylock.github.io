@@ -80,6 +80,20 @@
 .reveal.is-visible{ opacity:1; transform:none; }
 @media (prefers-reduced-motion: reduce){ .reveal{ opacity:1; transform:none; transition:none; } }
 
+
+
+/* Soft glow under the phone + float */
+.hero-phone{ position:relative; will-change:transform; }
+.hero-phone::before{
+  content:""; position:absolute; inset:auto auto -22px 50%; transform:translateX(-50%);
+  width:380px; height:200px; filter:blur(40px);
+  background:radial-gradient(ellipse at center, rgba(170,183,255,.35), rgba(88,114,255,.15) 60%, transparent 70%);
+  pointer-events:none;
+}
+@keyframes floaty{ 0%{transform:translateY(0);} 50%{transform:translateY(-6px);} 100%{transform:translateY(0);} }
+.hero-phone{ animation:floaty 6s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce){ .hero-phone{ animation:none; } }
+
     
 
 .split {
