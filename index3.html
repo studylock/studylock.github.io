@@ -1203,6 +1203,24 @@ html { scroll-behavior: smooth; }
 })();
 </script>
 
+  <script>
+(function(){
+  const el = document.querySelector('.hero-phone');
+  if(!el || 'ontouchstart' in window) return; // skip mobile/touch
+  const strength = 8;
+  function onMove(e){
+    const r = el.getBoundingClientRect();
+    const cx = r.left + r.width/2, cy = r.top + r.height/2 + window.scrollY;
+    const x = (e.pageX - cx) / (r.width/2);
+    const y = (e.pageY - cy) / (r.height/2);
+    el.style.transform = `rotateX(${-strength*y}deg) rotateY(${strength*x}deg)`;
+  }
+  function onLeave(){ el.style.transform = 'rotateX(0) rotateY(0)'; }
+  document.addEventListener('mousemove', onMove);
+  el.addEventListener('mouseleave', onLeave);
+})();
+</script>
+
 
 
   
