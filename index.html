@@ -717,6 +717,36 @@ html { scroll-behavior: smooth; }
   }
 }
 
+    .inline-video{
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* show full portrait video nicely in the phone frame */
+  border-radius: 28px;
+  background:#000;
+  display:block;
+}
+
+/* Small expand button in the top-right of the phone */
+.expand-btn{
+  position:absolute;
+  top:10px;
+  right:10px;
+  width:34px;
+  height:34px;
+  border-radius:999px;
+  border:1px solid #ffffff33;
+  background: rgba(255,255,255,.14);
+  color:#fff;
+  font-size:16px;
+  line-height:1;
+  display:grid;
+  place-items:center;
+  cursor:pointer;
+  z-index:3;
+}
+.expand-btn:hover{ background: rgba(255,255,255,.22); }
+
+
     /* === Footer polish: distinct band, compact, professional === */
 .site-footer{
   background: rgba(6, 10, 22, 0.55); /* darker than CTA */
@@ -894,14 +924,24 @@ html { scroll-behavior: smooth; }
 
       
 <div class="phone hero-phone" style="margin-top:10px; position:relative;">
-  <img src="img/main-screen.PNG" alt="Main App Screenshot">
-  <button class="play-overlay" aria-label="Play demo video" data-open-video>
-    <!-- Play icon -->
-    <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M8 5v14l11-7z" fill="currentColor"></path>
-    </svg>
+  <video id="heroInline"
+         class="inline-video"
+         src="https://files.catbox.moe/axfy57.mp4"
+         poster="img/main-screen.PNG"
+         muted
+         playsinline
+         preload="metadata"
+         loop
+         controls>
+    Sorry, your browser doesn’t support embedded videos.
+  </video>
+
+  <!-- Expand button (opens the modal) -->
+  <button class="expand-btn" aria-label="Expand video" data-open-video>
+    ⤢
   </button>
 </div>
+
 
     </div>
   </section>
@@ -1132,38 +1172,68 @@ html { scroll-behavior: smooth; }
 </div>
 
 <script>
-  (function(){
-    const openBtn = document.querySelector('[data-open-video]');
-    const modal   = document.getElementById('video-modal');
-    const closeEls= modal.querySelectorAll('[data-close-video]');
-    const video   = document.getElementById('heroVideo');
+(function(){
+  const inline = document.getElementById('heroInline');
+  const modal  = document.getElementById('video-modal');
+  const modalVideo = document.getElementById('heroVideo');
+  const openBtns = document.querySelectorAll('[data-open-video]');
+  const closeEls = modal.querySelectorAll('[data-close-video]');
 
-    function openModal(){
-      modal.classList.add('is-open');
-      document.body.classList.add('body-lock');
-      video.currentTime = 0;
-      video.play().catch(()=>{}); // autoplay on user gesture
-    }
-    function closeModal(){
-      modal.classList.remove('is-open');
-      document.body.classList.remove('body-lock');
-      video.pause();
-    }
-
-    openBtn?.addEventListener('click', openModal);
-    closeEls.forEach(el => el.addEventListener('click', closeModal));
-
-    // Close on ESC
-    document.addEventListener('keydown', (e)=>{
-      if(e.key === 'Escape' && modal.classList.contains('is-open')) closeModal();
+  // Try to autoplay inline when visible (muted + playsinline meets browser policies)
+  const io = new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.target !== inline) return;
+      if(e.isIntersecting){
+        // attempt to play; ignore failures
+        inline.play().catch(()=>{ /* user can tap play */ });
+      } else {
+        inline.pause();
+      }
     });
+  }, {threshold: 0.35});
+  if(inline) io.observe(inline);
 
-    // Close when clicking backdrop (only backdrop, not video)
-    modal.addEventListener('click', (e)=>{
-      if(e.target.classList.contains('video-modal__backdrop')) closeModal();
-    });
-  })();
+  function openModal(){
+    if(!modal) return;
+    // Sync time from inline to modal
+    try { modalVideo.currentTime = inline.currentTime || 0; } catch(e){}
+    // Pause inline while modal is open
+    inline.pause();
+
+    modal.classList.add('is-open');
+    document.body.classList.add('body-lock');
+
+    // Start playback in modal (user gesture exists because they clicked expand)
+    modalVideo.play().catch(()=>{ /* show controls; user can press play */ });
+  }
+
+  function closeModal(){
+    if(!modal) return;
+    // Sync time back to inline
+    try { inline.currentTime = modalVideo.currentTime || inline.currentTime; } catch(e){}
+    modal.classList.remove('is-open');
+    document.body.classList.remove('body-lock');
+    modalVideo.pause();
+    // Resume inline autoplay if still on screen
+    inline.play().catch(()=>{ /* might need user tap if policy blocks */ });
+  }
+
+  // Wire up open/close
+  openBtns.forEach(btn => btn.addEventListener('click', openModal));
+  closeEls.forEach(el => el.addEventListener('click', closeModal));
+
+  // Close on ESC
+  document.addEventListener('keydown', (e)=>{
+    if(e.key === 'Escape' && modal.classList.contains('is-open')) closeModal();
+  });
+
+  // Close when clicking the backdrop
+  modal.addEventListener('click', (e)=>{
+    if(e.target.classList.contains('video-modal__backdrop')) closeModal();
+  });
+})();
 </script>
+
 
 
   <script>
