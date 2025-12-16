@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>StudyLock Teacher – Dashboard</title>
+
+  <style>
+    :root{
+      --bg1:#0b1020;
+      --bg2:#0a1836;
+      --card: rgba(255,255,255,0.08);
+      --card2: rgba(255,255,255,0.10);
+      --border: rgba(255,255,255,0.14);
+      --text:#f1f4ff;
+      --muted:#c5cae6;
+      --danger:#ff5a7a;
+      --ok:#4ee59a;
+      --warn:#ffd166;
+      --accent:#7b61ff;
+      --accent2:#33c6ff;
+      --shadow: 0 18px 40px rgba(0,0,0,.35);
+      --radius: 18px;
+      --max: 1140px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "SF Pro Display","SF Pro Text", Inter, system-ui, Segoe UI, Roboto, Arial, sans-serif;
+      color:var(--text);
+      min-height:100vh;
+      background:
+        radial-gradient(1200px 700px at 20% 10%, rgba(123,97,255,0.35), transparent 60%),
+        radial-gradient(900px 600px at 85% 20%, rgba(51,198,255,0.25), transparent 55%),
+        linear-gradient(180deg, var(--bg1), var(--bg2));
+      padding:28px 16px;
+    }
+    .wrap{width:100%; max-width:var(--max); margin:0 auto;}
+    .topbar{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      gap:12px;
+      margin-bottom:14px;
+    }
+    .brand{display:flex; align-items:center; gap:12px;}
+    .logo{
+      width:44px;height:44px;border-radius:14px;
+      background: linear-gradient(135deg, rgba(123,97,255,0.9), rgba(51,198,255,0.75));
+      box-shadow: 0 12px 30px rgba(123,97,255,0.25);
+      border: 1px solid rgba(255,255,255,0.22);
+    }
+    .brand h1{font-size:18px; margin:0; letter-spacing:.2px;}
+    .brand p{margin:2px 0 0; color:var(--muted); font-size:13px;}
+    .pill{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:6px 10px;
+      border-radius: 999px;
+      border:1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.06);
+      color: rgba(241,244,255,0.86);
+      font-size:12px;
+      margin-top:8px;
+      width:fit-content;
+    }
+    .dot{width:8px;height:8px;border-radius:999px;background:rgba(51,198,255,0.9); box-shadow:0 0 0 4px rgba(51,198,255,0.12);}
+
+    .rightMeta{
+      display:flex; flex-direction:column; align-items:flex-end; gap:10px;
+      min-width: 240px;
+    }
+    .badge{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:6px 10px; border-radius: 999px;
+      border:1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.06);
+      color: rgba(241,244,255,0.86);
+      font-size:12px;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 14px;
+      align-items:start;
+    }
+    @media (max-width: 980px){
+      .grid{grid-template-columns:1fr;}
+    }
+    .card{
+      background: linear-gradient(180deg, var(--card), var(--card2));
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding:18px;
+      backdrop-filter: blur(10px);
+    }
+    h2{margin:0 0 8px; font-size:16px;}
+    .sub{margin:0 0 14px; color:var(--muted); font-size:13px; line-height:1.45;}
+    label{display:block; font-size:12px; color:var(--muted); margin:10px 0 6px;}
+    input, textarea{
+      width:100%;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.16);
+      background: rgba(0,0,0,0.18);
+      color: var(--text);
+      padding: 12px 12px;
+      outline:none;
+      font-size: 14px;
+    }
+    textarea{min-height:120px; resize:vertical;}
+    input:focus, textarea:focus{
+      border-color: rgba(123,97,255,0.55);
+      box-shadow: 0 0 0 4px rgba(123,97,255,0.14);
+    }
+    .row{display:flex; gap:10px; flex-wrap:wrap; margin-top:12px;}
+    button{
+      border:none;
+      border-radius: 14px;
+      padding: 12px 14px;
+      cursor:pointer;
+      color:white;
+      font-weight:800;
+      font-size:14px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      box-shadow: 0 12px 30px rgba(51,198,255,0.15);
+    }
+    button:disabled{opacity:.6; cursor:not-allowed;}
+    .secondary{
+      background: rgba(255,255,255,0.10);
+      border: 1px solid rgba(255,255,255,0.14);
+      box-shadow:none;
+      font-weight:800;
+    }
+    .danger{
+      background: rgba(255,90,122,0.12);
+      border:1px solid rgba(255,90,122,0.26);
+      box-shadow:none;
+    }
+    .msg{
+      margin-top:12px;
+      padding:10px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(0,0,0,0.18);
+      color: var(--muted);
+      font-size: 13px;
+      line-height:1.35;
+      display:none;
+      white-space:pre-line;
+    }
+    .msg.ok{display:block; color:rgba(78,229,154,0.95); border-color: rgba(78,229,154,0.25);}
+    .msg.err{display:block; color:rgba(255,90,122,0.95); border-color: rgba(255,90,122,0.25);}
+
+    .quizWrap{
+      border:1px solid rgba(255,255,255,0.12);
+      background: rgba(0,0,0,0.16);
+      border-radius: 16px;
+      padding:12px;
+      margin-top:10px;
+    }
+    .qCard{
+      border:1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.06);
+      border-radius: 14px;
+      padding:10px;
+      margin-top:10px;
+    }
+    .qTop{
+      display:flex; justify-content:space-between; align-items:center; gap:10px;
+      margin-bottom:8px;
+    }
+    .qTitle{font-weight:900; font-size:13px; color: rgba(241,244,255,0.92);}
+    .optRow{
+      display:grid;
+      grid-template-columns: 1fr auto;
+      gap: 8px;
+      align-items:center;
+      margin-top:8px;
+    }
+    .tiny{
+      font-size:12px;
+      color: rgba(197,202,230,0.78);
+      line-height:1.45;
+      margin-top:8px;
+    }
+
+    .list{display:flex; flex-direction:column; gap:10px;}
+    .planItem{
+      border:1px solid rgba(255,255,255,0.12);
+      background: rgba(0,0,0,0.16);
+      border-radius: 16px;
+      padding:12px;
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      align-items:flex-start;
+    }
+    .planMeta{display:flex; flex-direction:column; gap:6px; min-width:0;}
+    .planTitle{
+      font-weight:900;
+      font-size:14px;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      max-width: 520px;
+    }
+    .planLine{
+      color: var(--muted);
+      font-size:12px;
+      line-height:1.35;
+      word-break:break-word;
+    }
+    .planActions{display:flex; gap:8px; flex-wrap:wrap; justify-content:flex-end;}
+    .planActions button{
+      padding:10px 12px;
+      font-size:13px;
+      border-radius:12px;
+      box-shadow:none;
+    }
+
+    .qrBox{
+      margin-top:12px;
+      border:1px solid rgba(255,255,255,0.12);
+      background: rgba(0,0,0,0.16);
+      border-radius: 16px;
+      padding:12px;
+    }
+    .qrRow{
+      display:flex;
+      gap:12px;
+      align-items:flex-start;
+      flex-wrap:wrap;
+    }
+    #qrcode{
+      width:220px;
+      height:220px;
+      border-radius: 14px;
+      overflow:hidden;
+      background: white;
+      padding:8px;
+    }
+    .qrMeta{flex:1; min-width:220px;}
+    .mono{
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 12px;
+      color: rgba(241,244,255,0.92);
+      word-break:break-all;
+      padding:10px;
+      border-radius: 14px;
+      border:1px solid rgba(255,255,255,0.12);
+      background: rgba(0,0,0,0.18);
+    }
+
+    .hidden{display:none !important;}
+    a{color:rgba(209,217,255,0.92); text-decoration:none}
+    a:hover{text-decoration:underline}
+  </style>
+
+  <!-- QRCodeJS (client-side QR rendering) -->
+  <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="topbar">
+      <div>
+        <div class="brand">
+          <div class="logo" aria-hidden="true"></div>
+          <div>
+            <h1>StudyLock Teacher</h1>
+            <p>Create study plans and generate QR sessions</p>
+          </div>
+        </div>
+        <div class="pill"><span class="dot"></span> Dashboard</div>
+      </div>
+
+      <div class="rightMeta">
+        <div id="who" class="badge hidden">
+          Signed in: <span id="whoEmail" style="font-weight:900;"></span>
+        </div>
+        <div class="row" style="margin-top:0; justify-content:flex-end;">
+          <button id="logoutBtn" class="secondary hidden">Logout</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid">
+      <!-- Left: Create Plan -->
+      <div class="card">
+        <h2>Create a Study Plan</h2>
+        <p class="sub">
+          Build your 3-step plan (Learn → Quiz → Summary). After saving, you can start a live session and generate a QR code.
+        </p>
+
+        <label for="title">Plan title</label>
+        <input id="title" type="text" placeholder="e.g., Biology – Cell Division" />
+
+        <label for="learn">Learn content</label>
+        <textarea id="learn" placeholder="Write the learning material here…"></textarea>
+
+        <div class="quizWrap">
+          <div style="display:flex; justify-content:space-between; align-items:center; gap:10px;">
+            <div>
+              <div style="font-weight:900;">Quiz</div>
+              <div class="tiny">Multiple-choice questions. Mark the correct option(s).</div>
+            </div>
+            <button id="addQuestionBtn" class="secondary" type="button">+ Add question</button>
+          </div>
+
+          <div id="questions"></div>
+
+          <div class="tiny">
+            Tip: Keep quizzes short for classroom flow (3–8 questions).
+          </div>
+        </div>
+
+        <label for="summary">Summary content</label>
+        <textarea id="summary" placeholder="Write a short recap / key points / instructions…"></textarea>
+
+        <div class="row">
+          <button id="savePlanBtn">Save plan</button>
+          <button id="resetBtn" class="secondary" type="button">Reset</button>
+        </div>
+
+        <div id="msg" class="msg"></div>
+      </div>
+
+      <!-- Right: Plans + Start Session -->
+      <div class="card">
+        <h2>Your Plans</h2>
+        <p class="sub">Start a live session to generate a QR code students can scan in the StudyLock app.</p>
+
+        <div id="plansList" class="list"></div>
+
+        <div id="qrBox" class="qrBox hidden">
+          <div style="font-weight:900; margin-bottom:6px;">Live session QR</div>
+          <div class="tiny" style="margin-top:0;">Students scan this QR in the app to load your material.</div>
+
+          <div class="qrRow" style="margin-top:10px;">
+            <div id="qrcode" aria-label="QR Code"></div>
+            <div class="qrMeta">
+              <div class="tiny">QR payload:</div>
+              <div id="qrPayload" class="mono"></div>
+
+              <div class="row" style="margin-top:10px;">
+                <button id="copyPayloadBtn" class="secondary" type="button">Copy payload</button>
+                <button id="closeQrBtn" class="secondary" type="button">Close</button>
+              </div>
+
+              <div class="tiny">
+                Default payload is <span class="mono" style="display:inline-block; padding:2px 6px;">studylock://session/&lt;id&gt;</span>.
+                Your iOS scanner should parse the sessionId and fetch the plan.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tiny">
+          Note: Teacher dashboard is v1. Next we can add “Edit plan”, “Duplicate plan”, and live results view.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import {
+      getAuth,
+      onAuthStateChanged,
+      signOut
+    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+    import {
+      getFirestore,
+      doc,
+      getDoc,
+      addDoc,
+      setDoc,
+      collection,
+      query,
+      where,
+      orderBy,
+      onSnapshot,
+      serverTimestamp
+    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+    // ========= PASTE YOUR FIREBASE CONFIG HERE =========
+    const firebaseConfig = {
+      apiKey: "PASTE_ME",
+      authDomain: "PASTE_ME",
+      projectId: "PASTE_ME",
+      storageBucket: "PASTE_ME",
+      messagingSenderId: "PASTE_ME",
+      appId: "PASTE_ME"
+    };
+
+    // QR payload format (your iOS app will parse this)
+    const QR_PREFIX = "studylock://session/";
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    const $ = (id) => document.getElementById(id);
+
+    let currentUser = null;
+    let teacherProfile = null;
+    let unsubscribePlans = null;
+
+    // QR renderer instance
+    let qr = null;
+
+    function showMsg(kind, text){
+      const el = $("msg");
+      el.className = "msg " + (kind === "ok" ? "ok" : "err");
+      el.textContent = text;
+    }
+    function clearMsg(){
+      const el = $("msg");
+      el.className = "msg";
+      el.textContent = "";
+    }
+
+    function setSaving(isSaving){
+      $("savePlanBtn").disabled = isSaving;
+      $("savePlanBtn").textContent = isSaving ? "Saving..." : "Save plan";
+    }
+
+    function safeLower(s){ return (s || "").toString().trim().toLowerCase(); }
+
+    async function requireActiveTeacher(user){
+      const ref = doc(db, "teachers", user.uid);
+      const snap = await getDoc(ref);
+
+      if (!snap.exists()){
+        return { ok:false, reason:"missing_profile" };
+      }
+      const data = snap.data() || {};
+      const status = safeLower(data.status);
+      if (status !== "active"){
+        return { ok:false, reason:status || "not_active" };
+      }
+      return { ok:true, profile:data };
+    }
+
+    function resetForm(){
+      $("title").value = "";
+      $("learn").value = "";
+      $("summary").value = "";
+      $("questions").innerHTML = "";
+      addQuestion(); // start with one question
+      clearMsg();
+    }
+
+    // ---------- Quiz Builder ----------
+    function addQuestion(prefill = null){
+      const wrap = $("questions");
+
+      const qIndex = wrap.children.length + 1;
+      const card = document.createElement("div");
+      card.className = "qCard";
+
+      card.innerHTML = `
+        <div class="qTop">
+          <div class="qTitle">Question ${qIndex}</div>
+          <button class="secondary" type="button" data-action="removeQ">Remove</button>
+        </div>
+
+        <label>Question text</label>
+        <input type="text" data-field="qText" placeholder="Type the question…" />
+
+        <div class="tiny" style="margin-top:8px;">Options (mark correct)</div>
+
+        <div class="optRow">
+          <input type="text" data-field="opt0" placeholder="Option A" />
+          <label style="margin:0; display:flex; align-items:center; gap:8px; color:var(--muted); font-size:12px;">
+            <input type="checkbox" data-field="cor0" /> correct
+          </label>
+        </div>
+
+        <div class="optRow">
+          <input type="text" data-field="opt1" placeholder="Option B" />
+          <label style="margin:0; display:flex; align-items:center; gap:8px; color:var(--muted); font-size:12px;">
+            <input type="checkbox" data-field="cor1" /> correct
+          </label>
+        </div>
+
+        <div class="optRow">
+          <input type="text" data-field="opt2" placeholder="Option C" />
+          <label style="margin:0; display:flex; align-items:center; gap:8px; color:var(--muted); font-size:12px;">
+            <input type="checkbox" data-field="cor2" /> correct
+          </label>
+        </div>
+
+        <div class="optRow">
+          <input type="text" data-field="opt3" placeholder="Option D" />
+          <label style="margin:0; display:flex; align-items:center; gap:8px; color:var(--muted); font-size:12px;">
+            <input type="checkbox" data-field="cor3" /> correct
+          </label>
+        </div>
+
+        <label style="margin-top:10px;">Explanation (optional)</label>
+        <input type="text" data-field="explain" placeholder="Shown after answering (optional)" />
+      `;
+
+      // remove question handler
+      card.querySelector('[data-action="removeQ"]').addEventListener("click", () => {
+        card.remove();
+        renumberQuestions();
+      });
+
+      // prefill if provided
+      if (prefill){
+        card.querySelector('[data-field="qText"]').value = prefill.question || "";
+        const opts = Array.isArray(prefill.options) ? prefill.options : [];
+        for (let i=0;i<4;i++){
+          card.querySelector(`[data-field="opt${i}"]`).value = opts[i] || "";
+        }
+        const corr = Array.isArray(prefill.correct) ? prefill.correct : [];
+        for (let i=0;i<4;i++){
+          card.querySelector(`[data-field="cor${i}"]`).checked = corr.includes(i);
+        }
+        card.querySelector('[data-field="explain"]').value = prefill.explanation || "";
+      }
+
+      wrap.appendChild(card);
+    }
+
+    function renumberQuestions(){
+      const cards = Array.from($("questions").children);
+      cards.forEach((c, idx) => {
+        const title = c.querySelector(".qTitle");
+        if (title) title.textContent = `Question ${idx + 1}`;
+      });
+    }
+
+    function collectQuiz(){
+      const cards = Array.from($("questions").children);
+      const quiz = [];
+
+      for (const c of cards){
+        const qText = (c.querySelector('[data-field="qText"]').value || "").trim();
+        const options = [];
+        const correct = [];
+        for (let i=0;i<4;i++){
+          const opt = (c.querySelector(`[data-field="opt${i}"]`).value || "").trim();
+          options.push(opt);
+          if (c.querySelector(`[data-field="cor${i}"]`).checked) correct.push(i);
+        }
+        const explanation = (c.querySelector('[data-field="explain"]').value || "").trim();
+
+        // Skip empty question blocks entirely
+        const hasAnyOption = options.some(o => o.length > 0);
+        if (!qText && !hasAnyOption) continue;
+
+        quiz.push({
+          question: qText,
+          options,
+          correct,
+          explanation
+        });
+      }
+
+      return quiz;
+    }
+
+    function validatePlan(){
+      const title = ($("title").value || "").trim();
+      const learn = ($("learn").value || "").trim();
+      const summary = ($("summary").value || "").trim();
+      const quiz = collectQuiz();
+
+      if (!title || title.length < 3) return "Please enter a plan title.";
+      if (!learn || learn.length < 10) return "Learn content is too short.";
+      if (!summary || summary.length < 5) return "Summary content is too short.";
+      if (quiz.length === 0) return "Add at least one quiz question.";
+
+      // Validate quiz questions minimal
+      for (const [idx, q] of quiz.entries()){
+        if (!q.question || q.question.length < 3) return `Question ${idx+1} is missing text.`;
+        const nonEmptyOpts = q.options.filter(o => o && o.trim().length > 0);
+        if (nonEmptyOpts.length < 2) return `Question ${idx+1} needs at least 2 options.`;
+        if (!Array.isArray(q.correct) || q.correct.length === 0) return `Question ${idx+1} must have at least 1 correct option.`;
+      }
+
+      return null;
+    }
+
+    // ---------- Plans List ----------
+    function stopPlansListener(){
+      if (unsubscribePlans){
+        unsubscribePlans();
+        unsubscribePlans = null;
+      }
+      $("plansList").innerHTML = "";
+    }
+
+    function startPlansListener(teacherUid){
+      stopPlansListener();
+
+      const qy = query(
+        collection(db, "studyPlans"),
+        where("teacherUid", "==", teacherUid),
+        orderBy("updatedAt", "desc")
+      );
+
+      unsubscribePlans = onSnapshot(qy, (snap) => {
+        const plans = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+        renderPlans(plans);
+      }, (err) => {
+        $("plansList").innerHTML = `<div class="tiny">Failed to load plans: ${err?.message || "Unknown error"}</div>`;
+      });
+    }
+
+    function fmtTs(ts){
+      try{
+        if (!ts) return "—";
+        const d = ts.toDate ? ts.toDate() : new Date(ts);
+        return d.toLocaleString();
+      } catch { return "—"; }
+    }
+
+    function renderPlans(plans){
+      const list = $("plansList");
+      list.innerHTML = "";
+
+      if (!plans || plans.length === 0){
+        list.innerHTML = `<div class="tiny">No plans yet. Create your first plan on the left.</div>`;
+        return;
+      }
+
+      for (const p of plans){
+        const item = document.createElement("div");
+        item.className = "planItem";
+
+        const meta = document.createElement("div");
+        meta.className = "planMeta";
+
+        const title = document.createElement("div");
+        title.className = "planTitle";
+        title.textContent = p.title || "(Untitled)";
+
+        const line1 = document.createElement("div");
+        line1.className = "planLine";
+        line1.textContent = `Updated: ${fmtTs(p.updatedAt || p.createdAt)}`;
+
+        const qCount = Array.isArray(p.quiz) ? p.quiz.length : 0;
+        const line2 = document.createElement("div");
+        line2.className = "planLine";
+        line2.textContent = `Quiz questions: ${qCount}`;
+
+        meta.appendChild(title);
+        meta.appendChild(line1);
+        meta.appendChild(line2);
+
+        const actions = document.createElement("div");
+        actions.className = "planActions";
+
+        const startBtn = document.createElement("button");
+        startBtn.textContent = "Start session (QR)";
+        startBtn.addEventListener("click", () => startSession(p.id));
+
+        const copyPlanIdBtn = document.createElement("button");
+        copyPlanIdBtn.textContent = "Copy planId";
+        copyPlanIdBtn.className = "secondary";
+        copyPlanIdBtn.addEventListener("click", async () => {
+          await navigator.clipboard.writeText(p.id);
+        });
+
+        actions.appendChild(startBtn);
+        actions.appendChild(copyPlanIdBtn);
+
+        item.appendChild(meta);
+        item.appendChild(actions);
+
+        list.appendChild(item);
+      }
+    }
+
+    // ---------- Session + QR ----------
+    function showQr(payload){
+      $("qrBox").classList.remove("hidden");
+      $("qrPayload").textContent = payload;
+
+      // Clear existing QR
+      const qrEl = $("qrcode");
+      qrEl.innerHTML = "";
+
+      // Render new
+      qr = new QRCode(qrEl, {
+        text: payload,
+        width: 204,
+        height: 204
+      });
+    }
+
+    async function startSession(planId){
+      clearMsg();
+      try{
+        const sessionsRef = collection(db, "sessions");
+        const docRef = await addDoc(sessionsRef, {
+          planId,
+          teacherUid: currentUser.uid,
+          isActive: true,
+          createdAt: serverTimestamp(),
+          updatedAt: serverTimestamp()
+          // You can add expiresAt later if you want time-limited sessions
+        });
+
+        const sessionId = docRef.id;
+        const payload = QR_PREFIX + sessionId;
+        showQr(payload);
+
+      } catch (e){
+        showMsg("err", "Failed to start session: " + (e?.message || "Unknown error"));
+      }
+    }
+
+    // ---------- Auth gate ----------
+    onAuthStateChanged(auth, async (user) => {
+      currentUser = user || null;
+
+      if (!user){
+        window.location.href = "login.html";
+        return;
+      }
+
+      $("who").classList.remove("hidden");
+      $("whoEmail").textContent = user.email || "";
+      $("logoutBtn").classList.remove("hidden");
+
+      const ok = await requireActiveTeacher(user);
+      if (!ok.ok){
+        // Not active teacher
+        await signOut(auth);
+        window.location.href = "pending.html";
+        return;
+      }
+
+      teacherProfile = ok.profile;
+      startPlansListener(user.uid);
+      // initialize form
+      if ($("questions").children.length === 0) addQuestion();
+    });
+
+    // ---------- UI events ----------
+    $("logoutBtn").addEventListener("click", async () => {
+      await signOut(auth);
+      window.location.href = "login.html";
+    });
+
+    $("addQuestionBtn").addEventListener("click", () => addQuestion());
+
+    $("resetBtn").addEventListener("click", () => resetForm());
+
+    $("savePlanBtn").addEventListener("click", async () => {
+      clearMsg();
+
+      const err = validatePlan();
+      if (err){
+        showMsg("err", err);
+        return;
+      }
+
+      const title = ($("title").value || "").trim();
+      const learn = ($("learn").value || "").trim();
+      const summary = ($("summary").value || "").trim();
+      const quiz = collectQuiz();
+
+      try{
+        setSaving(true);
+
+        await addDoc(collection(db, "studyPlans"), {
+          teacherUid: currentUser.uid,
+          teacherEmail: currentUser.email || "",
+          title,
+          learnContent: learn,
+          summaryContent: summary,
+          quiz,
+          createdAt: serverTimestamp(),
+          updatedAt: serverTimestamp()
+        });
+
+        showMsg("ok", "Plan saved ✅");
+        resetForm();
+
+      } catch (e){
+        showMsg("err", "Save failed: " + (e?.message || "Unknown error"));
+      } finally {
+        setSaving(false);
+      }
+    });
+
+    $("copyPayloadBtn").addEventListener("click", async () => {
+      const payload = $("qrPayload").textContent || "";
+      if (!payload) return;
+      await navigator.clipboard.writeText(payload);
+    });
+
+    $("closeQrBtn").addEventListener("click", () => {
+      $("qrBox").classList.add("hidden");
+      $("qrcode").innerHTML = "";
+      $("qrPayload").textContent = "";
+    });
+
+    // First load default form
+    resetForm();
+  </script>
+</body>
+</html>
