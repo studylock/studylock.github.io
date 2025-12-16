@@ -74,9 +74,7 @@
       border-color: rgba(123,97,255,0.55);
       box-shadow: 0 0 0 4px rgba(123,97,255,0.14);
     }
-    .row{
-      display:flex; gap:10px; margin-top:14px;
-    }
+    .row{display:flex; gap:10px; margin-top:14px;}
     button{
       width:100%;
       border:none;
@@ -84,19 +82,17 @@
       padding: 12px 14px;
       cursor:pointer;
       color:white;
-      font-weight:700;
+      font-weight:800;
       font-size:14px;
       background: linear-gradient(135deg, var(--accent), var(--accent2));
       box-shadow: 0 12px 30px rgba(51,198,255,0.15);
     }
-    button:disabled{
-      opacity:.6; cursor:not-allowed;
-    }
+    button:disabled{opacity:.6; cursor:not-allowed;}
     .secondary{
       background: rgba(255,255,255,0.10);
       border: 1px solid rgba(255,255,255,0.14);
       box-shadow:none;
-      font-weight:700;
+      font-weight:800;
     }
     .msg{
       margin-top:12px;
@@ -108,6 +104,7 @@
       font-size: 13px;
       line-height:1.35;
       display:none;
+      white-space:pre-line;
     }
     .msg.ok{display:block; color:rgba(78,229,154,0.95); border-color: rgba(78,229,154,0.25);}
     .msg.err{display:block; color:rgba(255,90,122,0.95); border-color: rgba(255,90,122,0.25);}
@@ -147,14 +144,17 @@
       <div class="logo" aria-hidden="true"></div>
       <div>
         <h1>StudyLock Teacher</h1>
-        <p>Login to access your dashboard</p>
+        <p>Teacher portal access</p>
       </div>
     </div>
 
     <div class="card">
       <div class="pill"><span class="dot"></span> Teacher Portal</div>
       <h2>Sign in</h2>
-      <p class="sub">Use your teacher email and password. If you don’t have access yet, submit a request.</p>
+      <p class="sub">
+        Teacher accounts are created <b>after approval</b>.
+        If you don’t have credentials yet, submit an application first.
+      </p>
 
       <label for="email">Email</label>
       <input id="email" type="email" placeholder="name@school.edu" autocomplete="email" />
@@ -178,15 +178,20 @@
       </div>
 
       <div class="tiny">
-        If your account is pending approval, you’ll be redirected to the approval screen after login.
+        After approval, the admin will send you your initial password (you can reset it anytime via “Forgot password?”).
       </div>
     </div>
   </div>
 
   <script type="module">
-    // ========= Firebase imports (CDN, modular) =========
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-    import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, sendPasswordResetEmail, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+    import {
+      getAuth,
+      onAuthStateChanged,
+      signInWithEmailAndPassword,
+      sendPasswordResetEmail,
+      signOut
+    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
     import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
     // ========= 1) PASTE YOUR FIREBASE CONFIG HERE =========
@@ -199,15 +204,13 @@
       appId: "PASTE_ME"
     };
 
-    // ========= 2) ADMIN EMAIL (used only for redirect decisions) =========
+    // ========= 2) ADMIN EMAIL (same as in admin.html + functions) =========
     const ADMIN_EMAIL = "YOUR_ADMIN_EMAIL_HERE";
 
-    // ========= Init =========
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
     const db = getFirestore(app);
 
-    // ========= UI helpers =========
     const $ = (id) => document.getElementById(id);
     const msg = $("msg");
 
@@ -225,49 +228,51 @@
     }
 
     async function routeAfterLogin(user){
-      // Admin shortcut
       const email = (user?.email || "").toLowerCase();
+
+      // Admin shortcut
       if (email && email === ADMIN_EMAIL.toLowerCase()){
         window.location.href = "admin.html";
         return;
       }
 
-      // Teachers: check status in /teachers/{uid}
+      // Teachers: must have teachers/{uid} doc, created on approval
       const tRef = doc(db, "teachers", user.uid);
       const snap = await getDoc(tRef);
 
       if (!snap.exists()){
-        // No profile doc yet -> treat as pending
-        window.location.href = "pending.html";
+        // Auth user exists but no teacher profile => not activated / misconfigured
+        showMsg("err", "Your teacher access is not activated yet. Please contact the admin.");
+        await signOut(auth);
         return;
       }
 
-      const data = snap.data();
-      const status = (data.status || "pending").toLowerCase();
+      const status = (snap.data()?.status || "pending").toLowerCase();
 
       if (status === "active"){
-        // Next step later: teacher dashboard page
-        // For now, just show pending page until you create dashboard.html
-        showMsg("ok", "Login successful. Teacher dashboard not added yet — redirecting to pending placeholder.");
-        setTimeout(() => window.location.href = "pending.html", 900);
+        // When you create dashboard.html, change this to dashboard.html
+        showMsg("ok", "Login successful ✅");
+        setTimeout(() => {
+          // window.location.href = "dashboard.html";
+          window.location.href = "pending.html"; // placeholder until dashboard exists
+        }, 700);
       } else {
+        // pending / disabled
         window.location.href = "pending.html";
       }
     }
 
-    // ========= Auto-redirect if already logged in =========
+    // Auto-redirect if already logged in
     onAuthStateChanged(auth, async (user) => {
       if (!user) return;
-      try {
+      try{
         await routeAfterLogin(user);
-      } catch (e) {
-        // If something weird happens, sign out and stay on login
+      } catch (e){
         await signOut(auth);
-        showMsg("err", "Could not verify account status. Please try again.");
+        showMsg("err", "Could not verify your account status. Please try again.");
       }
     });
 
-    // ========= Events =========
     $("applyBtn").addEventListener("click", () => {
       window.location.href = "apply.html";
     });
@@ -283,16 +288,22 @@
         return;
       }
 
-      try {
+      try{
         setLoading(true);
         const cred = await signInWithEmailAndPassword(auth, email, password);
         await routeAfterLogin(cred.user);
-      } catch (e) {
+      } catch (e){
         const code = e?.code || "";
-        if (code.includes("auth/invalid-credential") || code.includes("auth/wrong-password")){
-          showMsg("err", "Invalid email or password.");
-        } else if (code.includes("auth/user-not-found")){
-          showMsg("err", "No account found for this email. Please apply first.");
+
+        // Most common in your new flow:
+        // - teacher applied but has no account yet => user-not-found OR invalid-credential
+        if (code.includes("auth/user-not-found") || code.includes("auth/invalid-credential") || code.includes("auth/wrong-password")){
+          showMsg(
+            "err",
+            "Login failed.\n\nIf you already applied, your account may not be approved yet.\nPlease wait for approval, or submit an application."
+          );
+        } else if (code.includes("auth/too-many-requests")){
+          showMsg("err", "Too many attempts. Try again later or reset your password.");
         } else {
           showMsg("err", "Login failed: " + (e?.message || "Unknown error"));
         }
@@ -304,15 +315,17 @@
     $("forgotLink").addEventListener("click", async (ev) => {
       ev.preventDefault();
       clearMsg();
+
       const email = $("email").value.trim();
       if (!email){
         showMsg("err", "Enter your email first, then click “Forgot password?”");
         return;
       }
-      try {
+
+      try{
         await sendPasswordResetEmail(auth, email);
-        showMsg("ok", "Password reset email sent.");
-      } catch (e) {
+        showMsg("ok", "Password reset email sent (if an account exists for this email).");
+      } catch (e){
         showMsg("err", "Could not send reset email: " + (e?.message || "Unknown error"));
       }
     });
