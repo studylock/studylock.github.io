@@ -3,6 +3,26 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+<script>
+(function () {
+  const NEW_ORIGIN = "https://studylock.academy"; // ✅ change to your new domain
+
+  // Only redirect when we're on the OLD host
+  const oldHosts = new Set(["studylock.github.io", "www.studylock.github.io"]);
+  if (!oldHosts.has(location.hostname)) return;
+
+  // Keep everything after the domain (path + ?query + #hash)
+  const target = NEW_ORIGIN + location.pathname + location.search + location.hash;
+
+  // 301-like behavior for browsers (no back button loop)
+  location.replace(target);
+})();
+</script>
+
+
+  
   <title>StudyLock — AI Study Tool with App Blocker</title>
   <link rel="icon" type="image/png" href="https://studylock.github.io/img/logo.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
